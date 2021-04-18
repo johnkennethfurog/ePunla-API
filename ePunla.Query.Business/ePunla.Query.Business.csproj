@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ePunla.Query.DAL\ePunla.Query.DAL.csproj" />
+    <ProjectReference Include="..\ePunla.Query.Domain\ePunla.Query.Domain.csproj" />
+  </ItemGroup>
+</Project>
