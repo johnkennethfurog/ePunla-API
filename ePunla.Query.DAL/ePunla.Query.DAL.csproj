@@ -8,6 +8,6 @@
     <Folder Include="Configurations\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ePunla.Database\ePunla.Common.Database.csproj" />
+    <ProjectReference Include="..\ePunla.Query.Domain\ePunla.Query.Domain.csproj" />
   </ItemGroup>
 </Project>

@@ -11,4 +11,7 @@
     <ProjectReference Include="..\ePunla.Query.DAL\ePunla.Query.DAL.csproj" />
     <ProjectReference Include="..\ePunla.Query.Domain\ePunla.Query.Domain.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
 </Project>

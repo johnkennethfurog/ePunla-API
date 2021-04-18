@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ePunla.Query.Business.Configurations;
+using ePunla.Query.Domain.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,7 @@ namespace ePunla.Query.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.ConfigureDomain(Configuration);
             services.ConfigureBusiness(Configuration);
         }
 
