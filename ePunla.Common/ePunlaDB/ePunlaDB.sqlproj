@@ -63,6 +63,8 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\StoredProcedures" />
+    <Folder Include="dbo\Data" />
+    <Folder Include="dbo\PostDeployment" />
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
@@ -79,5 +81,12 @@
     <Build Include="dbo\Tables\Farms.sql" />
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\StoredProcedures\sp_getFarms.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Data\categories_data.sql" />
+    <None Include="dbo\Data\test_data.sql" />
   </ItemGroup>
 </Project>
