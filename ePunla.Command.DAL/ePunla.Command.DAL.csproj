@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ePunla.Common.Utilitites\ePunla.Common.Utilitites.csproj" />
+    <Folder Include="Configurations\" />
+    <Folder Include="interfaces\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Configurations\" />
-    <Folder Include="Dtos\" />
+    <ProjectReference Include="..\ePunla.Command.Domain\ePunla.Command.Domain.csproj" />
   </ItemGroup>
 </Project>
