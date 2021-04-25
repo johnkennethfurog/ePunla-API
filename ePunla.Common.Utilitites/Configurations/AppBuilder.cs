@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 
-namespace ePunla.Command.API.Configurations
+namespace ePunla.Common.Utilitites.Configurations
 {
     public static class AppBuilder
     {

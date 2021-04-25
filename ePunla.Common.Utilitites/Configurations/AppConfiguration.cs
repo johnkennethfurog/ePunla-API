@@ -14,7 +14,7 @@ namespace ePunla.Common.Utilitites.Configurations
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Dot Net Project", Version = "v1", });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-Punla", Version = "v1", });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
@@ -44,6 +44,7 @@ namespace ePunla.Common.Utilitites.Configurations
         public static void ConfigureAppBusiness(this IServiceCollection services, Assembly businessAssembly)
         {
             services.AddMediatR(businessAssembly);
+            services.AddAutoMapper(businessAssembly);
 
             // For all the validators, register them with dependency injection as scoped
             AssemblyScanner.FindValidatorsInAssembly(businessAssembly)

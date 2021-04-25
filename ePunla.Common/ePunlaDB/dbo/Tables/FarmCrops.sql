@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[FarmCrops] (
     [CategoryId]           INT            NULL,
     [EstimatedHarvestDate] DATETIME2 (7)  NOT NULL,
     [PlantedDate]          DATETIME2 (7)  NOT NULL,
-    [AreaSize]             INT            NOT NULL,
+    [AreaSize]             DECIMAL        NOT NULL,
     [Status]               NVARCHAR (20) NULL,
     [HarvestDate]          DATETIME2 (7)  NULL,
     CONSTRAINT [PK_FarmCrops] PRIMARY KEY CLUSTERED ([FarmCropId] ASC),

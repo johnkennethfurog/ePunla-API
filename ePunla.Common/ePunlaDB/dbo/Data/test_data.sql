@@ -147,7 +147,7 @@ DECLARE @farms TABLE
     [Address]        NVARCHAR (200),
     [BarangayId]     INT,
     [BarangayAreaId] INT,
-    [AreaSize]       INT,
+    [AreaSize]       DECIMAL,
     [Name]           NVARCHAR (200),
     [Status]         NVARCHAR (20)
 );
@@ -178,7 +178,7 @@ DECLARE @farmCrops TABLE
     [CategoryId]           INT,
     [EstimatedHarvestDate] DATETIME2 (7),
     [PlantedDate]          DATETIME2 (7),
-    [AreaSize]             INT,
+    [AreaSize]             DECIMAL,
     [Status]               NVARCHAR(20),
     [HarvestDate]          DATETIME2 (7) NULL
 );

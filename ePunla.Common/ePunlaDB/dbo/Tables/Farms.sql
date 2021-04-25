@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[Farms] (
     [Address]        NVARCHAR (200) NULL,
     [BarangayId]     INT            NULL,
     [BarangayAreaId] INT            NULL,
-    [AreaSize]       INT            NOT NULL,
+    [AreaSize]       DECIMAL            NOT NULL,
     [Name]           NVARCHAR (200) NULL,
     [Status]         NVARCHAR (20) NULL,
     CONSTRAINT [PK_Farms] PRIMARY KEY CLUSTERED ([FarmId] ASC),

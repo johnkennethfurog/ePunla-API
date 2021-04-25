@@ -1,9 +1,9 @@
-﻿using ePunla.Command.Business.Configurations;
-using ePunla.Command.Domain.Configurations;
+﻿using ePunla.Query.Business.Configurations;
+using ePunla.Query.Domain.Configurations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace ePunla.Command.API.Configurations
+namespace ePunla.Query.API.Configurations
 {
     public static class ApiConfiguration
     {

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ePunla.Query.DAL.Interfaces;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ePunla.Query.DAL.Configurations
@@ -7,6 +8,7 @@ namespace ePunla.Query.DAL.Configurations
     {
         public static void ConfigureDAL(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddTransient<IFarmerContext, FarmerContext>();
         }
     }
 }

@@ -1,3 +1,5 @@
+using ePunla.Common.Utilitites.Configurations;
+using ePunla.Query.API.Configurations;
 using ePunla.Query.Business.Configurations;
 using ePunla.Query.Domain.Configurations;
 using Microsoft.AspNetCore.Builder;
@@ -21,8 +23,8 @@ namespace ePunla.Query.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.ConfigureDomain(Configuration);
-            services.ConfigureBusiness(Configuration);
+            services.ConfigureAPI(Configuration);
+            services.ConfigureAppApi();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +40,8 @@ namespace ePunla.Query.API
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCommonUtilities();
 
             app.UseEndpoints(endpoints =>
             {

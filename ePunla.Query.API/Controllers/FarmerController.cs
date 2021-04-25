@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ePunla.Common.Utilitites.BaseClass;
+using ePunla.Query.Business.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ePunla.Query.API.Controllers
 {
     [Route("api/[controller]")]
-    public class FarmerController : Controller
+    public class FarmerController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -19,11 +21,18 @@ namespace ePunla.Query.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetFarms()
+        [HttpGet("farms/{farmerId}")]
+        public async Task<IActionResult> GetFarms(int farmerId)
         {
-            //_mediator.Send(new )
-            return Ok();
+            var response = await _mediator.Send(new GetFarmersFarmQuery { FarmerId = farmerId });
+            return ProcessResponse(response);
+        }
+
+        [HttpGet("crops/{farmerId}")]
+        public async Task<IActionResult> GetCrops(int farmerId)
+        {
+            var response = await _mediator.Send(new GetFarmersCropQuery { FarmerId = farmerId });
+            return ProcessResponse(response);
         }
     }
 }
