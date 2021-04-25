@@ -9,9 +9,14 @@
     <Folder Include="Commands\" />
     <Folder Include="Utilities\" />
     <Folder Include="Validators\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ePunla.Command.Domain\ePunla.Command.Domain.csproj" />
     <ProjectReference Include="..\ePunla.Command.DAL\ePunla.Command.DAL.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CloudinaryDotNet" Version="1.15.1" />
   </ItemGroup>
 </Project>
