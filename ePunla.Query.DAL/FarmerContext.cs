@@ -7,6 +7,7 @@ using ePunla.Common.Utilitites.DbConnect;
 using ePunla.Common.Utilitites.Response;
 using ePunla.Query.DAL.Interfaces;
 using ePunla.Query.DAL.Models;
+using ePunla.Query.Domain.Dtos;
 
 namespace ePunla.Query.DAL
 {
@@ -22,12 +23,16 @@ namespace ePunla.Query.DAL
             _dbConnection = dbConnection;
         }
 
-        public async Task<ContextResponse<IEnumerable<FarmCropModel>>> GetCrops(int FarmerId)
+        public async Task<ContextResponse<IEnumerable<FarmCropModel>>> GetCrops(int FarmerId, SearchCropFieldsDto SearchFields)
         {
             using var dbConn = await _dbConnection.CreateConnectionAsync();
 
             var dynamicParameters = new DynamicParameters();
             dynamicParameters.Add("@FarmerId", FarmerId);
+            dynamicParameters.Add("@Status", SearchFields.Status?.ToString());
+            dynamicParameters.Add("@CropId", SearchFields.CropId);
+            dynamicParameters.Add("@PlantedFrom", SearchFields.PlantedFrom);
+            dynamicParameters.Add("@PlantedTo", SearchFields.PlantedTo);
 
             var response = (await dbConn.QueryAsync<FarmCropModel>(SP_GET_CROPS, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<FarmCropModel>>(response);

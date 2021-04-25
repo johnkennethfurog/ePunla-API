@@ -18,7 +18,7 @@ namespace ePunla.Command.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> GetFarms(RegisterFarmerDto registerFarmerDto)
+        public async Task<IActionResult> GetFarms([FromBody] RegisterFarmerDto registerFarmerDto)
         {
             var response = await _mediator.Send(new RegisterFarmerCommand { RegisterFarmerDto = registerFarmerDto });
             return ProcessResponse(response);

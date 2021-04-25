@@ -1,5 +1,9 @@
 CREATE PROCEDURE [dbo].[sp_getFarmersCrops]
-  @FarmerId INT
+  @FarmerId INT,
+  @Status NVARCHAR(200),
+  @CropId INT,
+  @PlantedFrom DATETIME,
+  @PlantedTo DATETIME
 AS
 BEGIN
   SELECT  [FarmCropId] = FC.FarmCropId,
@@ -19,4 +23,7 @@ BEGIN
   LEFT JOIN Crops C on C.CropId = FC.CropId
   LEFT JOIN Categories CA on CA.CategoryId = C.CategoryId
   WHERE FarmerId = @FarmerId
+        AND (@CropId IS NULL OR C.CropId = @CropId)
+        AND (@Status IS NULL OR FC.[Status] = @Status)
+        AND (@PlantedFrom IS NULL OR @PlantedTo IS NULL OR FC.PlantedDate BETWEEN @PlantedFrom AND @PlantedTo)
 END
