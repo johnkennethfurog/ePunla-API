@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using ePunla.Command.Business.Utilities;
 using ePunla.Command.DAL.Interfaces;
 using ePunla.Command.Domain.Enums;
 using ePunla.Common.Utilitites.Response;
@@ -19,7 +20,8 @@ namespace ePunla.Command.Business.Commands
 
         public async Task<MediatrResponse<int>> Handle(RegisterFarmerCommand request, CancellationToken cancellationToken)
         {
-            var contextResponse = await _farmerContext.SaveFarmer(request.RegisterFarmerDto);
+            PasswordUtil.CreatePasswordHash(request.RegisterFarmerDto.Password, out byte[] PasswordHash, out byte[] PasswordSalt);
+            var contextResponse = await _farmerContext.SaveFarmer(request.RegisterFarmerDto, PasswordHash, PasswordSalt);
 
             if(!contextResponse.IsValid)
             {

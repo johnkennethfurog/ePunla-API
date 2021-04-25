@@ -21,7 +21,7 @@ namespace ePunla.Command.DAL
             _dbConnection = dbConnection;
         }
 
-        public async Task<ContextResponse<int>> SaveFarmer(RegisterFarmerDto registerFarmerDto)
+        public async Task<ContextResponse<int>> SaveFarmer(RegisterFarmerDto registerFarmerDto, byte[] PasswordHash, byte[] PasswordSalt)
         {
             using var dbConn = await _dbConnection.CreateConnectionAsync();
 
@@ -33,7 +33,8 @@ namespace ePunla.Command.DAL
             dynamicParameters.Add("@BarangayId", registerFarmerDto.BarangayId);
             dynamicParameters.Add("@BarangayAreaId", registerFarmerDto.BarangayAreaId);
             dynamicParameters.Add("@MobileNumber", registerFarmerDto.MobileNumber);
-            dynamicParameters.Add("@Password", registerFarmerDto.Password);
+            dynamicParameters.Add("@PasswordHash", PasswordHash);
+            dynamicParameters.Add("@PasswordSalt", PasswordSalt);
             dynamicParameters.Add("@Avatar", registerFarmerDto.Avatar);
             dynamicParameters.Add("@AvatarId", registerFarmerDto.AvatarId);
             dynamicParameters.Add("@MobileNumber", registerFarmerDto.MobileNumber);

@@ -7,12 +7,11 @@
   <ItemGroup>
     <Folder Include="Configurations\" />
     <Folder Include="Commands\" />
+    <Folder Include="Utilities\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ePunla.Command.Domain\ePunla.Command.Domain.csproj" />
     <ProjectReference Include="..\ePunla.Command.DAL\ePunla.Command.DAL.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
   </ItemGroup>
 </Project>

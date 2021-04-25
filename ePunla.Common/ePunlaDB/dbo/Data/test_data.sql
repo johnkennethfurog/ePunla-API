@@ -61,7 +61,8 @@ DECLARE @Farmers TABLE
     [StreetAddress]    NVARCHAR (MAX) ,
     [BarangayId]       INT            ,
     [MobileNumber]     NVARCHAR (MAX) ,
-    [Password]         NVARCHAR (MAX) ,
+    [PasswordHash]     VARBINARY(1024) ,
+    [PasswordSalt]     VARBINARY(1024) ,
     [Avatar]           NVARCHAR (MAX) ,
     [AvatarId]         INT,
     [RegistrationDate] DATETIME2 (7),
@@ -71,11 +72,15 @@ DECLARE @Farmers TABLE
     [BarangayAreaId]   INT
 );
 
+DECLARE @pHash VARBINARY(1024) = 0xCEF09AFF1B8EFC61CD29A48A345E973DE8E8204BC7155E044D28F25C25F8969C5EF4986BCCF6DCC3348C07D986212B926E182C207A70747DF524BEEBB3764057;
+DECLARE @pSalt VARBINARY(1024) = 0x2A079BE12FDA78A2A5F2EA7BFEF67503AA4BFB5712B03B271EFEC373D5D3328A6224BF72207574336FF897303104E35BD1F2B80E519301A58D7E831E517405BADC54BDE3B20F23CA11F6063DC5ADF4B98B1A07F1AAB59019B139A44AAE44FC1B877F08A575CD53F3A165FA7248612A5A691A8B20E3A5EA9A0D4CB6474A1A4AE0;
+
+
 
 INSERT INTO @Farmers
-SELECT 1,'Juan','Dela Cruz','Sapang Ciduad',1,'09994811893','password',NULL,NULL,'01-01-2021','Pending',NULL,'',1
-UNION SELECT 2,'Ricky','Fernandez','B3 L5 PH9 Dugsongan st., Bongang Subd.',1,'09994811894','password',NULL,NULL,'01-01-2021','Pending',NULL,'',2
-UNION SELECT 3,'Pedro','Penduko','Unit , Lot 56 Housing Village',1,'09994811895','password',NULL,NULL,'01-01-2021','Confirmed',NULL,'',3
+SELECT 1,'Juan','Dela Cruz','Sapang Ciduad',1,'09994811893', @pHash , @pSalt ,NULL,NULL,'01-01-2021','Pending',NULL,'',1
+UNION SELECT 2,'Ricky','Fernandez','B3 L5 PH9 Dugsongan st., Bongang Subd.',1,'09994811894',  @pHash , @pSalt,NULL,NULL,'01-01-2021','Pending',NULL,'',2
+UNION SELECT 3,'Pedro','Penduko','Unit , Lot 56 Housing Village',1,'09994811895',  @pHash , @pSalt ,NULL,NULL,'01-01-2021','Confirmed',NULL,'',3
 
 
 SET IDENTITY_INSERT [dbo].Farmers ON
@@ -84,9 +89,9 @@ MERGE Farmers as [TARGET]
 USING @Farmers as [SOURCE]
 ON ([SOURCE].FarmerId = [TARGET].FarmerId)
 WHEN NOT MATCHED 
-    THEN INSERT (FarmerId,FirstName,LastName,StreetAddress,BarangayId,MobileNumber,Password,Avatar,AvatarId,RegistrationDate,Status,ValidationDate,Remarks,BarangayAreaId) 
+    THEN INSERT (FarmerId,FirstName,LastName,StreetAddress,BarangayId,MobileNumber,PasswordHash,PasswordSalt,Avatar,AvatarId,RegistrationDate,Status,ValidationDate,Remarks,BarangayAreaId) 
     VALUES ([SOURCE].FarmerId,[SOURCE].FirstName,[SOURCE].LastName,[SOURCE].StreetAddress,
-            [SOURCE].BarangayId,[SOURCE].MobileNumber,[SOURCE].Password,[SOURCE].Avatar,
+            [SOURCE].BarangayId,[SOURCE].MobileNumber,[SOURCE].PasswordHash,[SOURCE].PasswordSalt,[SOURCE].Avatar,
             [SOURCE].AvatarId,[SOURCE].RegistrationDate,[SOURCE].Status,[SOURCE].ValidationDate,
             [SOURCE].Remarks,[SOURCE].BarangayAreaId);
 

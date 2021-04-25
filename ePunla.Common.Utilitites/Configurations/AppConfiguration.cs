@@ -1,6 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using ePunla.Common.Utilitites.PipelinesBehavior;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 
@@ -8,7 +10,7 @@ namespace ePunla.Common.Utilitites.Configurations
 {
     public static class AppConfiguration
     {
-        public static void ConfigureApp(this IServiceCollection services)
+        public static void ConfigureAppApi(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -38,5 +40,18 @@ namespace ePunla.Common.Utilitites.Configurations
 
             });
         }
+
+        public static void ConfigureAppBusiness(this IServiceCollection services, Assembly businessAssembly)
+        {
+            services.AddMediatR(businessAssembly);
+
+            // For all the validators, register them with dependency injection as scoped
+            AssemblyScanner.FindValidatorsInAssembly(businessAssembly)
+              .ForEach(item => services.AddScoped(item.InterfaceType, item.ValidatorType));
+
+            // Add the custome pipeline validation to DI
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        }
+
     }
 }

@@ -8,6 +8,7 @@
     <Folder Include="Configurations\" />
     <Folder Include="Dtos\" />
     <Folder Include="Enums\" />
+    <Folder Include="Validators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ePunla.Common.Utilitites\ePunla.Common.Utilitites.csproj" />

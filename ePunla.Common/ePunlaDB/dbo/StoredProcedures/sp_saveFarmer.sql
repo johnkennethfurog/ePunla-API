@@ -5,7 +5,8 @@ CREATE PROCEDURE [dbo].[sp_saveFarmer]
     @StreetAddress    NVARCHAR (200),
     @BarangayId       INT,
     @MobileNumber     NVARCHAR (20),
-    @Password         NVARCHAR (20),
+    @PasswordHash     VARBINARY(1024),
+    @PasswordSalt     VARBINARY(1024),
     @Avatar           NVARCHAR (MAX),
     @AvatarId         INT,
     @BarangayAreaId   INT,
@@ -28,10 +29,10 @@ AS
       BEGIN
         INSERT INTO Farmers
           ([FirstName],[LastName],[StreetAddress],[BarangayId],[MobileNumber],[MiddleName],
-          [Password],[Avatar],[AvatarId],[RegistrationDate],[Status],[BarangayAreaId])
+          [PasswordHash],[PasswordSalt],[Avatar],[AvatarId],[RegistrationDate],[Status],[BarangayAreaId])
         VALUES
           (@FirstName,@LastName,@StreetAddress,@BarangayId,@MobileNumber,@MiddleName,
-          @Password,@Avatar,@AvatarId,GETDATE(),'Pending',@BarangayAreaId)
+          @PasswordHash, @PasswordSalt,@Avatar,@AvatarId,GETDATE(),'Pending',@BarangayAreaId)
       END
     
     SELECT ISNULL(SCOPE_IDENTITY(),0);

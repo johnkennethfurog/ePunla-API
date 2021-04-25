@@ -8,5 +8,10 @@ namespace ePunla.Command.Business.Commands
     public class RegisterFarmerCommand : IRequest<MediatrResponse<int>>
     {
         public RegisterFarmerDto RegisterFarmerDto { get; set; }
+
+        public RegisterFarmerCommand()
+        {
+
+        }
     }
 }

@@ -7,6 +7,6 @@ namespace ePunla.Command.DAL.Interfaces
 {
     public interface IFarmerContext
     {
-        Task<ContextResponse<int>> SaveFarmer(RegisterFarmerDto registerFarmerDto);
+        Task<ContextResponse<int>> SaveFarmer(RegisterFarmerDto registerFarmerDto, byte[] PasswordHash, byte[] PasswordSalt);
     }
 }

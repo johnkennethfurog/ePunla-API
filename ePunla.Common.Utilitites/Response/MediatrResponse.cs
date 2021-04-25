@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ePunla.Common.Utilitites.Validations;
 
 namespace ePunla.Common.Utilitites.Response
@@ -6,12 +7,25 @@ namespace ePunla.Common.Utilitites.Response
     public class MediatrResponse
     {
         public bool IsInvalid { get; set; }
-        public ErrorMessage ErrorMessage { get; set; }
+
+        private IEnumerable<ErrorMessage> _errorMessages;
+        public IEnumerable<ErrorMessage> ErrorMessages
+        {
+            get
+            {
+                return _errorMessages;
+            }
+            set
+            {
+                IsInvalid = true;
+                _errorMessages = value;
+            }
+        }
+
 
         public MediatrResponse(ErrorMessage errorMessage)
         {
-            ErrorMessage = errorMessage;
-            IsInvalid = true;
+            ErrorMessages = new List<ErrorMessage> { errorMessage };
         }
 
         public MediatrResponse()
@@ -29,6 +43,11 @@ namespace ePunla.Common.Utilitites.Response
         public MediatrResponse(T value)
         {
             Value = value;
+        }
+
+        public MediatrResponse()
+        {
+
         }
     }
 }

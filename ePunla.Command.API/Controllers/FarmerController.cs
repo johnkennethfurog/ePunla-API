@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ePunla.Command.Business.Commands;
 using ePunla.Command.Domain.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ePunla.Command.API.Controllers
 {
@@ -27,7 +22,7 @@ namespace ePunla.Command.API.Controllers
             var response = await _mediator.Send(new RegisterFarmerCommand { RegisterFarmerDto = registerFarmerDto });
 
             if(response.IsInvalid)
-                return BadRequest(response.ErrorMessage);
+                return BadRequest(response.ErrorMessages);
             else
                 return Ok(response.Value);
         }
