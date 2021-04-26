@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ePunla.Common.Utilitites.Response;
 using ePunla.Query.DAL.Models;

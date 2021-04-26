@@ -23,5 +23,19 @@ namespace ePunla.Command.API.Controllers
             var response = await _mediator.Send(new RegisterFarmerCommand { RegisterFarmerDto = registerFarmerDto });
             return ProcessResponse(response);
         }
+
+        [HttpDelete("crops/{cropId}")]
+        public async Task<IActionResult> GetFarms(int cropId)
+        {
+            var response = await _mediator.Send(new CropDeleteCommand { FarmCropId = cropId });
+            return ProcessResponse(response);
+        }
+
+        [HttpPut("crops/{cropId}/harvest")]
+        public async Task<IActionResult> GetFarms(int cropId, CropHarvestDto cropHarvestDto)
+        {
+            var response = await _mediator.Send(new CropHarvestCommand { FarmCropId = cropId, CropHarvestDto = cropHarvestDto });
+            return ProcessResponse(response);
+        }
     }
 }

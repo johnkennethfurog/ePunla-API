@@ -16,6 +16,14 @@ namespace ePunla.Common.Utilitites.Response
         {
             IsValid = true;
         }
+
+        public static ContextResponse ValidateContextResponse(int? validation)
+        {
+            if (validation != null)
+                return new ContextResponse(validation);
+            else
+                return new ContextResponse();
+        }
     }
 
     public class ContextResponse<T> : ContextResponse
@@ -30,6 +38,14 @@ namespace ePunla.Common.Utilitites.Response
         public ContextResponse(T value)
         {
             Value = value;
+        }
+
+        public static ContextResponse<TResponse> ValidateContextResponse<TResponse>(int? validation, TResponse response )
+        {
+            if (validation != null)
+                return new ContextResponse<TResponse>(validation);
+            else
+                return new ContextResponse<TResponse>(response);
         }
     }
 }
