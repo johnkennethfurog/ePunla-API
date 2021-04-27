@@ -86,6 +86,7 @@
     <Build Include="dbo\StoredProcedures\sp_getFarmersCrops.sql" />
     <Build Include="dbo\StoredProcedures\sp_farmCropDelete.sql" />
     <Build Include="dbo\StoredProcedures\sp_farmCropHarvest.sql" />
+    <Build Include="dbo\StoredProcedures\sp_farmCropSave.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

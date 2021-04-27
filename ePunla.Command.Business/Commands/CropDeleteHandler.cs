@@ -28,7 +28,7 @@ namespace ePunla.Command.Business.Commands
                 {
                     case ErrorCode.CropStatusIsNotPlanted:
                         return new MediatrResponse(new ErrorMessage("Cannot delete crop, status of crop is not planted"));
-                    case ErrorCode.CropNotFound:
+                    case ErrorCode.FarmCropNotFound:
                         return new MediatrResponse(new ErrorMessage("Crop does not exist"));
                 }
             }

@@ -25,16 +25,23 @@ namespace ePunla.Command.API.Controllers
         }
 
         [HttpDelete("crops/{cropId}")]
-        public async Task<IActionResult> GetFarms(int cropId)
+        public async Task<IActionResult> DeleteCrop(int cropId)
         {
             var response = await _mediator.Send(new CropDeleteCommand { FarmCropId = cropId });
             return ProcessResponse(response);
         }
 
         [HttpPut("crops/{cropId}/harvest")]
-        public async Task<IActionResult> GetFarms(int cropId, CropHarvestDto cropHarvestDto)
+        public async Task<IActionResult> HarvestCrop(int cropId, [FromBody] CropHarvestDto cropHarvestDto)
         {
             var response = await _mediator.Send(new CropHarvestCommand { FarmCropId = cropId, CropHarvestDto = cropHarvestDto });
+            return ProcessResponse(response);
+        }
+
+        [HttpPost("crops/save")]
+        public async Task<IActionResult> SaveCrop([FromBody] FarmCropSaveDto farmCropSaveDto)
+        {
+            var response = await _mediator.Send(new FarmCropSaveCommand { FarmerId = 1, FarmCropSaveDto = farmCropSaveDto });
             return ProcessResponse(response);
         }
     }

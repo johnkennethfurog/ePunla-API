@@ -10,5 +10,6 @@ namespace ePunla.Command.DAL.Interfaces
         Task<ContextResponse<int>> SaveFarmer(RegisterFarmerDto registerFarmerDto, byte[] PasswordHash, byte[] PasswordSalt);
         Task<ContextResponse> DeleteCrop(int FarmCropId);
         Task<ContextResponse> HarvestCrop(int FarmCropId, DateTime HarvestDate);
+        Task<ContextResponse<int>> SaveCrop(int FarmerId, FarmCropSaveDto FarmCropSaveDto);
     }
 }

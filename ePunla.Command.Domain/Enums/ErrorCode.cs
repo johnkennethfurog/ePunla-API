@@ -13,7 +13,13 @@
 
         // FARM CROP ERROR
         CropStatusIsNotPlanted = 4001,
-        CropNotFound = 4002,
+        FarmCropNotFound = 4002,
+        CropIsAlreadyPlanted = 4003,
 
+        // FARM ERROR
+        FarmNotFound = 5001,
+
+        // CROP ERROR
+        CropNotFound = 6001,
     }
 }

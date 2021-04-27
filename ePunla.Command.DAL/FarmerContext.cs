@@ -17,6 +17,7 @@ namespace ePunla.Command.DAL
 
         const string SP_DELETE_CROP = "sp_farmCropDelete";
         const string SP_HARVEST_CROP = "sp_farmCropHarvest";
+        const string SP_SAVE_CROP = "sp_farmCropSave";
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -44,10 +45,10 @@ namespace ePunla.Command.DAL
             dynamicParameters.Add("@MobileNumber", registerFarmerDto.MobileNumber);
             dynamicParameters.AddValidationParam();
 
-            var response = (await dbConn.QueryAsync<int>(SP_SAVE_FARMER, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
+            var result = (await dbConn.QueryAsync<int>(SP_SAVE_FARMER, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
 
             var validation = dynamicParameters.GetValidationParamValue();
-            return ContextResponse<int>.ValidateContextResponse(validation, response);
+            return ContextResponse<int>.ValidateContextResponse(validation, result);
         }
 
         public async Task<ContextResponse> DeleteCrop(int FarmCropId)
@@ -77,6 +78,25 @@ namespace ePunla.Command.DAL
 
             var validation = dynamicParameters.GetValidationParamValue();
             return ContextResponse.ValidateContextResponse(validation);
+        }
+
+        public async Task<ContextResponse<int>> SaveCrop(int FarmerId, FarmCropSaveDto FarmCropSaveDto)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@farmerId", FarmerId);
+            dynamicParameters.Add("@farmCropId", FarmCropSaveDto.FarmCropId);
+            dynamicParameters.Add("@farmId", FarmCropSaveDto.FarmId);
+            dynamicParameters.Add("@cropId", FarmCropSaveDto.CropId);
+            dynamicParameters.Add("@datePlanted", FarmCropSaveDto.DatePlanted);
+            dynamicParameters.Add("@areaSize", FarmCropSaveDto.AreaSize);
+            dynamicParameters.AddValidationParam();
+
+            var result = (await dbConn.QueryAsync<int>(SP_SAVE_CROP, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse<int>.ValidateContextResponse(validation, result);
         }
     }
 }
