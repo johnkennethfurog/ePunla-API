@@ -18,6 +18,7 @@
 
         // FARM ERROR
         FarmNotFound = 5001,
+        FarmStatusIsNotPending = 5002,
 
         // CROP ERROR
         CropNotFound = 6001,

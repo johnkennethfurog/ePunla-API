@@ -11,5 +11,6 @@ namespace ePunla.Command.DAL.Interfaces
         Task<ContextResponse> DeleteCrop(int FarmCropId);
         Task<ContextResponse> HarvestCrop(int FarmCropId, DateTime HarvestDate);
         Task<ContextResponse<int>> SaveCrop(int FarmerId, FarmCropSaveDto FarmCropSaveDto);
+        Task<ContextResponse<int>> SaveFarm(int FarmerId, FarmSaveDto FarmSaveDto);
     }
 }

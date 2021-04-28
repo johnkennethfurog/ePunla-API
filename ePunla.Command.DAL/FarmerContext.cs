@@ -13,6 +13,8 @@ namespace ePunla.Command.DAL
 {
     public class FarmerContext : IFarmerContext
     {
+        const string SP_SAVE_FARM = "sp_saveFarm";
+
         const string SP_SAVE_FARMER = "sp_saveFarmer";
 
         const string SP_DELETE_CROP = "sp_farmCropDelete";
@@ -94,6 +96,26 @@ namespace ePunla.Command.DAL
             dynamicParameters.AddValidationParam();
 
             var result = (await dbConn.QueryAsync<int>(SP_SAVE_CROP, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse<int>.ValidateContextResponse(validation, result);
+        }
+
+        public async Task<ContextResponse<int>> SaveFarm(int FarmerId, FarmSaveDto FarmSaveDto)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@FarmerId", FarmerId);
+            dynamicParameters.Add("@FarmId", FarmSaveDto.FarmId);
+            dynamicParameters.Add("@AreaSize", FarmSaveDto.Size);
+            dynamicParameters.Add("@Name", FarmSaveDto.Name);
+            dynamicParameters.Add("@StreetAddress", FarmSaveDto.StreetAddress);
+            dynamicParameters.Add("@BarangayId", FarmSaveDto.BarangayId);
+            dynamicParameters.Add("@BarangayAreaId", FarmSaveDto.BarangayAreaId);
+            dynamicParameters.AddValidationParam();
+
+            var result = (await dbConn.QueryAsync<int>(SP_SAVE_FARM, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
 
             var validation = dynamicParameters.GetValidationParamValue();
             return ContextResponse<int>.ValidateContextResponse(validation, result);

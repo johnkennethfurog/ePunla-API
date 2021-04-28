@@ -44,5 +44,12 @@ namespace ePunla.Command.API.Controllers
             var response = await _mediator.Send(new FarmCropSaveCommand { FarmerId = 1, FarmCropSaveDto = farmCropSaveDto });
             return ProcessResponse(response);
         }
+
+        [HttpPost("farms/save")]
+        public async Task<IActionResult> SaveFarm([FromBody] FarmSaveDto farmSaveDto)
+        {
+            var response = await _mediator.Send(new SaveFarmCommand { FarmerId = 1, FarmSaveDto = farmSaveDto });
+            return ProcessResponse(response);
+        }
     }
 }
