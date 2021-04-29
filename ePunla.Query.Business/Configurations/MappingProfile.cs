@@ -10,6 +10,9 @@ namespace ePunla.Query.Business.Configurations
         {
             CreateMap<FarmModel, FarmDto>();
             CreateMap<FarmCropModel, FarmCropDto>();
+
+            CreateMap<FarmerClaimModel, FarmerClaimDto>();
+            CreateMap<ClaimDamageCauseModel, ClaimDamageCauseDto>();
         }
     }
 }

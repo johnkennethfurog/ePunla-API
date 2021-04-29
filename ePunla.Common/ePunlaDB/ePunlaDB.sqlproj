@@ -65,6 +65,7 @@
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="dbo\Data" />
     <Folder Include="dbo\PostDeployment" />
+    <Folder Include="dbo\Types" />
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
@@ -88,12 +89,17 @@
     <Build Include="dbo\StoredProcedures\sp_farmCropHarvest.sql" />
     <Build Include="dbo\StoredProcedures\sp_farmCropSave.sql" />
     <Build Include="dbo\StoredProcedures\sp_saveFarm.sql" />
+    <Build Include="dbo\Tables\DamageType.sql" />
+    <Build Include="dbo\StoredProcedures\sp_getFarmerClaims.sql" />
+    <Build Include="dbo\StoredProcedures\sp_getClaimCauses.sql" />
+    <Build Include="dbo\Types\ClaimId.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="dbo\Data\categories_data.sql" />
+    <None Include="dbo\Data\damage_type_data.sql" />
     <None Include="dbo\Data\test_data.sql" />
   </ItemGroup>
 </Project>

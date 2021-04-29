@@ -186,15 +186,15 @@ DECLARE @farmCrops TABLE
 INSERT INTO @farmCrops
 SELECT 1, 1, 1, 1, '12-01-2021', '01-01-2021', 500, 'Planted', NULL
 UNION  SELECT 2, 2, 1, 1, '12-01-2021', '01-01-2021', 700, 'Harvested', '12-01-2021'
-UNION SELECT 3, 3, 1, 1, '12-01-2021', '01-01-2021', 500, 'Planted', NULL
-UNION SELECT 4, 4, 1, 1, '12-01-2021', '01-01-2021', 500, 'Planted', NULL
+UNION SELECT 3, 3, 1, 1, '12-01-2021', '01-01-2021', 500, 'Damaged', NULL
+UNION SELECT 4, 4, 1, 1, '12-01-2021', '01-01-2021', 500, 'Damaged', NULL
 
 UNION  SELECT 5, 5, 2, 1, '12-01-2021', '01-01-2021', 700, 'Harvested', '12-01-2021'
-UNION SELECT 6, 6, 2, 1, '12-01-2021', '01-01-2021', 500, 'Planted', NULL
+UNION SELECT 6, 6, 2, 1, '12-01-2021', '01-01-2021', 500, 'Damaged', NULL
 UNION SELECT 7, 7, 2, 1, '12-01-2021', '01-01-2021', 500, 'Planted', NULL
 
 UNION  SELECT 8, 8, 3, 1, '12-01-2021', '01-01-2021', 700, 'Harvested', '12-01-2021'
-UNION SELECT 9, 9, 3, 1, '12-01-2021', '01-01-2021', 500, 'Planted', NULL
+UNION SELECT 9, 9, 3, 1, '12-01-2021', '01-01-2021', 500, 'Damaged', NULL
 UNION SELECT 10, 10, 3, 1, '12-01-2021', '01-01-2021', 500, 'Planted', NULL
 
 UNION  SELECT 11, 11, 4, 2, '12-01-2021', '01-01-2021', 700, 'Harvested', '12-01-2021'
@@ -211,3 +211,75 @@ WHEN NOT MATCHED
     VALUES ([SOURCE].[FarmCropId],[SOURCE].[CropId],[SOURCE].[FarmId],[SOURCE].[CategoryId],[SOURCE].[EstimatedHarvestDate],[SOURCE].[PlantedDate],[SOURCE].[AreaSize],[SOURCE].[Status],[SOURCE].[HarvestDate]);
 
 SET IDENTITY_INSERT [dbo].FarmCrops OFF
+
+-- TEST DATA FOR CLAIM INSURANCE
+DECLARE @claimsInsurance TABLE
+(
+    [ClaimId]       INT           ,
+    [FarmCropId]     INT            ,
+    [FarmId]         INT            ,
+    [FilingDate]     DATETIME2 (7)  ,
+    [DamagedArea]    NVARCHAR (20) ,
+    [Description]    NVARCHAR (200) ,
+    [PhotoUrl]       NVARCHAR (100) ,
+    [PhotoId]        NVARCHAR(100),
+    [Status]         NVARCHAR (20)
+);
+
+INSERT INTO @claimsInsurance
+SELECT 1, 3, 1, '02-01-2021', 'Partial', 'Unkown Creatures are romaing around the earth', 'https://res.cloudinary.com/db2qrpicm/image/upload/v1585485396/o4pt0fg0ffxps0n3wq9t.jpg','o4pt0fg0ffxps0n3wq9t','Pending'
+UNION SELECT 2, 4, 1, '02-01-2021', 'Partial', '', 'https://res.cloudinary.com/db2qrpicm/image/upload/v1585485396/o4pt0fg0ffxps0n3wq9t.jpg','o4pt0fg0ffxps0n3wq9t','Pending'
+
+UNION SELECT 3, 6, 2, '02-01-2021', 'Partial', '', 'https://res.cloudinary.com/db2qrpicm/image/upload/v1585485396/o4pt0fg0ffxps0n3wq9t.jpg','o4pt0fg0ffxps0n3wq9t','Pending'
+
+UNION SELECT 4, 9, 3, '02-01-2021', 'Partial', '', 'https://res.cloudinary.com/db2qrpicm/image/upload/v1585485396/o4pt0fg0ffxps0n3wq9t.jpg','o4pt0fg0ffxps0n3wq9t','Pending'
+
+
+SET IDENTITY_INSERT [dbo].Claims ON
+
+MERGE Claims as [TARGET]
+USING @claimsInsurance as [SOURCE]
+ON ([SOURCE].ClaimId = [TARGET].ClaimId)
+WHEN NOT MATCHED 
+    THEN INSERT([ClaimId],[FarmCropId],[FarmId],[FilingDate],[DamagedArea],[Description],[PhotoUrl], [PhotoId],[Status]) 
+    VALUES ([SOURCE].[ClaimId],[SOURCE].[FarmCropId],[SOURCE].[FarmId],[SOURCE].[FilingDate],[SOURCE].[DamagedArea],[SOURCE].[Description],[SOURCE].[PhotoUrl],[SOURCE].[PhotoId],[SOURCE].[Status]);
+
+SET IDENTITY_INSERT [dbo].Claims OFF
+
+-- TEST DATA FOR CLAIM CAUSE
+DECLARE @claimCauses TABLE
+(
+    [ClaimCauseId]    INT,
+    [ClaimId]         INT,
+    [DamageTypeId]    INT,
+    [DamagedAreaSize] DECIMAL
+);
+
+INSERT INTO @claimCauses
+SELECT 1, 1, 1, 100
+UNION SELECT 2, 1, 2, 0
+UNION SELECT 3, 1, 3, 0
+
+UNION SELECT 4, 2, 1, 0 
+UNION SELECT 5, 2, 2, 100
+UNION SELECT 6, 2, 3, 0
+
+UNION SELECT 7, 3, 1, 0 
+UNION SELECT 8, 3, 2, 0
+UNION SELECT 9, 3, 3, 100
+
+UNION SELECT 10, 4, 1, 100
+UNION SELECT 11, 4, 2, 100
+UNION SELECT 12, 4, 3, 0
+
+
+SET IDENTITY_INSERT [dbo].ClaimCauses ON
+
+MERGE ClaimCauses as [TARGET]
+USING @claimCauses as [SOURCE]
+    ON ([SOURCE].ClaimCauseId = [TARGET].ClaimCauseId)
+WHEN NOT MATCHED 
+    THEN INSERT([ClaimCauseId],[ClaimId],[DamageTypeId],[DamagedAreaSize]) 
+    VALUES ([SOURCE].[ClaimCauseId],[SOURCE].[ClaimId],[SOURCE].[DamageTypeId],[SOURCE].[DamagedAreaSize]);
+
+SET IDENTITY_INSERT [dbo].ClaimCauses OFF

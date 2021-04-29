@@ -2,6 +2,7 @@
 using ePunla.Command.Business.Commands;
 using ePunla.Command.Domain.Dtos;
 using ePunla.Common.Utilitites.BaseClass;
+using ePunla.Common.Utilitites.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +19,7 @@ namespace ePunla.Command.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> GetFarms([FromBody] RegisterFarmerDto registerFarmerDto)
+        public async Task<IActionResult> Register([FromBody] RegisterFarmerDto registerFarmerDto)
         {
             var response = await _mediator.Send(new RegisterFarmerCommand { RegisterFarmerDto = registerFarmerDto });
             return ProcessResponse(response);
@@ -41,14 +42,14 @@ namespace ePunla.Command.API.Controllers
         [HttpPost("crops/save")]
         public async Task<IActionResult> SaveCrop([FromBody] FarmCropSaveDto farmCropSaveDto)
         {
-            var response = await _mediator.Send(new FarmCropSaveCommand { FarmerId = 1, FarmCropSaveDto = farmCropSaveDto });
+            var response = await _mediator.Send(new FarmCropSaveCommand { FarmerId = UserHelper.GetUserId(), FarmCropSaveDto = farmCropSaveDto });
             return ProcessResponse(response);
         }
 
         [HttpPost("farms/save")]
         public async Task<IActionResult> SaveFarm([FromBody] FarmSaveDto farmSaveDto)
         {
-            var response = await _mediator.Send(new SaveFarmCommand { FarmerId = 1, FarmSaveDto = farmSaveDto });
+            var response = await _mediator.Send(new SaveFarmCommand { FarmerId = UserHelper.GetUserId(), FarmSaveDto = farmSaveDto });
             return ProcessResponse(response);
         }
     }

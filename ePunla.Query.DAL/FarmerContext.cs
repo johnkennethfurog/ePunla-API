@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using ePunla.Common.Utilitites.DbConnect;
@@ -7,6 +8,7 @@ using ePunla.Common.Utilitites.Response;
 using ePunla.Query.DAL.Interfaces;
 using ePunla.Query.DAL.Models;
 using ePunla.Query.Domain.Dtos;
+using FleetResponse.Common.Business.Helpers;
 
 namespace ePunla.Query.DAL
 {
@@ -14,6 +16,10 @@ namespace ePunla.Query.DAL
     {
         const string SP_GET_FARMS = "sp_getFarmerFarms";
         const string SP_GET_CROPS = "sp_getFarmersCrops";
+
+        const string SP_GET_CLAIM_CAUSES = "sp_getClaimCauses";
+        const string SP_GET_FARMER_CLAIMS = "sp_getFarmerClaims";
+
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -47,6 +53,31 @@ namespace ePunla.Query.DAL
             var response = (await dbConn.QueryAsync<FarmModel>(SP_GET_FARMS, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<FarmModel>>(response);
 
+        }
+
+        public async Task<ContextResponse<IEnumerable<FarmerClaimModel>>> GetClaims(int FarmerId, SearchClaimFieldsDto SearchFields)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@FarmerId", FarmerId);
+            dynamicParameters.Add("@Status", SearchFields?.Status);
+
+            var response = (await dbConn.QueryAsync<FarmerClaimModel>(SP_GET_FARMER_CLAIMS, dynamicParameters, commandType: CommandType.StoredProcedure));
+            return new ContextResponse<IEnumerable<FarmerClaimModel>>(response);
+        }
+
+        public async Task<ContextResponse<IEnumerable<ClaimDamageCauseModel>>> GetDamageCause(IEnumerable<int> claimIds)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var claims = claimIds.Select(x => new ClaimIdModel { ClaimId = x });
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@claimsId", claims.ToList().ToDataTable().AsTableValuedParameter());
+
+            var response = (await dbConn.QueryAsync<ClaimDamageCauseModel>(SP_GET_CLAIM_CAUSES, dynamicParameters, commandType: CommandType.StoredProcedure));
+            return new ContextResponse<IEnumerable<ClaimDamageCauseModel>>(response);
         }
     }
 }

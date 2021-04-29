@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ePunla.Common.Utilitites.BaseClass;
+using ePunla.Common.Utilitites.Helpers;
 using ePunla.Query.Business.Queries;
 using ePunla.Query.Domain.Dtos;
 using MediatR;
@@ -22,17 +23,24 @@ namespace ePunla.Query.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{farmerId}/farms")]
-        public async Task<IActionResult> GetFarms(int farmerId)
+        [HttpGet("farms")]
+        public async Task<IActionResult> GetFarms()
         {
-            var response = await _mediator.Send(new GetFarmersFarmQuery { FarmerId = farmerId });
+            var response = await _mediator.Send(new GetFarmersFarmQuery { FarmerId = UserHelper.GetUserId() });
             return ProcessResponse(response);
         }
 
-        [HttpPost("{farmerId}/crops/search")]
-        public async Task<IActionResult> GetCrops(int farmerId, [FromBody] SearchCropFieldsDto SearchField)
+        [HttpPost("claims/search")]
+        public async Task<IActionResult> GetFarms([FromBody] SearchClaimFieldsDto SearchField)
         {
-            var response = await _mediator.Send(new GetFarmersCropQuery { FarmerId = farmerId, SearchField = SearchField });
+            var response = await _mediator.Send(new GetFarmersClaimQuery { FarmerId = UserHelper.GetUserId(), SearchField = SearchField });
+            return ProcessResponse(response);
+        }
+
+        [HttpPost("crops/search")]
+        public async Task<IActionResult> GetCrops([FromBody] SearchCropFieldsDto SearchField)
+        {
+            var response = await _mediator.Send(new GetFarmersCropQuery { FarmerId = UserHelper.GetUserId(), SearchField = SearchField });
             return ProcessResponse(response);
         }
     }
