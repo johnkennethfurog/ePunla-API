@@ -21,6 +21,8 @@ namespace ePunla.Command.DAL
         const string SP_HARVEST_CROP = "sp_farmCropHarvest";
         const string SP_SAVE_CROP = "sp_farmCropSave";
 
+        const string SP_DELETE_CLAIM = "sp_deleteFarmerClaim";
+
         private readonly IDatabaseConnection _dbConnection;
 
         public FarmerContext(IDatabaseConnection dbConnection)
@@ -119,6 +121,20 @@ namespace ePunla.Command.DAL
 
             var validation = dynamicParameters.GetValidationParamValue();
             return ContextResponse<int>.ValidateContextResponse(validation, result);
+        }
+
+        public async Task<ContextResponse> DeleteClaim(int ClaimId)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@ClaimId", ClaimId);
+            dynamicParameters.AddValidationParam();
+
+            await dbConn.QueryAsync(SP_DELETE_CLAIM, dynamicParameters, commandType: CommandType.StoredProcedure);
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse.ValidateContextResponse(validation);
         }
     }
 }

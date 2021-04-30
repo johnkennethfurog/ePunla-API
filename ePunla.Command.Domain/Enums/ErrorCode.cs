@@ -22,5 +22,9 @@
 
         // CROP ERROR
         CropNotFound = 6001,
+
+        // CLAIM ERROR
+        ClaimNotFound = 7001,
+        ClaimStatusIsNotPending = 7002
     }
 }

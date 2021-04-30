@@ -93,6 +93,7 @@
     <Build Include="dbo\StoredProcedures\sp_getFarmerClaims.sql" />
     <Build Include="dbo\StoredProcedures\sp_getClaimCauses.sql" />
     <Build Include="dbo\Types\ClaimId.sql" />
+    <Build Include="dbo\StoredProcedures\sp_deleteFarmerClaim.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

@@ -8,9 +8,13 @@ namespace ePunla.Command.DAL.Interfaces
     public interface IFarmerContext
     {
         Task<ContextResponse<int>> SaveFarmer(RegisterFarmerDto registerFarmerDto, byte[] PasswordHash, byte[] PasswordSalt);
+
         Task<ContextResponse> DeleteCrop(int FarmCropId);
         Task<ContextResponse> HarvestCrop(int FarmCropId, DateTime HarvestDate);
         Task<ContextResponse<int>> SaveCrop(int FarmerId, FarmCropSaveDto FarmCropSaveDto);
+
         Task<ContextResponse<int>> SaveFarm(int FarmerId, FarmSaveDto FarmSaveDto);
+
+        Task<ContextResponse> DeleteClaim(int ClaimId);
     }
 }

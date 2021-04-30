@@ -1,10 +1,11 @@
 ﻿using System;
+using ePunla.Common.Utilitites.Response;
+using MediatR;
+
 namespace ePunla.Command.Business.Commands
 {
-    public class DeleteClaimCommand
+    public class DeleteClaimCommand : IRequest<MediatrResponse>
     {
-        public DeleteClaimCommand()
-        {
-        }
+        public int ClaimId { get; set; }
     }
 }
