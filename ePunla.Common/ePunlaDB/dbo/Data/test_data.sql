@@ -249,37 +249,32 @@ SET IDENTITY_INSERT [dbo].Claims OFF
 -- TEST DATA FOR CLAIM CAUSE
 DECLARE @claimCauses TABLE
 (
-    [ClaimCauseId]    INT,
     [ClaimId]         INT,
     [DamageTypeId]    INT,
     [DamagedAreaSize] DECIMAL
 );
 
 INSERT INTO @claimCauses
-SELECT 1, 1, 1, 100
-UNION SELECT 2, 1, 2, 0
-UNION SELECT 3, 1, 3, 0
+SELECT 1, 1, 100
+UNION SELECT 1, 2, 0
+UNION SELECT 1, 3, 0
 
-UNION SELECT 4, 2, 1, 0 
-UNION SELECT 5, 2, 2, 100
-UNION SELECT 6, 2, 3, 0
+UNION SELECT 2, 1, 0 
+UNION SELECT 2, 2, 100
+UNION SELECT 2, 3, 0
 
-UNION SELECT 7, 3, 1, 0 
-UNION SELECT 8, 3, 2, 0
-UNION SELECT 9, 3, 3, 100
+UNION SELECT 3, 1, 0 
+UNION SELECT 3, 2, 0
+UNION SELECT 3, 3, 100
 
-UNION SELECT 10, 4, 1, 100
-UNION SELECT 11, 4, 2, 100
-UNION SELECT 12, 4, 3, 0
+UNION SELECT 4, 1, 100
+UNION SELECT 4, 2, 100
+UNION SELECT 4, 3, 0
 
-
-SET IDENTITY_INSERT [dbo].ClaimCauses ON
 
 MERGE ClaimCauses as [TARGET]
 USING @claimCauses as [SOURCE]
-    ON ([SOURCE].ClaimCauseId = [TARGET].ClaimCauseId)
+    ON ([SOURCE].DamageTypeId = [TARGET].DamageTypeId AND [SOURCE].ClaimId = [TARGET].ClaimId)
 WHEN NOT MATCHED 
-    THEN INSERT([ClaimCauseId],[ClaimId],[DamageTypeId],[DamagedAreaSize]) 
-    VALUES ([SOURCE].[ClaimCauseId],[SOURCE].[ClaimId],[SOURCE].[DamageTypeId],[SOURCE].[DamagedAreaSize]);
-
-SET IDENTITY_INSERT [dbo].ClaimCauses OFF
+    THEN INSERT([ClaimId],[DamageTypeId],[DamagedAreaSize]) 
+    VALUES ([SOURCE].[ClaimId],[SOURCE].[DamageTypeId],[SOURCE].[DamagedAreaSize]);

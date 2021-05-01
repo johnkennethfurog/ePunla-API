@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using ePunla.Command.DAL.Interfaces;
+using ePunla.Command.DAL.Models;
 using ePunla.Command.Domain.Dtos;
 using ePunla.Common.Utilitites.DbConnect;
 using ePunla.Common.Utilitites.Extensions;
 using ePunla.Common.Utilitites.Response;
+using FleetResponse.Common.Business.Helpers;
 
 namespace ePunla.Command.DAL
 {
@@ -22,6 +24,7 @@ namespace ePunla.Command.DAL
         const string SP_SAVE_CROP = "sp_farmCropSave";
 
         const string SP_DELETE_CLAIM = "sp_deleteFarmerClaim";
+        const string SP_SAVE_CLAIM = "sp_saveClaim";
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -135,6 +138,29 @@ namespace ePunla.Command.DAL
 
             var validation = dynamicParameters.GetValidationParamValue();
             return ContextResponse.ValidateContextResponse(validation);
+        }
+
+        public async Task<ContextResponse<int>> SaveClaim(SaveClaimDto saveClaimDto)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var claimCausesModel = saveClaimDto.ClaimCauses
+                                    .Select(x => new DamageCauseModel { DamagedAreaSize = x.DamagedAreaSize, DamageTypeId = (int) x.DamageTypeId });
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@ClaimId", saveClaimDto.ClaimId);
+            dynamicParameters.Add("@FarmCropId", saveClaimDto.FarmCropId);
+            dynamicParameters.Add("@Description", saveClaimDto.Description);
+            dynamicParameters.Add("@PhotoUrl", saveClaimDto.PhotoUrl);
+            dynamicParameters.Add("@PhotoId", saveClaimDto.PhotoId);
+            dynamicParameters.Add("@DamagedArea", saveClaimDto.DamagedArea);
+            dynamicParameters.Add("@ClaimCauses", claimCausesModel.ToList().ToDataTable().AsTableValuedParameter());
+            dynamicParameters.AddValidationParam();
+
+            var result = (await dbConn.QueryAsync<int>(SP_SAVE_CLAIM, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse<int>.ValidateContextResponse(validation, result);
         }
     }
 }

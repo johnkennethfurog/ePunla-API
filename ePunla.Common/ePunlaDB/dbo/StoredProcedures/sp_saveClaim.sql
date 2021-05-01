@@ -11,6 +11,7 @@ AS
 BEGIN
 
   DECLARE @FarmId INT = (SELECT [FarmId] FROM FarmCrops WHERE FarmCropId = @FarmCropId)
+  DECLARE @ExistingFarmCropId INT = (SELECT [FarmCropId] FROM Claims WHERE ClaimId = @claimId)
 
   IF @ClaimId IS NOT NULL AND NOT EXISTS (SELECT TOP 1 * FROM Claims WHERE ClaimId = @claimId)
     BEGIN 
@@ -20,11 +21,15 @@ BEGIN
     BEGIN
       SET @Validation = 7002;
     END
+  ELSE IF EXISTS (SELECT DamageTypeId, COUNT(*) FROM @ClaimCauses GROUP BY DamageTypeId HAVING COUNT(*) > 1)
+    BEGIN
+        SET @Validation = 7003;
+    END
   ELSE IF NOT EXISTS (SELECT TOP 1 * FROM FarmCrops WHERE FarmCropId = @FarmCropId) OR @FarmId IS NULL
     BEGIN
       SET @Validation = 4002;
     END
-  ELSE IF (SELECT [Status] FROM FarmCrops WHERE FarmCropId = @FarmCropId) <> 'Planted'
+  ELSE IF (@ClaimId IS NULL OR @ExistingFarmCropId <> @FarmCropId) AND (SELECT [Status] FROM FarmCrops WHERE FarmCropId = @FarmCropId) <> 'Planted'
     BEGIN
       SET @Validation = 4001;
     END
@@ -45,6 +50,7 @@ BEGIN
       
     END
   ELSE
+    /* UPDATE CLAIM */
     BEGIN
       UPDATE Claims
       SET
@@ -58,12 +64,14 @@ BEGIN
         ClaimId = @ClaimId
 
       MERGE ClaimCauses as [TARGET]
-        USING @ClaimCauses as [SOURCE]
-        ON ([SOURCE].ClaimCauseId = [TARGET].ClaimCauseId)
+      USING @ClaimCauses as [SOURCE]
+        ON ([SOURCE].DamageTypeId = [TARGET].DamageTypeId AND @ClaimId = [TARGET].ClaimId)
           WHEN NOT MATCHED
               THEN INSERT([ClaimId],[DamageTypeId],[DamagedAreaSize]) 
               VALUES (@claimId,[SOURCE].[DamageTypeId],[SOURCE].[DamagedAreaSize])
           WHEN MATCHED AND [TARGET].DamagedAreaSize <> [SOURCE].DamagedAreaSize
               THEN UPDATE SET [TARGET].DamagedAreaSize = [SOURCE].DamagedAreaSize;
     END
+
+    SELECT ISNULL(@ClaimId,0);
 END

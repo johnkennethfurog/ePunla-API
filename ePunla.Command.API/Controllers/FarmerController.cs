@@ -59,5 +59,12 @@ namespace ePunla.Command.API.Controllers
             var response = await _mediator.Send(new DeleteClaimCommand { ClaimId = claimId });
             return ProcessResponse(response);
         }
+
+        [HttpPost("claims/save")]
+        public async Task<IActionResult> SaveClaim([FromBody] SaveClaimDto saveClaimDto)
+        {
+            var response = await _mediator.Send(new SaveClaimCommand { SaveClaimDto = saveClaimDto });
+            return ProcessResponse(response);
+        }
     }
 }

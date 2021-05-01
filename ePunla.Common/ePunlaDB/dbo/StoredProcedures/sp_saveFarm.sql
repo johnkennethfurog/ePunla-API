@@ -31,6 +31,8 @@ BEGIN
         ([FarmerId],[Address],[BarangayId],[BarangayAreaId],[AreaSize],[Name],[Status])
       VALUES
         (@FarmerId, @StreetAddress, @BarangayId, @BarangayAreaId, @AreaSize, @Name, 'Pending')
+
+        SET @FarmId = SCOPE_IDENTITY()
     END
   ELSE
     BEGIN
@@ -45,5 +47,5 @@ BEGIN
     END
 
   
-  SELECT ISNULL(ISNULL(SCOPE_IDENTITY(),0),@FarmId);
+  SELECT ISNULL(@FarmId,0);
 END

@@ -16,5 +16,6 @@ namespace ePunla.Command.DAL.Interfaces
         Task<ContextResponse<int>> SaveFarm(int FarmerId, FarmSaveDto FarmSaveDto);
 
         Task<ContextResponse> DeleteClaim(int ClaimId);
+        Task<ContextResponse<int>> SaveClaim(SaveClaimDto saveClaimDto);
     }
 }

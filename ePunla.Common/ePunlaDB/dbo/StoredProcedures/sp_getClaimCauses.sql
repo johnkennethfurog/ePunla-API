@@ -3,7 +3,6 @@ CREATE PROCEDURE [dbo].[sp_getClaimCauses]
 AS
 BEGIN
   SELECT
-    CC.ClaimCauseId,
     DT.DamageType,
     DT.DamageTypeId,
     CC.DamagedAreaSize,

@@ -7,6 +7,7 @@
   <ItemGroup>
     <Folder Include="Configurations\" />
     <Folder Include="interfaces\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ePunla.Command.Domain\ePunla.Command.Domain.csproj" />

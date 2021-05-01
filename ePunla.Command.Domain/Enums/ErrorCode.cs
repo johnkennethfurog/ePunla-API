@@ -25,6 +25,7 @@
 
         // CLAIM ERROR
         ClaimNotFound = 7001,
-        ClaimStatusIsNotPending = 7002
+        ClaimStatusIsNotPending = 7002,
+        ClaimDuplicateDamageType = 7003
     }
 }
