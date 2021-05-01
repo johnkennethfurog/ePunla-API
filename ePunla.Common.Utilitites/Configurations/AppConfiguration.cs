@@ -1,16 +1,21 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
+using ePunla.Common.Utilitites.Helpers;
 using ePunla.Common.Utilitites.PipelinesBehavior;
 using FluentValidation;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 namespace ePunla.Common.Utilitites.Configurations
 {
     public static class AppConfiguration
     {
-        public static void ConfigureAppApi(this IServiceCollection services)
+        public static void ConfigureAppApi(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddSwaggerGen(c =>
             {
@@ -39,6 +44,28 @@ namespace ePunla.Common.Utilitites.Configurations
                 });
 
             });
+
+            services.AddCors(options => {
+                options.AddPolicy(CorsHelper.CORS_POLICY,
+                    policyBuilder =>
+                        policyBuilder
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials());
+                        
+            });
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opt =>
+                {
+                    opt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:Secret"])),
+                        ValidateIssuer = false,
+                        ValidateAudience = false
+                    };
+                });
         }
 
         public static void ConfigureAppBusiness(this IServiceCollection services, Assembly businessAssembly)

@@ -2,6 +2,7 @@
 using ePunla.Command.Business.Commands;
 using ePunla.Common.Utilitites.BaseClass;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ePunla.Command.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class PhotoController : BaseController
     {

@@ -78,9 +78,9 @@ DECLARE @pSalt VARBINARY(1024) = 0x2A079BE12FDA78A2A5F2EA7BFEF67503AA4BFB5712B03
 
 
 INSERT INTO @Farmers
-SELECT 1,'Juan','Dela Cruz','Sapang Ciduad',1,'09994811893', @pHash , @pSalt ,NULL,NULL,'01-01-2021','Pending',NULL,'',1
-UNION SELECT 2,'Ricky','Fernandez','B3 L5 PH9 Dugsongan st., Bongang Subd.',1,'09994811894',  @pHash , @pSalt,NULL,NULL,'01-01-2021','Pending',NULL,'',2
-UNION SELECT 3,'Pedro','Penduko','Unit , Lot 56 Housing Village',1,'09994811895',  @pHash , @pSalt ,NULL,NULL,'01-01-2021','Confirmed',NULL,'',3
+SELECT 1,'Juan','Dela Cruz','Sapang Ciduad',1,'9994811893', @pHash , @pSalt ,NULL,NULL,'01-01-2021','Pending',NULL,'',1
+UNION SELECT 2,'Ricky','Fernandez','B3 L5 PH9 Dugsongan st., Bongang Subd.',1,'9994811894',  @pHash , @pSalt,NULL,NULL,'01-01-2021','Pending',NULL,'',2
+UNION SELECT 3,'Pedro','Penduko','Unit , Lot 56 Housing Village',1,'9994811895',  @pHash , @pSalt ,NULL,NULL,'01-01-2021','Confirmed',NULL,'',3
 
 
 SET IDENTITY_INSERT [dbo].Farmers ON

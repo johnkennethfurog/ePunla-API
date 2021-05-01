@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[Farmers] (
     [MiddleName]       NVARCHAR (100) NULL,
     [StreetAddress]    NVARCHAR (200) NOT NULL,
     [BarangayId]       INT            NOT NULL,
-    [MobileNumber]     NVARCHAR (20)  NOT NULL,
+    [MobileNumber]     NVARCHAR(11)  NOT NULL,
     [PasswordHash]         VARBINARY(1024)  NOT NULL,
     [PasswordSalt]         VARBINARY(1024)  NOT NULL,
     [Avatar]           NVARCHAR (MAX) NULL,

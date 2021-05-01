@@ -22,7 +22,7 @@ namespace ePunla.Command.API
         {
             services.AddControllers();
             services.ConfigureAPI(Configuration);
-            services.ConfigureAppApi();
+            services.ConfigureAppApi(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -32,12 +32,6 @@ namespace ePunla.Command.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseCommonUtilities();
 

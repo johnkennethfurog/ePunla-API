@@ -9,6 +9,7 @@ namespace ePunla.Query.DAL.Configurations
         public static void ConfigureDAL(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IFarmerContext, FarmerContext>();
+            services.AddTransient<IAuthenticationContext, AuthenticationContext>();
         }
     }
 }

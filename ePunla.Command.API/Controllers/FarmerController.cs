@@ -2,12 +2,13 @@
 using ePunla.Command.Business.Commands;
 using ePunla.Command.Domain.Dtos;
 using ePunla.Common.Utilitites.BaseClass;
-using ePunla.Common.Utilitites.Helpers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ePunla.Command.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class FarmerController : BaseController
     {
@@ -42,14 +43,14 @@ namespace ePunla.Command.API.Controllers
         [HttpPost("crops/save")]
         public async Task<IActionResult> SaveCrop([FromBody] FarmCropSaveDto farmCropSaveDto)
         {
-            var response = await _mediator.Send(new FarmCropSaveCommand { FarmerId = UserHelper.GetUserId(), FarmCropSaveDto = farmCropSaveDto });
+            var response = await _mediator.Send(new FarmCropSaveCommand { FarmerId = GetUserId(), FarmCropSaveDto = farmCropSaveDto });
             return ProcessResponse(response);
         }
 
         [HttpPost("farms/save")]
         public async Task<IActionResult> SaveFarm([FromBody] FarmSaveDto farmSaveDto)
         {
-            var response = await _mediator.Send(new SaveFarmCommand { FarmerId = UserHelper.GetUserId(), FarmSaveDto = farmSaveDto });
+            var response = await _mediator.Send(new SaveFarmCommand { FarmerId = GetUserId(), FarmSaveDto = farmSaveDto });
             return ProcessResponse(response);
         }
 

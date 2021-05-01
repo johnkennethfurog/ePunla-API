@@ -10,6 +10,7 @@
 
         // FARMER ERROR
         MobileNumberAlreadyExist = 3001,
+        InvalidMobileNumber = 3002,
 
         // FARM CROP ERROR
         CropStatusIsNotPlanted = 4001,

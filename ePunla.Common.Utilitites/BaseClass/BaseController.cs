@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Security.Claims;
 using ePunla.Common.Utilitites.Response;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +8,12 @@ namespace ePunla.Common.Utilitites.BaseClass
     {
         public BaseController()
         {
+        }
+
+        protected int GetUserId()
+        {
+            var userId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            return userId;
         }
 
 

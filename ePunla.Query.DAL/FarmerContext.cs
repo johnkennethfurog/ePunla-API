@@ -79,5 +79,6 @@ namespace ePunla.Query.DAL
             var response = (await dbConn.QueryAsync<ClaimDamageCauseModel>(SP_GET_CLAIM_CAUSES, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<ClaimDamageCauseModel>>(response);
         }
+
     }
 }
