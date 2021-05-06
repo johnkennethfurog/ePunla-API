@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  epunla.query.api:
+    image: ${DOCKER_REGISTRY-}epunlaquery
+    build:
+      context: .
+      dockerfile: Dockerfile.query
+
+  epunla.command.api:
+    image: ${DOCKER_REGISTRY-}epunlacommand
+    build:
+      context: .
+      dockerfile: Dockerfile.command
+

@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePunla.Command.DAL", "ePunl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ePunla.Command.Domain", "ePunla.Command.Domain\ePunla.Command.Domain.csproj", "{A4C25724-C6E3-431D-850C-57E212D2F694}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{768160BF-3449-4C25-B72F-88B94CDB7616}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{A4C25724-C6E3-431D-850C-57E212D2F694}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4C25724-C6E3-431D-850C-57E212D2F694}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4C25724-C6E3-431D-850C-57E212D2F694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{768160BF-3449-4C25-B72F-88B94CDB7616}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{768160BF-3449-4C25-B72F-88B94CDB7616}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{768160BF-3449-4C25-B72F-88B94CDB7616}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{768160BF-3449-4C25-B72F-88B94CDB7616}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
