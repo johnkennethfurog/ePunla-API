@@ -14,8 +14,6 @@ namespace ePunla.Command.Business.Configurations
         {
             services.ConfigureDAL(configuration);
             services.ConfigureAppBusiness(typeof(BusinessConfiguration).Assembly);
-            services.Configure<CloudinarySetting>(configuration.GetSection("CloudinarySettings"));
-
             services.AddTransient<IPhotoService, PhotoService>();
 
         }

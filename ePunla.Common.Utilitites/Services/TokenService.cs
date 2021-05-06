@@ -15,7 +15,7 @@ namespace ePunla.Common.Utilitites.Services
 
         public TokenService(IConfiguration configuration)
         {
-            _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:Secret"]));
+            _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("TOKEN_SECRET")));
         }
 
         public string CreateToken(string userId)

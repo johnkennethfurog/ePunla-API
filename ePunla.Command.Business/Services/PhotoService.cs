@@ -3,10 +3,8 @@ using System.Threading.Tasks;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using ePunla.Command.Business.Services.Interfaces;
-using ePunla.Command.Business.Utilities;
 using ePunla.Command.Domain.Dtos;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 
 namespace ePunla.Command.Business.Services
 {
@@ -14,9 +12,12 @@ namespace ePunla.Command.Business.Services
     {
         private readonly Cloudinary _cloudinary;
 
-        public PhotoService(IOptions<CloudinarySetting> config)
+        public PhotoService()
         {
-            var acc = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
+            var cloudName = Environment.GetEnvironmentVariable("CLOUDINART_SETTINGS_CLOUD_NAME");
+            var apiKey = Environment.GetEnvironmentVariable("CLOUDINART_SETTINGS_API_KEY");
+            var apiSecret = Environment.GetEnvironmentVariable("CLOUDINART_SETTINGS_API_SECRET");
+            var acc = new Account(cloudName, apiKey, apiSecret);
 
             _cloudinary = new Cloudinary(acc);
         }

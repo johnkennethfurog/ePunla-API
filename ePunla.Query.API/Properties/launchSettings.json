@@ -14,7 +14,9 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONNECTION_STRING": "Server=localhost, 1433;user id=sa;password=Qwerty123!;database=ePunlaDB;MultipleActiveResultSets=true",
+        "TOKEN_SECRET": "super_secret_key"
       }
     },
     "ePunla.Query.API": {
@@ -23,7 +25,9 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "CONNECTION_STRING": "Server=localhost, 1433;user id=sa;password=Qwerty123!;database=ePunlaDB;MultipleActiveResultSets=true",
+        "TOKEN_SECRET": "super_secret_key"
       }
     }
   }
