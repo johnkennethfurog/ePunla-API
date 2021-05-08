@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
+using ePunla.Common.Utilitites.Helpers;
 using ePunla.Common.Utilitites.Interfaces;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ePunla.Common.Utilitites.Services
@@ -13,9 +12,9 @@ namespace ePunla.Common.Utilitites.Services
     {
         private readonly SymmetricSecurityKey _symmetricSecurityKey;
 
-        public TokenService(IConfiguration configuration)
+        public TokenService()
         {
-            _symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("TOKEN_SECRET")));
+            _symmetricSecurityKey = UserHelper.GetSymmetricSecurityKey();
         }
 
         public string CreateToken(string userId)

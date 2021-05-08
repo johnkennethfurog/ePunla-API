@@ -1,4 +1,8 @@
-﻿namespace ePunla.Common.Utilitites.Helpers
+﻿using System;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
+
+namespace ePunla.Common.Utilitites.Helpers
 {
     public static class UserHelper
     {
@@ -23,6 +27,11 @@
                 }
             }
             return true; //if no mismatches.
+        }
+
+        public static SymmetricSecurityKey GetSymmetricSecurityKey()
+        {
+            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("TOKEN_SECRET")));
         }
 
     }

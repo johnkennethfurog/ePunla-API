@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 using ePunla.Common.Utilitites.Helpers;
@@ -49,9 +50,9 @@ namespace ePunla.Common.Utilitites.Configurations
                 options.AddPolicy(CorsHelper.CORS_POLICY,
                     policyBuilder =>
                         policyBuilder
+                        .AllowAnyOrigin()
                         .AllowAnyHeader()
-                        .AllowAnyMethod()
-                        .AllowCredentials());
+                        .AllowAnyMethod());
                         
             });
 
@@ -61,7 +62,7 @@ namespace ePunla.Common.Utilitites.Configurations
                     opt.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:Secret"])),
+                        IssuerSigningKey = UserHelper.GetSymmetricSecurityKey(),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
