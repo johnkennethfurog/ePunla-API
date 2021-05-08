@@ -11,11 +11,11 @@ namespace ePunla.Command.API.Controllers
     [Route("api/[controller]")]
     public class TestController : Controller
     {
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        // GET api/values/5
+        [HttpGet("{key}")]
+        public string Env(string key)
         {
-            return new string[] { "value1", "value2" };
+            return Environment.GetEnvironmentVariable(key);
         }
     }
 }
