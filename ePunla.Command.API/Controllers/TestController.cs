@@ -15,6 +15,7 @@ namespace ePunla.Command.API.Controllers
         [HttpGet("{key}")]
         public string Env(string key)
         {
+            // some changes
             return Environment.GetEnvironmentVariable(key);
         }
     }
