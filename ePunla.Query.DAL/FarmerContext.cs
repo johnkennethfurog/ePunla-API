@@ -61,7 +61,7 @@ namespace ePunla.Query.DAL
 
             var dynamicParameters = new DynamicParameters();
             dynamicParameters.Add("@FarmerId", FarmerId);
-            dynamicParameters.Add("@Status", SearchFields?.Status);
+            dynamicParameters.Add("@Status", SearchFields?.Status?.ToString());
 
             var response = (await dbConn.QueryAsync<FarmerClaimModel>(SP_GET_FARMER_CLAIMS, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<FarmerClaimModel>>(response);

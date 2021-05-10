@@ -1,7 +1,5 @@
 using ePunla.Common.Utilitites.Configurations;
 using ePunla.Query.API.Configurations;
-using ePunla.Query.Business.Configurations;
-using ePunla.Query.Domain.Configurations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,7 +20,6 @@ namespace ePunla.Query.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
             services.ConfigureAPI(Configuration);
             services.ConfigureAppApi(Configuration);
         }

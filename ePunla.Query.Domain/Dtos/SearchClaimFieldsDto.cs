@@ -1,8 +1,10 @@
 ﻿using System;
+using ePunla.Query.Domain.Enums;
+
 namespace ePunla.Query.Domain.Dtos
 {
     public class SearchClaimFieldsDto
     {
-        public string Status { get; set; }
+        public ClaimStatus? Status { get; set; }
     }
 }

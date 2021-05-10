@@ -13,7 +13,7 @@ BEGIN
     BEGIN
       SET @Validation = 5001
     END
-  IF @FarmId IS NOT NULL AND ( SELECT [Status] FROM Farms WHERE FarmId = @farmId AND FarmerId = @farmerId) <> 'Pending'
+  ELSE IF @FarmId IS NOT NULL AND ( SELECT [Status] FROM Farms WHERE FarmId = @farmId AND FarmerId = @farmerId) <> 'Pending'
     BEGIN
       SET @Validation = 5002
     END

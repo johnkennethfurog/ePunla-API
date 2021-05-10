@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
+using System.Text.Json.Serialization;
 using ePunla.Common.Utilitites.Helpers;
 using ePunla.Common.Utilitites.PipelinesBehavior;
 using FluentValidation;
@@ -18,6 +17,9 @@ namespace ePunla.Common.Utilitites.Configurations
     {
         public static void ConfigureAppApi(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddControllers()
+            .AddJsonOptions(opts => { opts.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "E-Punla", Version = "v1", });
