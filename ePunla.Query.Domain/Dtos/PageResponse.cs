@@ -1,6 +1,6 @@
 ﻿namespace ePunla.Query.Domain.Dtos
 {
-    public class Page
+    public class PageResponse
     {
         public int TotalCount { get; set; }
         public int PageNumber { get; set; }

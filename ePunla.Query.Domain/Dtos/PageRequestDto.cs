@@ -2,11 +2,9 @@
 
 namespace ePunla.Query.Domain.Dtos
 {
-    public class PageRequestDto
+    public class PageRequestDto <T>
     {
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
-        public string SortBy { get; set; }
-        public SortDirection SortDirection { get; set; }
+        public T SearchField { get; set; }
+        public PageRequest Page { get; set; }
     }
 }

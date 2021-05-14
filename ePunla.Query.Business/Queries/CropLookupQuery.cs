@@ -7,6 +7,6 @@ namespace ePunla.Query.Business.Queries
 {
     public class CropLookupQuery : IRequest<MediatrResponse<IEnumerable<LookupDto>>>
     {
-        public CropsLookupFieldsDto CropsLookupFields { get; set; }
+        public PageRequestDto<CropsLookupFieldsDto> CropsLookupFields { get; set; }
     }
 }

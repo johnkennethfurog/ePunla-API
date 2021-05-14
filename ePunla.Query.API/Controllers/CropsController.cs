@@ -20,9 +20,9 @@ namespace ePunla.Query.API.Controllers
         }
 
         [HttpPost("lookup")]
-        public async Task<IActionResult> CropsLookup([FromBody] CropsLookupFieldsDto cropsLookupFields)
+        public async Task<IActionResult> CropsLookup([FromBody] PageRequestDto<CropsLookupFieldsDto> request)
         {
-            var response = await _mediator.Send(new CropLookupQuery { CropsLookupFields = cropsLookupFields });
+            var response = await _mediator.Send(new CropLookupQuery { CropsLookupFields = request });
             return ProcessResponse(response);
         }
     }

@@ -21,14 +21,17 @@ namespace ePunla.Query.DAL
             _dbConnection = dbConnection;
         }
 
-        public async Task<ContextResponse<IEnumerable<LookupModel>>> CropsLookup(CropsLookupFieldsDto lookupFieldsDto)
+        public async Task<ContextResponse<IEnumerable<LookupModel>>> CropsLookup(PageRequestDto<CropsLookupFieldsDto> lookupFieldsDto)
         {
             using var dbConn = await _dbConnection.CreateConnectionAsync();
 
+            var searchField = lookupFieldsDto.SearchField;
+            var page = lookupFieldsDto.Page;
+
             var dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add("@cropName", lookupFieldsDto.Keyword);
-            dynamicParameters.Add("@pageNUmber", lookupFieldsDto.Page.PageNumber);
-            dynamicParameters.Add("@pageSize", lookupFieldsDto.Page.PageSize);
+            dynamicParameters.Add("@cropName", searchField.Keyword);
+            dynamicParameters.Add("@pageNUmber", page.PageNumber);
+            dynamicParameters.Add("@pageSize", page.PageSize);
 
             var response = (await dbConn.QueryAsync<LookupModel>(SP_CROPS_LOOKUP, dynamicParameters, commandType: CommandType.StoredProcedure));
 

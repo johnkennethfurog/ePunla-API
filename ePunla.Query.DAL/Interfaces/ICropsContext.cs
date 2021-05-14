@@ -8,6 +8,6 @@ namespace ePunla.Query.DAL.Interfaces
 {
     public interface ICropsContext
     {
-        Task<ContextResponse<IEnumerable<LookupModel>>> CropsLookup(CropsLookupFieldsDto lookupFieldsDto);
+        Task<ContextResponse<IEnumerable<LookupModel>>> CropsLookup(PageRequestDto<CropsLookupFieldsDto> lookupFieldsDto);
     }
 }
