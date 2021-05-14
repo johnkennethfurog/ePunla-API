@@ -1,5 +1,4 @@
-﻿using System;
-namespace ePunla.Query.DAL.Models
+﻿namespace ePunla.Query.DAL.Models
 {
     public class FarmModel
     {

@@ -10,6 +10,7 @@ namespace ePunla.Query.DAL.Configurations
         {
             services.AddTransient<IFarmerContext, FarmerContext>();
             services.AddTransient<IAuthenticationContext, AuthenticationContext>();
+            services.AddTransient<ICropsContext, CropsContext>();
         }
     }
 }
