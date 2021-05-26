@@ -19,6 +19,7 @@ namespace ePunla.Command.API.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterFarmerDto registerFarmerDto)
         {

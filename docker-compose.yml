@@ -6,10 +6,17 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.query
+    ports:
+      - 5001:80
+    env_file: 
+      - .env
 
   epunla.command.api:
     image: ${DOCKER_REGISTRY-}epunlacommand
     build:
       context: .
       dockerfile: Dockerfile.command
-
+    ports:
+      - 5002:80
+    env_file: 
+      - .env

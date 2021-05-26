@@ -17,6 +17,9 @@ namespace ePunla.Query.Business.Configurations
             CreateMap<FarmerAuthResponseModel, FarmerInfoDto>();
 
             CreateMap<LookupModel, LookupDto>();
+
+            CreateMap<BarangayAndAreaModel, BarangayDto>();
+            CreateMap<BarangayAndAreaModel, AreaDto>();
         }
     }
 }

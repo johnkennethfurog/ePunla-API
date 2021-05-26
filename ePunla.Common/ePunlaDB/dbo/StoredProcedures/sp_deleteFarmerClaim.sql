@@ -3,7 +3,9 @@ CREATE PROCEDURE [dbo].[sp_deleteFarmerClaim]
   @Validation   INT OUTPUT
 AS
 BEGIN
-  IF NOT EXISTS (SELECT TOP 1 * FROM Claims WHERE ClaimId = @claimId)
+  DECLARE @ExistingFarmCropId INT = (SELECT [FarmCropId] FROM Claims WHERE ClaimId = @ClaimId)
+
+  IF @ExistingFarmCropId IS NULL
     BEGIN 
       SET @Validation = 7001;
     END
@@ -15,5 +17,6 @@ BEGIN
     BEGIN
       DELETE FROM ClaimCauses WHERE ClaimId = @ClaimId;
       DELETE FROM Claims WHERE ClaimId = @ClaimId;
+      UPDATE FarmCrops SET [Status]='Planted' WHERE FarmCropId = @ExistingFarmCropId
     END
 END
