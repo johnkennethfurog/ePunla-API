@@ -26,6 +26,12 @@ namespace ePunla.Command.Domain.Validators
             RuleFor(x => x.Size)
                .NotEmpty();
 
+            RuleFor(x => x.Lat)
+                .InclusiveBetween(-90, 90);
+
+            RuleFor(x => x.Lat)
+               .InclusiveBetween(-180, 180);
+
         }
     }
 }

@@ -10,7 +10,9 @@ BEGIN
           [Barangay] = B.Name,
           [BarangayId] = B.BarangayId,
           [BarangayArea] = BA.Name,
-          [BarangayAreaId] = BA.BarangayAreaId
+          [BarangayAreaId] = BA.BarangayAreaId,
+          [Lng] = F.Lng,
+          [Lat] = F.Lat
   FROM Farms F
   LEFT JOIN Barangays B ON B.BarangayId = F.BarangayId
   LEFT JOIN BarangayAreas BA ON BA.BarangayAreaId = F.BarangayAreaId

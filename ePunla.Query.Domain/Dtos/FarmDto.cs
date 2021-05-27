@@ -12,6 +12,7 @@ namespace ePunla.Query.Domain.Dtos
         public string BarangayArea { get; set; }
         public int BarangayAreaId { get; set; }
         public string StreetAddress { get; set; }
-
+        public decimal Lng { get; set; }
+        public decimal Lat { get; set; }
     }
 }

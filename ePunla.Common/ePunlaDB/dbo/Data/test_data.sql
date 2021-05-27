@@ -139,7 +139,7 @@ WHEN NOT MATCHED
 
 SET IDENTITY_INSERT [dbo].Crops OFF
 
--- TEST DATA FOR FARMS
+-- -- TEST DATA FOR FARMS
 DECLARE @farms TABLE
 (
     [FarmId]         INT,
@@ -149,14 +149,18 @@ DECLARE @farms TABLE
     [BarangayAreaId] INT,
     [AreaSize]       DECIMAL,
     [Name]           NVARCHAR (200),
-    [Status]         NVARCHAR (20)
+    [Status]         NVARCHAR (20),
+    [Lat]           DECIMAL(19,16),
+    [Lng]           DECIMAL(19,16)
 );
 
 INSERT INTO @farms
-SELECT 1, 1, 'Dimagiba street santo cristobal', 1, 1, 1050, 'The Farm', 'Approved'
-UNION SELECT 2, 1, 'Phase 2 Resbakan street', 1, 1, 5000, 'The Farm Extension', 'Pending'
-UNION SELECT 3, 2, 'Sityo Masantok, Manulas na lupa', 1, 2, 15000, 'The Big Farm', 'Approved'
-UNION SELECT 4, 3, 'Unit , Lot 56 Housing Village', 1, 3, 500, 'The Penduko Farm', 'Approved'
+SELECT 1, 1, 'Dimagiba street santo cristobal', 1, 1, 1050, 'The Farm', 'Approved',14.11121856, 121.13529635
+UNION SELECT 2, 1, 'Phase 2 Resbakan street', 1, 1, 5000, 'The Farm Extension', 'Pending',14.07209086, 121.10027743
+UNION SELECT 3, 2, 'Sityo Masantok, Manulas na lupa', 1, 2, 15000, 'The Big Farm', 'Approved',14.12901374, 121.09358264
+UNION SELECT 4, 3, 'Unit , Lot 56 Housing Village', 1, 3, 500, 'The Penduko Farm', 'Approved',14.12104075, 121.10147906
+
+
 
 SET IDENTITY_INSERT [dbo].Farms ON
 
@@ -164,8 +168,8 @@ MERGE Farms as [TARGET]
 USING @farms as [SOURCE]
 ON ([SOURCE].FarmId = [TARGET].FarmId)
 WHEN NOT MATCHED 
-    THEN INSERT([FarmId],[FarmerId],[Address],[BarangayId],[BarangayAreaId],[AreaSize],[Name],[Status]) 
-    VALUES ([SOURCE].[FarmId],[SOURCE].[FarmerId],[SOURCE].[Address],[SOURCE].[BarangayId],[SOURCE].[BarangayAreaId],[SOURCE].[AreaSize],[SOURCE].[Name],[SOURCE].[Status]);
+    THEN INSERT([FarmId],[FarmerId],[Address],[BarangayId],[BarangayAreaId],[AreaSize],[Name],[Status],[Lng],[Lat]) 
+    VALUES ([SOURCE].[FarmId],[SOURCE].[FarmerId],[SOURCE].[Address],[SOURCE].[BarangayId],[SOURCE].[BarangayAreaId],[SOURCE].[AreaSize],[SOURCE].[Name],[SOURCE].[Status],[SOURCE].Lng, [SOURCE].Lat);
 
 SET IDENTITY_INSERT [dbo].Farms OFF
 

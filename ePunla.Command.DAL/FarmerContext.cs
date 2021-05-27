@@ -118,6 +118,8 @@ namespace ePunla.Command.DAL
             dynamicParameters.Add("@StreetAddress", FarmSaveDto.StreetAddress);
             dynamicParameters.Add("@BarangayId", FarmSaveDto.BarangayId);
             dynamicParameters.Add("@BarangayAreaId", FarmSaveDto.BarangayAreaId);
+            dynamicParameters.Add("@Lng", FarmSaveDto.Lng);
+            dynamicParameters.Add("@Lat", FarmSaveDto.Lat);
             dynamicParameters.AddValidationParam();
 
             var result = (await dbConn.QueryAsync<int>(SP_SAVE_FARM, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
