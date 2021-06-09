@@ -47,7 +47,10 @@ jobs:
       - name: Heroku Container Login
         run: heroku container:login
 
-      - name: Publish
+      - name: Push
+        run: docker push $IMAGE_NAME
+
+      - name: Release
         run: heroku container:release web -a $APP_NAME
 
       # - name: Update Heroku
