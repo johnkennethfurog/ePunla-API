@@ -23,7 +23,7 @@ jobs:
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
     permissions:
@@ -39,10 +39,10 @@ jobs:
       - name: Docker build
         run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
-      - name: Updating Ubuntu system and Heroku
+      - name: Update Heroku
         env:
           HEROKU_API_KEY: $HEROKU_API_KEY
-        run: sudo apt update && sudo apt install heroku neofetch
+        run: heroku update
 
       - name: Checking the info
         run: neofetch
