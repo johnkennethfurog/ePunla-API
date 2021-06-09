@@ -21,6 +21,7 @@ namespace ePunla.Command.API.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpPost("upload")]
         public async Task<IActionResult> Post(IFormFile file)
         {
