@@ -8,10 +8,9 @@ namespace ePunla.Command.API.Controllers
     [Route("api/[controller]")]
     public class TestController : Controller
     {
-        [HttpGet("checkEnv/{key}")]
+        [HttpGet("checkEnvironment/{key}")]
         public string Env(string key)
         {
-            // some changes
             return Environment.GetEnvironmentVariable(key);
         }
     }
