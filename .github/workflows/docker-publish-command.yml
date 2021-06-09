@@ -42,6 +42,7 @@ jobs:
           heroku_app_name: $APP_NAME #Must be unique in Heroku
           heroku_email: "furogjohnkenneth@gmail.com"
           usedocker: true
+          dontuseforce: 1
 
       # PUSH IMAGE TO DOCKER CONTAINER
       # - name: Log into registry
