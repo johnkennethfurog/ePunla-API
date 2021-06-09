@@ -51,7 +51,7 @@ jobs:
 
       - name: Publish
         run: |
-          heroku container:push web -a $APP_NAME
+          docker push $APP_NAME
           heroku container:release web -a $APP_NAME
 
       # PUSH IMAGE TO DOCKER
