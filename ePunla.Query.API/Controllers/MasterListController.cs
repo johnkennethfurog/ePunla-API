@@ -18,6 +18,7 @@ namespace ePunla.Query.API.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet("barangays")]
         public async Task<IActionResult> GetFarms()
         {
