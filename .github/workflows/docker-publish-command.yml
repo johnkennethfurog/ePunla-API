@@ -45,13 +45,13 @@ jobs:
       #   run: heroku update
 
       - name: Build and push
-          id: docker_build
-          uses: docker/build-push-action@v2
-          with:
-            context: ./
-            file: ./Dockerfile.query
-            push: true
-            tags: $IMAGE_NAME:latest
+        id: docker_build
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./Dockerfile.query
+          push: true
+          tags: $IMAGE_NAME:latest
 
       # Push the Docker image to Heroku Container Registry
 
