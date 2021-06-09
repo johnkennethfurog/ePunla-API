@@ -16,7 +16,7 @@ on:
 env:
   # TODO: Change variable to your image's name.
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-  IMAGE_NAME: registry.heroku.com/epunla-command-api/web
+  IMAGE_NAME: registry.heroku.com/epunla-command-api/web:latest
   APP_NAME: epunla-command-api
 
 jobs:
@@ -39,13 +39,8 @@ jobs:
       - name: Docker Login
         run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
-      # - name: Update Heroku
-      #   env:
-      #     HEROKU_API_KEY: $HEROKU_API_KEY
-      #   run: heroku update
-
       - name: Build image
-        run: docker build . --file Dockerfile.command --tag $IMAGE_NAME
+        run: docker build --file Dockerfile.command --tag $IMAGE_NAME .
 
       # Push the Docker image to Heroku Container Registry
 
@@ -54,6 +49,11 @@ jobs:
 
       - name: Publish
         run: heroku container:release web -a $APP_NAME
+
+      # - name: Update Heroku
+      #   env:
+      #     HEROKU_API_KEY: $HEROKU_API_KEY
+      #   run: heroku update
 
       # PUSH IMAGE TO DOCKER
       # - name: Build image

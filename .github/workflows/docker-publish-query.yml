@@ -16,7 +16,7 @@ on:
 env:
   # TODO: Change variable to your image's name.
   HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-  IMAGE_NAME: registry.heroku.com/epunla-query-api/web
+  IMAGE_NAME: registry.heroku.com/epunla-query-api/web:latest
   APP_NAME: epunla-query-api
 
 jobs:
@@ -38,7 +38,7 @@ jobs:
         run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
       - name: Build image
-        run: docker build . --file Dockerfile.query --tag $IMAGE_NAME
+        run: docker build --file Dockerfile.query --tag $IMAGE_NAME .
 
       - name: Heroku Container Login
         run: heroku container:login
