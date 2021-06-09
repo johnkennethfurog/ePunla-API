@@ -44,9 +44,6 @@ jobs:
           HEROKU_API_KEY: $HEROKU_API_KEY
         run: heroku update
 
-      - name: Checking the info
-        run: neofetch
-
       # Push the Docker image to Heroku Container Registry
 
       - name: Heroku Container Login
