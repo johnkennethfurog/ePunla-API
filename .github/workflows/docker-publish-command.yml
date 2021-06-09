@@ -42,7 +42,8 @@ jobs:
       - name: Update Heroku
         env:
           HEROKU_API_KEY: $HEROKU_API_KEY
-        run: sudo apt update && sudo apt install heroku neofetch
+        run: sudo snap install --classic heroku
+
       - name: Checking the info
         run: neofetch
 
