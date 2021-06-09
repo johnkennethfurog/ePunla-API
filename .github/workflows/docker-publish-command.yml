@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v2
 
       # Build Docker image
-      - name: Docker build
+      - name: Docker Login
         run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
       # - name: Update Heroku
@@ -44,14 +44,8 @@ jobs:
       #     HEROKU_API_KEY: $HEROKU_API_KEY
       #   run: heroku update
 
-      - name: Build and push
-        id: docker_build
-        uses: docker/build-push-action@v2
-        with:
-          context: ./
-          file: ./Dockerfile.query
-          push: true
-          tags: registry.heroku.com/epunla-command-api/web:latest
+      - name: Build image
+        run: docker build . --file Dockerfile.query --tag $IMAGE_NAME
 
       # Push the Docker image to Heroku Container Registry
 
@@ -62,6 +56,9 @@ jobs:
         run: heroku container:release web -a $APP_NAME
 
       # PUSH IMAGE TO DOCKER
+      # - name: Build image
+      #   run: docker build . --file Dockerfile.query --tag $IMAGE_NAME
+
       # - name: Log into registry
       #   run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
