@@ -39,10 +39,19 @@ jobs:
       - name: Docker build
         run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
-      - name: Update Heroku
-        env:
-          HEROKU_API_KEY: $HEROKU_API_KEY
-        run: heroku update
+      # - name: Update Heroku
+      #   env:
+      #     HEROKU_API_KEY: $HEROKU_API_KEY
+      #   run: heroku update
+
+      - name: Build and push
+          id: docker_build
+          uses: docker/build-push-action@v2
+          with:
+            context: ./
+            file: ./Dockerfile.query
+            push: true
+            tags: $IMAGE_NAME:latest
 
       # Push the Docker image to Heroku Container Registry
 
@@ -50,9 +59,7 @@ jobs:
         run: heroku container:login
 
       - name: Publish
-        run: |
-          docker push $APP_NAME
-          heroku container:release web -a $APP_NAME
+        run: heroku container:release web -a $APP_NAME
 
       # PUSH IMAGE TO DOCKER
       # - name: Log into registry
