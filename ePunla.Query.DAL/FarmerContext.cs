@@ -43,12 +43,13 @@ namespace ePunla.Query.DAL
             return new ContextResponse<IEnumerable<FarmCropModel>>(response);
         }
 
-        public async Task<ContextResponse<IEnumerable<FarmModel>>> GetFarms(int FarmerId)
+        public async Task<ContextResponse<IEnumerable<FarmModel>>> GetFarms(int FarmerId, string Status)
         {
             using var dbConn = await _dbConnection.CreateConnectionAsync();
 
             var dynamicParameters = new DynamicParameters();
             dynamicParameters.Add("@FarmerId", FarmerId);
+            dynamicParameters.Add("@Status", Status);
 
             var response = (await dbConn.QueryAsync<FarmModel>(SP_GET_FARMS, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<FarmModel>>(response);

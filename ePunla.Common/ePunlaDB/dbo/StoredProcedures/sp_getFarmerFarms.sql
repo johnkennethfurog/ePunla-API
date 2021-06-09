@@ -1,5 +1,6 @@
 CREATE PROCEDURE [dbo].[sp_getFarmerFarms]
-  @FarmerId int
+  @FarmerId int,
+  @status NVARCHAR(50) NULL
 AS
 BEGIN
   SELECT  [FarmId] = F.FarmId,
@@ -17,4 +18,5 @@ BEGIN
   LEFT JOIN Barangays B ON B.BarangayId = F.BarangayId
   LEFT JOIN BarangayAreas BA ON BA.BarangayAreaId = F.BarangayAreaId
   WHERE FarmerId = @FarmerId
+  and (@status IS NULL OR F.[status]=@status)
 END

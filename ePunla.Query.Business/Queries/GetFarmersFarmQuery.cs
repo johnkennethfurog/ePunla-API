@@ -8,5 +8,6 @@ namespace ePunla.Query.Business.Queries
     public class GetFarmersFarmQuery : IRequest<MediatrResponse<IEnumerable<FarmDto>>>
     {
         public int FarmerId { get; set; }
+        public string Status { get; set; }
     }
 }

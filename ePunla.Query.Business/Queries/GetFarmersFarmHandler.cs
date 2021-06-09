@@ -23,7 +23,7 @@ namespace ePunla.Query.Business.Queries
 
         public async Task<MediatrResponse<IEnumerable<FarmDto>>> Handle(GetFarmersFarmQuery request, CancellationToken cancellationToken)
         {
-            var mediatorResponse = await _farmerContext.GetFarms(request.FarmerId);
+            var mediatorResponse = await _farmerContext.GetFarms(request.FarmerId, request.Status);
             var farmsDto = _mapper.Map<IEnumerable<FarmDto>>(mediatorResponse.Value);
 
             return new MediatrResponse<IEnumerable<FarmDto>>(farmsDto);
