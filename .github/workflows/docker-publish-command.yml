@@ -43,6 +43,8 @@ jobs:
         env:
           HEROKU_API_KEY: $HEROKU_API_KEY
         run: sudo apt update && sudo apt install heroku neofetch
+      - name: Checking the info
+        run: neofetch
 
       # Push the Docker image to Heroku Container Registry
 
