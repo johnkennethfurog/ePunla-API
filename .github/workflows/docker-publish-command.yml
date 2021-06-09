@@ -45,7 +45,7 @@ jobs:
       #   run: heroku update
 
       - name: Build image
-        run: docker build . --file Dockerfile.query --tag $IMAGE_NAME
+        run: docker build . --file Dockerfile.command --tag $IMAGE_NAME
 
       # Push the Docker image to Heroku Container Registry
 
