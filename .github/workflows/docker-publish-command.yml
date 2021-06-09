@@ -36,14 +36,12 @@ jobs:
         uses: actions/checkout@v2
 
       # Build Docker image
-      - name: Docker build
-        run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
-
-      # Push the Docker image to Heroku Container Registry
-      - name: Publish
-        run: |
-          heroku container:push web -a $APP_NAME
-          heroku container:release web -a $APP_NAME
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: $HEROKU_API_KEY
+          heroku_app_name: $APP_NAME #Must be unique in Heroku
+          heroku_email: "furogjohnkenneth@gmail.com"
+          usedocker: true
 
       # PUSH IMAGE TO DOCKER CONTAINER
       # - name: Log into registry
