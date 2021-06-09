@@ -39,6 +39,12 @@ jobs:
       - name: Docker build
         run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
+
+    - name: Update Heroku
+      env: 
+        HEROKU_API_KEY: $HEROKU_API_KEY
+      run: sudo apt update && sudo apt install heroku
+
       # Push the Docker image to Heroku Container Registry
 
       - name: Heroku Container Login
