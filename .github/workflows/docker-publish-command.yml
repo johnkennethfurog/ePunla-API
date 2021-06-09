@@ -42,7 +42,7 @@ jobs:
       - name: Update Heroku
         env:
           HEROKU_API_KEY: $HEROKU_API_KEY
-        run: sudo apt-get update && sudo apt-get upgrade heroku
+        run: sudo apt update && sudo apt install heroku --classic
 
       # Push the Docker image to Heroku Container Registry
 
