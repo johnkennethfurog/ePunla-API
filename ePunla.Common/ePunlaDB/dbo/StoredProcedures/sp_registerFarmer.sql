@@ -1,4 +1,4 @@
-CREATE PROCEDURE [dbo].[sp_saveFarmer]
+CREATE PROCEDURE [dbo].[sp_registerFarmer]
     @FirstName        NVARCHAR (100),
     @LastName         NVARCHAR (100),
     @MiddleName         NVARCHAR (100),
@@ -8,7 +8,7 @@ CREATE PROCEDURE [dbo].[sp_saveFarmer]
     @PasswordHash     VARBINARY(1024),
     @PasswordSalt     VARBINARY(1024),
     @Avatar           NVARCHAR (MAX),
-    @AvatarId         INT,
+    @AvatarId         NVARCHAR (100),
     @BarangayAreaId   INT,
     @Validation       INT OUTPUT
 AS

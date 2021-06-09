@@ -9,6 +9,6 @@ BEGIN
     END
   ELSE
     BEGIN
-      SELECT [FarmerId],[FirstName],[lastName],[avatar],[status],[PasswordHash],[PasswordSalt] FROM Farmers WHERE MobileNumber = @mobileNUmber
+      SELECT [FarmerId],[FirstName],[lastName],[avatar],[status],[PasswordHash],[PasswordSalt],[Status] FROM Farmers WHERE MobileNumber = @mobileNUmber
     END
 END

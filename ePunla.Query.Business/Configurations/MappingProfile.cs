@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ePunla.Common.Utillities.Dtos;
 using ePunla.Query.DAL.Models;
 using ePunla.Query.Domain.Dtos;
 

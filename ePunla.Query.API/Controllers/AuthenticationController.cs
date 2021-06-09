@@ -20,9 +20,16 @@ namespace ePunla.Query.API.Controllers
         }
 
         [HttpPost("farmer")]
-        public async Task<IActionResult> GetCrops([FromBody] SigninFarmerDto signinFarmerDto)
+        public async Task<IActionResult> Signin([FromBody] SigninFarmerDto signinFarmerDto)
         {
             var response = await _mediator.Send(new SigninFarmerQuery {SigninFarmerDto = signinFarmerDto });
+            return ProcessResponse(response);
+        }
+
+        [HttpGet("ValidateMobileNumber/{mobileNumber}")]
+        public async Task<IActionResult> ValidateMobileNumber(string mobileNumber)
+        {
+            var response = await _mediator.Send(new ValidateFarmerMobileNumberQuery { MobileNumber= mobileNumber });
             return ProcessResponse(response);
         }
     }

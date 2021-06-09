@@ -2,7 +2,10 @@
 {
     public enum ErrorCode
     {
-        // Farmer
+        // Authentication
         InvalidCredential = 1001,
+
+        // Farmer
+        MobileNumberAlreadyExist = 3001,
     }
 }

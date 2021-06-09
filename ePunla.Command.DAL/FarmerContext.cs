@@ -17,7 +17,7 @@ namespace ePunla.Command.DAL
     {
         const string SP_SAVE_FARM = "sp_saveFarm";
 
-        const string SP_SAVE_FARMER = "sp_saveFarmer";
+        const string SP_REGISTER_FARMER = "sp_registerFarmer";
 
         const string SP_DELETE_CROP = "sp_farmCropDelete";
         const string SP_HARVEST_CROP = "sp_farmCropHarvest";
@@ -52,7 +52,7 @@ namespace ePunla.Command.DAL
             dynamicParameters.Add("@MobileNumber", registerFarmerDto.MobileNumber);
             dynamicParameters.AddValidationParam();
 
-            var result = (await dbConn.QueryAsync<int>(SP_SAVE_FARMER, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
+            var result = (await dbConn.QueryAsync<int>(SP_REGISTER_FARMER, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();
 
             var validation = dynamicParameters.GetValidationParamValue();
             return ContextResponse<int>.ValidateContextResponse(validation, result);

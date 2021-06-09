@@ -9,7 +9,7 @@ CREATE TABLE [dbo].[Farmers] (
     [PasswordHash]         VARBINARY(1024)  NOT NULL,
     [PasswordSalt]         VARBINARY(1024)  NOT NULL,
     [Avatar]           NVARCHAR (MAX) NULL,
-    [AvatarId]         INT            NULL,
+    [AvatarId]         NVARCHAR(100)  NULL,
     [RegistrationDate] DATETIME2 (7)  NOT NULL,
     [Status]           NVARCHAR (20)  NOT NULL,
     [ValidationDate]   DATETIME2 (7)  NULL,

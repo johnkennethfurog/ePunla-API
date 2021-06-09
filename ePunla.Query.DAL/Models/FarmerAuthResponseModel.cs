@@ -8,5 +8,6 @@
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Avatar { get; set; }
+        public string Status { get; set; }
     }
 }

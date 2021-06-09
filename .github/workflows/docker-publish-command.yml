@@ -15,7 +15,9 @@ on:
 
 env:
   # TODO: Change variable to your image's name.
-  IMAGE_NAME: epunlacommand
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+  IMAGE_NAME: registry.heroku.com/epunla-command-api/web
+  APP_NAME: epunla-command-api
 
 jobs:
   # Push image to GitHub Packages.
@@ -29,32 +31,42 @@ jobs:
       packages: write
 
     steps:
-      - uses: actions/checkout@v2
+      # Clone the repository
+      - name: Checkout
+        uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build . --file Dockerfile.command --tag $IMAGE_NAME
+      # Build Docker image
+      - name: Docker build
+        run: docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
 
-      - name: Log into registry
-        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Push image
+      # Push the Docker image to Heroku Container Registry
+      - name: Publish
         run: |
-          IMAGE_ID=${{ secrets.DOCKER_USER }}/$IMAGE_NAME
+          heroku container:push web -a $APP_NAME
+          heroku container:release web -a $APP_NAME
 
-          # Change all uppercase to lowercase
-          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+      # PUSH IMAGE TO DOCKER CONTAINER
+      # - name: Log into registry
+      #   run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
-          # Strip git ref prefix from version
-          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+      # - name: Push image
+      #   run: |
+      #     IMAGE_ID=${{ secrets.DOCKER_USER }}/$IMAGE_NAME
 
-          # Strip "v" prefix from tag name
-          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+      #     # Change all uppercase to lowercase
+      #     IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
 
-          # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
+      #     # Strip git ref prefix from version
+      #     VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
 
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
+      #     # Strip "v" prefix from tag name
+      #     [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
 
-          docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+      #     # Use Docker `latest` tag convention
+      #     [ "$VERSION" == "master" ] && VERSION=latest
+
+      #     echo IMAGE_ID=$IMAGE_ID
+      #     echo VERSION=$VERSION
+
+      #     docker tag $IMAGE_NAME $IMAGE_ID:$VERSION
+      #     docker push $IMAGE_ID:$VERSION

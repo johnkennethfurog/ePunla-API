@@ -82,7 +82,6 @@
     <Build Include="dbo\Tables\Farms.sql" />
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\StoredProcedures\sp_getFarms.sql" />
-    <Build Include="dbo\StoredProcedures\sp_saveFarmer.sql" />
     <Build Include="dbo\StoredProcedures\sp_getFarmerFarms.sql" />
     <Build Include="dbo\StoredProcedures\sp_getFarmersCrops.sql" />
     <Build Include="dbo\StoredProcedures\sp_farmCropDelete.sql" />
@@ -99,6 +98,8 @@
     <Build Include="dbo\StoredProcedures\sp_authenticateFarmer.sql" />
     <Build Include="dbo\StoredProcedures\sp_CropsLookup.sql" />
     <Build Include="dbo\StoredProcedures\sp_getBarangaysAndAreas.sql" />
+    <Build Include="dbo\StoredProcedures\sp_registerFarmer.sql" />
+    <Build Include="dbo\StoredProcedures\sp_checkFarmerMobileNumber.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

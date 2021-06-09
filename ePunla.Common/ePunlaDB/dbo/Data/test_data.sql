@@ -64,7 +64,7 @@ DECLARE @Farmers TABLE
     [PasswordHash]     VARBINARY(1024) ,
     [PasswordSalt]     VARBINARY(1024) ,
     [Avatar]           NVARCHAR (MAX) ,
-    [AvatarId]         INT,
+    [AvatarId]         NVARCHAR (100) ,
     [RegistrationDate] DATETIME2 (7),
     [Status]           NVARCHAR (MAX) ,
     [ValidationDate]   DATETIME2 (7) ,

@@ -1,7 +1,7 @@
-﻿using System;
-namespace ePunla.Query.Domain.Dtos
+﻿
+namespace ePunla.Common.Utillities.Dtos
 {
-    public class SigninFarmerResponseDto
+    public class FarmerResponseDto
     {
         public string Token { get; set; }
         public FarmerInfoDto User { get; set; }

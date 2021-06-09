@@ -6,14 +6,14 @@ using ePunla.Common.Utilitites.Helpers;
 using ePunla.Common.Utilitites.Interfaces;
 using ePunla.Common.Utilitites.Response;
 using ePunla.Common.Utilitites.Validations;
+using ePunla.Common.Utillities.Dtos;
 using ePunla.Query.DAL.Interfaces;
-using ePunla.Query.Domain.Dtos;
 using ePunla.Query.Domain.Enums;
 using MediatR;
 
 namespace ePunla.Query.Business.Queries
 {
-    public class SigninFarmerHandler : IRequestHandler<SigninFarmerQuery, MediatrResponse<SigninFarmerResponseDto>>
+    public class SigninFarmerHandler : IRequestHandler<SigninFarmerQuery, MediatrResponse<FarmerResponseDto>>
     {
         private readonly IAuthenticationContext _authenticationContext;
         private readonly IMapper _mapper;
@@ -26,7 +26,7 @@ namespace ePunla.Query.Business.Queries
             _tokenService = tokenService;
         }
 
-        public async Task<MediatrResponse<SigninFarmerResponseDto>> Handle(SigninFarmerQuery request, CancellationToken cancellationToken)
+        public async Task<MediatrResponse<FarmerResponseDto>> Handle(SigninFarmerQuery request, CancellationToken cancellationToken)
         {
             var signinDto = request.SigninFarmerDto;
             var contextResponse = await _authenticationContext.AuthenticateFarmer(signinDto.MobileNumber);
@@ -37,7 +37,7 @@ namespace ePunla.Query.Business.Queries
                 switch (error)
                 {
                     case ErrorCode.InvalidCredential:
-                        return new MediatrResponse<SigninFarmerResponseDto>(new ErrorMessage("Invalid signin credential"));
+                        return new MediatrResponse<FarmerResponseDto>(new ErrorMessage("Invalid signin credential"));
                 }
             }
 
@@ -45,14 +45,14 @@ namespace ePunla.Query.Business.Queries
             var isPasswordValid = UserHelper.VerifyPassword(signinDto.Password, farmerModel.PasswordHash, farmerModel.PasswordSalt);
 
             if(!isPasswordValid)
-                return new MediatrResponse<SigninFarmerResponseDto>(new ErrorMessage("Invalid signin credential"));
+                return new MediatrResponse<FarmerResponseDto>(new ErrorMessage("Invalid signin credential"));
 
             var farmerInfo = _mapper.Map<FarmerInfoDto>(farmerModel);
             var token = _tokenService.CreateToken(farmerModel.FarmerId.ToString());
 
-            var signinResponse = new SigninFarmerResponseDto { User = farmerInfo, Token = token };
+            var signinResponse = new FarmerResponseDto { User = farmerInfo, Token = token };
 
-            return new MediatrResponse<SigninFarmerResponseDto>(signinResponse);
+            return new MediatrResponse<FarmerResponseDto>(signinResponse);
         }
     }
 }

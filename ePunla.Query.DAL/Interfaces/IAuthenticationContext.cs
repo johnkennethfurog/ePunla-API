@@ -7,5 +7,6 @@ namespace ePunla.Query.DAL.Interfaces
     public interface IAuthenticationContext
     {
         Task<ContextResponse<FarmerAuthResponseModel>> AuthenticateFarmer(string mobileNumber);
+        Task<ContextResponse> ValidateMobileNumber(string mobileNumber);
     }
 }
