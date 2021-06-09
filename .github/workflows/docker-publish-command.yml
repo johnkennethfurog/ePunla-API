@@ -51,7 +51,7 @@ jobs:
           context: ./
           file: ./Dockerfile.query
           push: true
-          tags: $IMAGE_NAME:latest
+          tags: registry.heroku.com/epunla-command-api/web:latest
 
       # Push the Docker image to Heroku Container Registry
 
