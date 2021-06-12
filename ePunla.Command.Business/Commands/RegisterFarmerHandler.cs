@@ -44,9 +44,8 @@ namespace ePunla.Command.Business.Commands
 
             var farmerId = contextResponse.Value;
             var token = _tokenService.CreateToken(farmerId.ToString());
-            var farmerInfo = new FarmerInfoDto { Avatar = farmer.Avatar, FirstName= farmer.FirstName, LastName = farmer.LastName, Status = "Pending" };
 
-            var farmerResponse = new FarmerResponseDto { User = farmerInfo, Token = token };
+            var farmerResponse = new FarmerResponseDto {Token = token };
 
             return new MediatrResponse<FarmerResponseDto>(farmerResponse);
         }
