@@ -47,10 +47,9 @@ namespace ePunla.Query.Business.Queries
             if(!isPasswordValid)
                 return new MediatrResponse<FarmerResponseDto>(new ErrorMessage("Invalid signin credential"));
 
-            var farmerInfo = _mapper.Map<FarmerInfoDto>(farmerModel);
             var token = _tokenService.CreateToken(farmerModel.FarmerId.ToString());
 
-            var signinResponse = new FarmerResponseDto { User = farmerInfo, Token = token };
+            var signinResponse = new FarmerResponseDto {Token = token };
 
             return new MediatrResponse<FarmerResponseDto>(signinResponse);
         }

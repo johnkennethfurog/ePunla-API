@@ -15,7 +15,8 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "CONNECTION_STRING": "Server=122.3.7.99\\AGRI;user id=sa;password=Capstone@2021;database=ePunlaDB;MultipleActiveResultSets=true",
+        //"CONNECTION_STRING": "Server=122.3.7.99\\AGRI;user id=sa;password=Capstone@2021;database=ePunlaDB;MultipleActiveResultSets=true",
+        "CONNECTION_STRING": "Server=localhost, 1433;user id=sa;password=Qwerty123!;database=ePunlaDB;MultipleActiveResultSets=false",
         "TOKEN_SECRET": "super_secret_key"
       }
     },
@@ -27,6 +28,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
         "CONNECTION_STRING": "Server=122.3.7.99\\AGRI;user id=sa;password=Capstone@2021;database=ePunlaDB;MultipleActiveResultSets=true",
+        //"CONNECTION_STRING": "Server=localhost, 1433;user id=sa;password=Qwerty123!;database=ePunlaDB;MultipleActiveResultSets=false",
         "TOKEN_SECRET": "super_secret_key"
       }
     }

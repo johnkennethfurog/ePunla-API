@@ -28,10 +28,10 @@ namespace ePunla.Query.DAL
 
 
             var dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add("@mobileNUmber", mobileNumber);
+            dynamicParameters.Add("@mobileNumber", mobileNumber);
             dynamicParameters.AddValidationParam();
 
-            var response = (await dbConn.QueryAsync<FarmerAuthResponseModel>(SP_AUTHENTICATE_FARMER, dynamicParameters, commandType: CommandType.StoredProcedure))?.FirstOrDefault();
+            var response = await dbConn.QueryFirstOrDefaultAsync<FarmerAuthResponseModel>(SP_AUTHENTICATE_FARMER, dynamicParameters, commandType: CommandType.StoredProcedure);
 
             var validation = dynamicParameters.GetValidationParamValue();
             return ContextResponse<FarmerAuthResponseModel>.ValidateContextResponse(validation, response);
@@ -43,7 +43,7 @@ namespace ePunla.Query.DAL
 
 
             var dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add("@mobileNUmber", mobileNumber);
+            dynamicParameters.Add("@mobileNumber", mobileNumber);
             dynamicParameters.AddValidationParam();
 
             var response = (await dbConn.QueryAsync<int>(SP_VALIDATE_MOBILE_NUMBER, dynamicParameters, commandType: CommandType.StoredProcedure))?.FirstOrDefault();

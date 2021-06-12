@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using ePunla.Common.Utilitites.DbConnect;
+using ePunla.Common.Utilitites.Extensions;
 using ePunla.Common.Utilitites.Response;
 using ePunla.Query.DAL.Interfaces;
 using ePunla.Query.DAL.Models;
@@ -14,6 +15,8 @@ namespace ePunla.Query.DAL
 {
     public class FarmerContext : IFarmerContext
     {
+        const string SP_GET_FARMER_PROFILE = "sp_getFarmerProfile";
+
         const string SP_GET_FARMS = "sp_getFarmerFarms";
         const string SP_GET_CROPS = "sp_getFarmersCrops";
 
@@ -81,5 +84,18 @@ namespace ePunla.Query.DAL
             return new ContextResponse<IEnumerable<ClaimDamageCauseModel>>(response);
         }
 
+        public async Task<ContextResponse<FarmerModel>> GetProfile(int farmerId)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@FarmerId", farmerId);
+            dynamicParameters.AddValidationParam();
+
+            var response = await dbConn.QueryFirstOrDefaultAsync<FarmerModel>(SP_GET_FARMER_PROFILE, dynamicParameters, commandType: CommandType.StoredProcedure);
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse<FarmerModel>.ValidateContextResponse(validation, response);
+        }
     }
 }

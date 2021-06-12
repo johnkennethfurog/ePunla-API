@@ -15,7 +15,7 @@ namespace ePunla.Query.Business.Configurations
             CreateMap<FarmerClaimModel, FarmerClaimDto>();
             CreateMap<ClaimDamageCauseModel, ClaimDamageCauseDto>();
 
-            CreateMap<FarmerAuthResponseModel, FarmerInfoDto>();
+            CreateMap<FarmerModel, FarmerProfileDto>();
 
             CreateMap<LookupModel, LookupDto>();
 

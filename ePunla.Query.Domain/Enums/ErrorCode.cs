@@ -7,5 +7,6 @@
 
         // Farmer
         MobileNumberAlreadyExist = 3001,
+        FarmerNotFound = 3002,
     }
 }

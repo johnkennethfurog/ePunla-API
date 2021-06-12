@@ -19,6 +19,13 @@ namespace ePunla.Query.API.Controllers
             _mediator = mediator;
         }
 
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            var response = await _mediator.Send(new GetFarmerProfileQuery { FarmerId = GetUserId() });
+            return ProcessResponse(response);
+        }
+
         [HttpGet("farms")]
         public async Task<IActionResult> GetFarms([FromQuery] string Status)
         {

@@ -1,9 +1,26 @@
 CREATE PROCEDURE [dbo].[sp_getFarmerProfile]
-  @farnerId int
+  @farmerId int,
+  @Validation INT OUTPUT
 AS
 BEGIN
-   IF @FarmId IS NOT NULL AND  NOT EXISTS ( SELECT TOP 1 * FROM Farms WHERE FarmId = @farmId AND FarmerId = @farmerId)
+  IF NOT EXISTS ( SELECT TOP 1 * FROM Farmers WHERE FarmerId = @farmerId)
     BEGIN
-      SET @Validation = 5001
+      SET @Validation = 3002
+    END
+  ELSE 
+    BEGIN
+      SELECT
+        FarmerId,
+        FirstName,
+        LastName,
+        MiddleName,
+        StreetAddress,
+        BarangayAreaId,
+        BarangayId,
+        MobileNumber,
+        Avatar,
+        AvatarId,
+        [Status]
+      FROM Farmers WHERE FarmerId = @farmerId
     END
 END
