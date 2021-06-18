@@ -101,6 +101,7 @@
     <Build Include="dbo\StoredProcedures\sp_registerFarmer.sql" />
     <Build Include="dbo\StoredProcedures\sp_checkFarmerMobileNumber.sql" />
     <Build Include="dbo\StoredProcedures\sp_getFarmerProfile.sql" />
+    <Build Include="dbo\StoredProcedures\sp_getListOfFarms.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

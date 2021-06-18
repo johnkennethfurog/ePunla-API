@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using ePunla.Common.Utillities.Dtos;
 using ePunla.Query.DAL.Models;
 using ePunla.Query.Domain.Dtos;
 
@@ -9,7 +8,7 @@ namespace ePunla.Query.Business.Configurations
     {
         public AutoMappingProfile()
         {
-            CreateMap<FarmModel, FarmDto>();
+            CreateMap<FarmerFarmModel, FarmerFarmDto>();
             CreateMap<FarmCropModel, FarmCropDto>();
 
             CreateMap<FarmerClaimModel, FarmerClaimDto>();
@@ -21,6 +20,9 @@ namespace ePunla.Query.Business.Configurations
 
             CreateMap<BarangayAndAreaModel, BarangayDto>();
             CreateMap<BarangayAndAreaModel, AreaDto>();
+
+            // Admin
+            CreateMap<FarmModel, FarmDto>();
         }
     }
 }

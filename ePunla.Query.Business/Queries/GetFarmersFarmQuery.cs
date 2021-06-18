@@ -5,7 +5,7 @@ using MediatR;
 
 namespace ePunla.Query.Business.Queries
 {
-    public class GetFarmersFarmQuery : IRequest<MediatrResponse<IEnumerable<FarmDto>>>
+    public class GetFarmersFarmQuery : IRequest<MediatrResponse<IEnumerable<FarmerFarmDto>>>
     {
         public int FarmerId { get; set; }
         public string Status { get; set; }

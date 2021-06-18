@@ -10,7 +10,7 @@ namespace ePunla.Query.DAL.Interfaces
     {
         Task<ContextResponse<FarmerModel>> GetProfile(int farmerId);
 
-        Task<ContextResponse<IEnumerable<FarmModel>>> GetFarms(int FarmerId, string Status);
+        Task<ContextResponse<IEnumerable<FarmerFarmModel>>> GetFarms(int FarmerId, string Status);
         Task<ContextResponse<IEnumerable<FarmCropModel>>> GetCrops(int FarmerId, SearchCropFieldsDto SearchFields);
 
         Task<ContextResponse<IEnumerable<FarmerClaimModel>>> GetClaims(int FarmerId, SearchClaimFieldsDto SearchFields);

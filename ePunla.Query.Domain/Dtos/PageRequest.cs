@@ -1,5 +1,4 @@
-﻿using System;
-using ePunla.Query.Domain.Enums;
+﻿using ePunla.Query.Domain.Enums;
 
 namespace ePunla.Query.Domain.Dtos
 {
@@ -7,7 +6,5 @@ namespace ePunla.Query.Domain.Dtos
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public string SortBy { get; set; }
-        public SortDirection SortDirection { get; set; }
     }
 }

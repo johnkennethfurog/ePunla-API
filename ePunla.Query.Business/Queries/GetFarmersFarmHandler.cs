@@ -10,7 +10,7 @@ using MediatR;
 
 namespace ePunla.Query.Business.Queries
 {
-    public class GetFarmersFarmHandler : IRequestHandler<GetFarmersFarmQuery, MediatrResponse<IEnumerable<FarmDto>>>
+    public class GetFarmersFarmHandler : IRequestHandler<GetFarmersFarmQuery, MediatrResponse<IEnumerable<FarmerFarmDto>>>
     {
         private readonly IFarmerContext _farmerContext;
         private readonly IMapper _mapper;
@@ -21,12 +21,12 @@ namespace ePunla.Query.Business.Queries
             _mapper = mapper;
         }
 
-        public async Task<MediatrResponse<IEnumerable<FarmDto>>> Handle(GetFarmersFarmQuery request, CancellationToken cancellationToken)
+        public async Task<MediatrResponse<IEnumerable<FarmerFarmDto>>> Handle(GetFarmersFarmQuery request, CancellationToken cancellationToken)
         {
             var mediatorResponse = await _farmerContext.GetFarms(request.FarmerId, request.Status);
-            var farmsDto = _mapper.Map<IEnumerable<FarmDto>>(mediatorResponse.Value);
+            var farmsDto = _mapper.Map<IEnumerable<FarmerFarmDto>>(mediatorResponse.Value);
 
-            return new MediatrResponse<IEnumerable<FarmDto>>(farmsDto);
+            return new MediatrResponse<IEnumerable<FarmerFarmDto>>(farmsDto);
         }
     }
 }

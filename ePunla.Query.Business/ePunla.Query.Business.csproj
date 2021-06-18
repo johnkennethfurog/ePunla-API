@@ -8,6 +8,7 @@
     <Folder Include="Configurations\" />
     <Folder Include="Queries\" />
     <Folder Include="Validators\" />
+    <Folder Include="AdminQueries\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ePunla.Query.DAL\ePunla.Query.DAL.csproj" />
@@ -15,5 +16,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="AdminQueries\" />
   </ItemGroup>
 </Project>

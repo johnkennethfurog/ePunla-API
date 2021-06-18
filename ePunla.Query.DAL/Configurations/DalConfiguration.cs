@@ -12,6 +12,7 @@ namespace ePunla.Query.DAL.Configurations
             services.AddTransient<IAuthenticationContext, AuthenticationContext>();
             services.AddTransient<ICropsContext, CropsContext>();
             services.AddTransient<IMasterListContext, MasterListContext>();
+            services.AddTransient<IAdminContext, AdminContext>();
         }
     }
 }
