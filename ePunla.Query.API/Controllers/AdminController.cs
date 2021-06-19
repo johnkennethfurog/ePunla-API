@@ -22,7 +22,14 @@ namespace ePunla.Query.API.Controllers
         [HttpPost("farms")]
         public async Task<IActionResult> GetFarms([FromBody] PageRequestDto<SearchFarmFieldsDto> request)
         {
-            var response = await _mediator.Send(new GetFarmsQuery { FarmsLookupFields = request });
+            var response = await _mediator.Send(new GetFarmsQuery { SearchRequest = request });
+            return ProcessResponse(response);
+        }
+
+        [HttpPost("claims")]
+        public async Task<IActionResult> GetClaims([FromBody] PageRequestDto<SearchAdminClaimFieldsDto> request)
+        {
+            var response = await _mediator.Send(new GetClaimsQuery { SearchRequest = request });
             return ProcessResponse(response);
         }
     }

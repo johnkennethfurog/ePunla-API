@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[Farmers] (
     [RegistrationDate] DATETIME2 (7)  NOT NULL,
     [Status]           NVARCHAR (20)  NOT NULL,
     [ValidationDate]   DATETIME2 (7)  NULL,
-    [Remarks]          NVARCHAR (MAX) NULL,
     [BarangayAreaId]   INT            NOT NULL,
     CONSTRAINT [PK_Farmers] PRIMARY KEY CLUSTERED ([FarmerId] ASC),
     CONSTRAINT [FK_Farmers_BarangayAreas_BarangayAreaId] FOREIGN KEY ([BarangayAreaId]) REFERENCES [dbo].[BarangayAreas] ([BarangayAreaId]),

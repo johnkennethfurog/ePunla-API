@@ -10,5 +10,6 @@ namespace ePunla.Query.DAL.Interfaces
     public interface IAdminContext
     {
         Task<ContextResponse<IEnumerable<FarmModel>>> GetFarms(PageRequestDto<SearchFarmFieldsDto> FarmsLookupFields);
+        Task<ContextResponse<IEnumerable<ClaimModel>>> GetClaims(PageRequestDto<SearchAdminClaimFieldsDto> ClaimsLookupFields);
     }
 }

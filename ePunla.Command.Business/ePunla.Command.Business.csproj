@@ -11,6 +11,7 @@
     <Folder Include="Validators\" />
     <Folder Include="Services\" />
     <Folder Include="Services\Interfaces\" />
+    <Folder Include="AdminCommands\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ePunla.Command.Domain\ePunla.Command.Domain.csproj" />
@@ -18,5 +19,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CloudinaryDotNet" Version="1.15.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="AdminCommand\" />
   </ItemGroup>
 </Project>

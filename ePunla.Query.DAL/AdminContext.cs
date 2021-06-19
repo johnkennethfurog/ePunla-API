@@ -14,6 +14,7 @@ namespace ePunla.Query.DAL
     public class AdminContext : IAdminContext
     {
         const string SP_GET_FARMS = "sp_getListOfFarms";
+        const string SP_GET_CLAIMS = "sp_getListOfClaims";
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -39,6 +40,25 @@ namespace ePunla.Query.DAL
 
             var response = (await dbConn.QueryAsync<FarmModel>(SP_GET_FARMS, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<FarmModel>>(response);
+        }
+
+        public async Task<ContextResponse<IEnumerable<ClaimModel>>> GetClaims(PageRequestDto<SearchAdminClaimFieldsDto> ClaimsLookupFields)
+        {
+            var searchField = ClaimsLookupFields.SearchField;
+            var page = ClaimsLookupFields.Page;
+
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@barangayId", searchField.BarangayId);
+            dynamicParameters.Add("@searchText", searchField.SearchText);
+            dynamicParameters.Add("@Status", searchField.Status.ToString());
+
+            dynamicParameters.Add("@pageNumber", page.PageNumber);
+            dynamicParameters.Add("@pageSize", page.PageSize);
+
+            var response = (await dbConn.QueryAsync<ClaimModel>(SP_GET_CLAIMS, dynamicParameters, commandType: CommandType.StoredProcedure));
+            return new ContextResponse<IEnumerable<ClaimModel>>(response);
         }
     }
 }

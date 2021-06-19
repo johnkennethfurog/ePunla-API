@@ -68,7 +68,6 @@ DECLARE @Farmers TABLE
     [RegistrationDate] DATETIME2 (7),
     [Status]           NVARCHAR (MAX) ,
     [ValidationDate]   DATETIME2 (7) ,
-    [Remarks]          NVARCHAR (MAX) ,
     [BarangayAreaId]   INT
 );
 
@@ -78,9 +77,9 @@ DECLARE @pSalt VARBINARY(1024) = 0x2A079BE12FDA78A2A5F2EA7BFEF67503AA4BFB5712B03
 
 
 INSERT INTO @Farmers
-SELECT 1,'Juan','Dela Cruz','Sapang Ciduad',1,'9994811893', @pHash , @pSalt ,NULL,NULL,'01-01-2021','Pending',NULL,'',1
-UNION SELECT 2,'Ricky','Fernandez','B3 L5 PH9 Dugsongan st., Bongang Subd.',1,'9994811894',  @pHash , @pSalt,NULL,NULL,'01-01-2021','Pending',NULL,'',2
-UNION SELECT 3,'Pedro','Penduko','Unit , Lot 56 Housing Village',1,'9994811895',  @pHash , @pSalt ,NULL,NULL,'01-01-2021','Confirmed',NULL,'',3
+SELECT 1,'Juan','Dela Cruz','Sapang Ciduad',1,'9994811893', @pHash , @pSalt ,NULL,NULL,'01-01-2021','Pending',NULL,1
+UNION SELECT 2,'Ricky','Fernandez','B3 L5 PH9 Dugsongan st., Bongang Subd.',1,'9994811894',  @pHash , @pSalt,NULL,NULL,'01-01-2021','Pending',NULL,2
+UNION SELECT 3,'Pedro','Penduko','Unit , Lot 56 Housing Village',1,'9994811895',  @pHash , @pSalt ,NULL,NULL,'01-01-2021','Confirmed',NULL,3
 
 
 SET IDENTITY_INSERT [dbo].Farmers ON
@@ -89,11 +88,11 @@ MERGE Farmers as [TARGET]
 USING @Farmers as [SOURCE]
 ON ([SOURCE].FarmerId = [TARGET].FarmerId)
 WHEN NOT MATCHED 
-    THEN INSERT (FarmerId,FirstName,LastName,StreetAddress,BarangayId,MobileNumber,PasswordHash,PasswordSalt,Avatar,AvatarId,RegistrationDate,Status,ValidationDate,Remarks,BarangayAreaId) 
+    THEN INSERT (FarmerId,FirstName,LastName,StreetAddress,BarangayId,MobileNumber,PasswordHash,PasswordSalt,Avatar,AvatarId,RegistrationDate,Status,ValidationDate,BarangayAreaId) 
     VALUES ([SOURCE].FarmerId,[SOURCE].FirstName,[SOURCE].LastName,[SOURCE].StreetAddress,
             [SOURCE].BarangayId,[SOURCE].MobileNumber,[SOURCE].PasswordHash,[SOURCE].PasswordSalt,[SOURCE].Avatar,
             [SOURCE].AvatarId,[SOURCE].RegistrationDate,[SOURCE].Status,[SOURCE].ValidationDate,
-            [SOURCE].Remarks,[SOURCE].BarangayAreaId);
+            [SOURCE].BarangayAreaId);
 
 SET IDENTITY_INSERT [dbo].Farmers OFF
 
