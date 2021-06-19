@@ -105,6 +105,7 @@
     <Build Include="dbo\StoredProcedures\sp_validateFarm.sql" />
     <Build Include="dbo\StoredProcedures\sp_getListOfClaims.sql" />
     <Build Include="dbo\StoredProcedures\sp_validateClaim.sql" />
+    <Build Include="dbo\StoredProcedures\sp_saveCrop.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

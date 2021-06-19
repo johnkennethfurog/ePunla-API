@@ -23,10 +23,12 @@
 
         // CROP ERROR
         CropNotFound = 6001,
+        CropAlreadyExist = 6002,
+        CropCategoryNotFound = 6003,
 
         // CLAIM ERROR
         ClaimNotFound = 7001,
         ClaimStatusIsNotPending = 7002,
-        ClaimDuplicateDamageType = 7003
+        ClaimDuplicateDamageType = 7003,
     }
 }
