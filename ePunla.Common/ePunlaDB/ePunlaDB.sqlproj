@@ -108,6 +108,8 @@
     <Build Include="dbo\StoredProcedures\sp_saveCrop.sql" />
     <Build Include="dbo\StoredProcedures\sp_getCategories.sql" />
     <Build Include="dbo\StoredProcedures\sp_getCrops.sql" />
+    <Build Include="dbo\StoredProcedures\sp_saveBarangay.sql" />
+    <Build Include="dbo\Types\BarangayArea.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

@@ -10,5 +10,6 @@ namespace ePunla.Command.DAL.interfaces
         Task<ContextResponse> ValidateClaim(int ClaimId, ValidateClaimDto validateClaimDto);
 
         Task<ContextResponse<int>> SaveCrop(SaveCropDto saveCropDto);
+        Task<ContextResponse<int>> SaveBarangay(SaveBarangayDto saveBarangayDto);
     }
 }

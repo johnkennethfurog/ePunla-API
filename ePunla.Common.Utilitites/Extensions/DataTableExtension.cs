@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 
-namespace FleetResponse.Common.Business.Helpers
+namespace ePunla.Common.Utilitites.Extensions
 {
     public static class DataTableExtension
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using ePunla.Command.DAL.interfaces;
@@ -16,12 +17,29 @@ namespace ePunla.Command.DAL
         const string SP_VALIDATE_CLAIM = "sp_validateClaim";
 
         const string SP_SAVE_CROP = "sp_saveCrop";
+        const string SP_SAVE_BARANGAY = "sp_saveBarangay";
 
         private readonly IDatabaseConnection _dbConnection;
 
         public AdminContext(IDatabaseConnection dbConnection)
         {
             _dbConnection = dbConnection;
+        }
+
+        public async Task<ContextResponse<int>> SaveBarangay(SaveBarangayDto saveBarangayDto)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@barangayId", saveBarangayDto.BarangayId);
+            dynamicParameters.Add("@barangayName", saveBarangayDto.BarangayName);
+            dynamicParameters.Add("@areas", saveBarangayDto.Areas.ToList().ToDataTable().AsTableValuedParameter());
+            dynamicParameters.AddValidationParam();
+
+            var result = await dbConn.QueryFirstOrDefaultAsync<int>(SP_SAVE_BARANGAY, dynamicParameters, commandType: CommandType.StoredProcedure);
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse<int>.ValidateContextResponse(validation, result);
         }
 
         public async Task<ContextResponse<int>> SaveCrop(SaveCropDto saveCropDto)

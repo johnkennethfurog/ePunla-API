@@ -9,7 +9,6 @@ using ePunla.Common.Utilitites.Response;
 using ePunla.Query.DAL.Interfaces;
 using ePunla.Query.DAL.Models;
 using ePunla.Query.Domain.Dtos;
-using FleetResponse.Common.Business.Helpers;
 
 namespace ePunla.Query.DAL
 {

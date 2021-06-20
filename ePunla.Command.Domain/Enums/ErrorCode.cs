@@ -4,6 +4,7 @@
     {
         // BARANGAY ERROR
         BarangayNotFound = 1001,
+        BarangayAlreadyExist = 1002,
 
         // BARANGAY AREA ERROR
         BarangayAreaNotFound = 2001,
