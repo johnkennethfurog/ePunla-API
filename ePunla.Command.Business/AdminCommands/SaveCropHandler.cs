@@ -11,16 +11,16 @@ namespace ePunla.Command.Business.AdminCommands
 {
     public class SaveCropHandler : IRequestHandler<SaveCropCommand, MediatrResponse<int>>
     {
-        private readonly IAdminContext _adminContext;
+        private readonly IMasterListContext _masterListContext;
 
-        public SaveCropHandler(IAdminContext adminContext)
+        public SaveCropHandler(IMasterListContext masterListContext)
         {
-            _adminContext = adminContext;
+            _masterListContext = masterListContext;
         }
 
         public async Task<MediatrResponse<int>> Handle(SaveCropCommand request, CancellationToken cancellationToken)
         {
-            var contextResponse = await _adminContext.SaveCrop(request.SaveCropDto);
+            var contextResponse = await _masterListContext.SaveCrop(request.SaveCropDto);
 
             if (!contextResponse.IsValid)
             {

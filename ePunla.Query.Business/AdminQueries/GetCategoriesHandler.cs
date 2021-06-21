@@ -12,18 +12,18 @@ namespace ePunla.Query.Business.AdminQueries
 {
     public class GetCategoriesHandler : IRequestHandler<GetCategoriesQuery, MediatrResponse<IEnumerable<CategoryDto>>>
     {
-        private readonly IAdminContext _adminContext;
+        private readonly IMasterListContext _masterListContext;
         private readonly IMapper _mapper;
 
-        public GetCategoriesHandler(IAdminContext adminContext, IMapper mapper)
+        public GetCategoriesHandler(IMasterListContext masterListContext, IMapper mapper)
         {
-            _adminContext = adminContext;
+            _masterListContext = masterListContext;
             _mapper = mapper;
         }
 
         public async Task<MediatrResponse<IEnumerable<CategoryDto>>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
-            var mediatorResponse = await _adminContext.GetCategories();
+            var mediatorResponse = await _masterListContext.GetCategories();
             var categoriesDto = _mapper.Map<IEnumerable<CategoryDto>>(mediatorResponse.Value);
 
             return new MediatrResponse<IEnumerable<CategoryDto>>(categoriesDto);

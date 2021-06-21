@@ -12,16 +12,16 @@ namespace ePunla.Command.Business.AdminCommands
 {
     public class SaveBarangayHandler : IRequestHandler<SaveBarangayCommand, MediatrResponse<int>>
     {
-        private readonly IAdminContext _adminContext;
+        private readonly IMasterListContext _masterListContext;
 
-        public SaveBarangayHandler(IAdminContext adminContext)
+        public SaveBarangayHandler(IMasterListContext masterListContext)
         {
-            _adminContext = adminContext;
+            _masterListContext = masterListContext;
         }
 
         public async Task<MediatrResponse<int>> Handle(SaveBarangayCommand request, CancellationToken cancellationToken)
         {
-            var contextResponse = await _adminContext.SaveBarangay(request.SaveBarangayDto);
+            var contextResponse = await _masterListContext.SaveBarangay(request.SaveBarangayDto);
 
             if (!contextResponse.IsValid)
             {

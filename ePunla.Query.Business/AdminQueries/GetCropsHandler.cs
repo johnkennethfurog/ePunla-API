@@ -11,18 +11,18 @@ namespace ePunla.Query.Business.AdminQueries
 {
     public class GetCropsHandler : IRequestHandler<GetCropsQuery, MediatrResponse<IEnumerable<CropDto>>>
     {
-        private readonly IAdminContext _adminContext;
+        private readonly IMasterListContext _masterListContext;
         private readonly IMapper _mapper;
 
-        public GetCropsHandler(IAdminContext adminContext, IMapper mapper)
+        public GetCropsHandler(IMasterListContext masterListContext, IMapper mapper)
         {
-            _adminContext = adminContext;
+            _masterListContext = masterListContext;
             _mapper = mapper;
         }
 
         public async Task<MediatrResponse<IEnumerable<CropDto>>> Handle(GetCropsQuery request, CancellationToken cancellationToken)
         {
-            var mediatorResponse = await _adminContext.GetCrops();
+            var mediatorResponse = await _masterListContext.GetCrops();
             var categoriesDto = _mapper.Map<IEnumerable<CropDto>>(mediatorResponse.Value);
 
             return new MediatrResponse<IEnumerable<CropDto>>(categoriesDto);

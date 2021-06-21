@@ -37,7 +37,7 @@ BEGIN
       USING @areas S
       ON S.BarangayAreaId = T.BarangayAreaId AND T.BarangayId = @barangayId
       WHEN MATCHED THEN
-        UPDATE SET T.[Name] = S.[Area]
+        UPDATE SET T.[Name] = S.[Area], T.[IsActive] = S.[AreaIsActive]
       WHEN NOT MATCHED BY TARGET THEN
         INSERT ([Name],[BarangayId]) VALUES (S.[Area],@barangayId)
       WHEN NOT MATCHED BY SOURCE THEN

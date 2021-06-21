@@ -11,8 +11,5 @@ namespace ePunla.Query.DAL.Interfaces
     {
         Task<ContextResponse<IEnumerable<FarmModel>>> GetFarms(PageRequestDto<SearchFarmFieldsDto> FarmsLookupFields);
         Task<ContextResponse<IEnumerable<ClaimModel>>> GetClaims(PageRequestDto<SearchAdminClaimFieldsDto> ClaimsLookupFields);
-
-        Task<ContextResponse<IEnumerable<CategoryModel>>> GetCategories();
-        Task<ContextResponse<IEnumerable<CropModel>>> GetCrops();
     }
 }

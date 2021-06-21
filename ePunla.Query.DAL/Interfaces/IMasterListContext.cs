@@ -8,5 +8,7 @@ namespace ePunla.Query.DAL.Interfaces
     public interface IMasterListContext
     {
         Task<ContextResponse<IEnumerable<BarangayAndAreaModel>>> GetBarangaysAndArea();
+        Task<ContextResponse<IEnumerable<CategoryModel>>> GetCategories();
+        Task<ContextResponse<IEnumerable<CropModel>>> GetCrops();
     }
 }

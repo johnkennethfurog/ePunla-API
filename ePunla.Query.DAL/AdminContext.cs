@@ -16,9 +16,6 @@ namespace ePunla.Query.DAL
         const string SP_GET_FARMS = "sp_getListOfFarms";
         const string SP_GET_CLAIMS = "sp_getListOfClaims";
 
-        const string SP_GET_CATEGORIES = "sp_getCategories";
-        const string SP_GET_CROPS = "sp_getCrops";
-
         private readonly IDatabaseConnection _dbConnection;
 
         public AdminContext(IDatabaseConnection dbConnection)
@@ -62,20 +59,6 @@ namespace ePunla.Query.DAL
 
             var response = (await dbConn.QueryAsync<ClaimModel>(SP_GET_CLAIMS, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<ClaimModel>>(response);
-        }
-
-        public async Task<ContextResponse<IEnumerable<CategoryModel>>> GetCategories()
-        {
-            using var dbConn = await _dbConnection.CreateConnectionAsync();
-            var response = (await dbConn.QueryAsync<CategoryModel>(SP_GET_CATEGORIES, commandType: CommandType.StoredProcedure));
-            return new ContextResponse<IEnumerable<CategoryModel>>(response);
-        }
-
-        public async Task<ContextResponse<IEnumerable<CropModel>>> GetCrops()
-        {
-            using var dbConn = await _dbConnection.CreateConnectionAsync();
-            var response = (await dbConn.QueryAsync<CropModel>(SP_GET_CROPS, commandType: CommandType.StoredProcedure));
-            return new ContextResponse<IEnumerable<CropModel>>(response);
         }
     }
 }

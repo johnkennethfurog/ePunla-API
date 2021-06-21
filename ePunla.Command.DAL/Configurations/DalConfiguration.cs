@@ -11,6 +11,7 @@ namespace ePunla.Command.DAL.Configurations
         {
             services.AddScoped<IFarmerContext, FarmerContext>();
             services.AddScoped<IAdminContext, AdminContext>();
+            services.AddScoped<IMasterListContext, MasterListContext>();
         }
     }
 }
