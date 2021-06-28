@@ -3,6 +3,7 @@ namespace ePunla.Query.DAL.Models
 {
     public class ClaimModel
     {
+        public int total_count { get; set; }
         public int ClaimId { get; set; }
         public DateTime FilingDate { get; set; }
         public string Crop { get; set; }

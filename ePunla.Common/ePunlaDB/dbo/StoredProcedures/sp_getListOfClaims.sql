@@ -7,6 +7,7 @@ CREATE PROCEDURE [dbo].[sp_getListOfClaims]
 AS
 BEGIN
   SELECT
+      total_count = COUNT(*) OVER(),
       C.ClaimId,
       C.FilingDate,
       [Crop] = CR.Name,
@@ -37,7 +38,7 @@ BEGIN
   WHERE
   (
       ISNULL(@status, '') = '' OR
-      FA.[Status] = @status
+      C.[Status] = @status
   ) AND
   (
       ISNULL(@searchText, '') = '' OR

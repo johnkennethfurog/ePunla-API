@@ -11,7 +11,7 @@ using MediatR;
 
 namespace ePunla.Query.Business.AdminQueries
 {
-    public class GetClaimsHandler : IRequestHandler<GetClaimsQuery, MediatrResponse<IEnumerable<ClaimDto>>>
+    public class GetClaimsHandler : IRequestHandler<GetClaimsQuery, MediatrResponse<PageResponseDto<ClaimDto>>>
     {
         private readonly IAdminContext _adminContext;
         private readonly IMapper _mapper;
@@ -24,12 +24,13 @@ namespace ePunla.Query.Business.AdminQueries
             _farmerContext = farmerContext;
         }
 
-        public async Task<MediatrResponse<IEnumerable<ClaimDto>>> Handle(GetClaimsQuery request, CancellationToken cancellationToken)
+        public async Task<MediatrResponse<PageResponseDto<ClaimDto>>> Handle(GetClaimsQuery request, CancellationToken cancellationToken)
         {
             var claimsMediatorResponse = await _adminContext.GetClaims(request.SearchRequest);
             var claimsModel = claimsMediatorResponse.Value;
             var claimIds = claimsModel.Select(x => x.ClaimId);
             var claimsDto = _mapper.Map<IEnumerable<ClaimDto>>(claimsModel);
+            var totalCount = claimsModel.FirstOrDefault()?.total_count;
 
             var damageCausesMediatorResponse = await _farmerContext.GetDamageCause(claimIds);
             var damageCauses = damageCausesMediatorResponse.Value;
@@ -43,7 +44,18 @@ namespace ePunla.Query.Business.AdminQueries
                 claim.DamageCause = claimDamageCauseDto;
             });
 
-            return new MediatrResponse<IEnumerable<ClaimDto>>(claimsDto);
+            var page = new PageResponse
+            {
+                TotalCount = totalCount ?? 0
+            };
+
+            var pagedResponse = new PageResponseDto<ClaimDto>
+            {
+                Page = page,
+                Values = claimsDto
+            };
+
+            return new MediatrResponse<PageResponseDto<ClaimDto>>(pagedResponse);
         }
     }
 }
