@@ -3,6 +3,7 @@ namespace ePunla.Query.DAL.Models
 {
     public class FarmModel
     {
+        public int total_count { get; set; }
         public int FarmId { get; set; }
         public string Farm { get; set; }
         public string Barangay { get; set; }

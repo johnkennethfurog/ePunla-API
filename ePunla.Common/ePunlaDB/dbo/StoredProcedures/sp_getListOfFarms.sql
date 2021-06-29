@@ -22,6 +22,7 @@ BEGIN
   )
 
   SELECT
+        total_count = COUNT(*) OVER(),
       FA.FarmId,
       [Farm] = FA.Name,
       [Barangay] = B.Name,

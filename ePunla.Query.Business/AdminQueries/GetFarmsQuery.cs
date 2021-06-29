@@ -6,7 +6,7 @@ using MediatR;
 
 namespace ePunla.Query.Business.AdminQueries
 {
-    public class GetFarmsQuery : IRequest<MediatrResponse<IEnumerable<FarmDto>>>
+    public class GetFarmsQuery : IRequest<MediatrResponse<PageResponseDto<FarmDto>>>
     {
         public PageRequestDto<SearchFarmFieldsDto> SearchRequest { get; set; }
     }
