@@ -2,6 +2,7 @@
 using ePunla.Common.Utilitites.BaseClass;
 using ePunla.Query.Business.AdminQueries;
 using ePunla.Query.Business.Queries;
+using ePunla.Query.Domain.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -36,10 +37,10 @@ namespace ePunla.Query.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("crops")]
-        public async Task<IActionResult> GetCrops()
+        [HttpPost("crops")]
+        public async Task<IActionResult> GetCrops([FromBody] PageRequestDto<SearchAdminCropFieldsDto> searchRequest)
         {
-            var response = await _mediator.Send(new GetCropsQuery());
+            var response = await _mediator.Send(new GetCropsQuery { SearchRequest = searchRequest });
             return ProcessResponse(response);
         }
     }

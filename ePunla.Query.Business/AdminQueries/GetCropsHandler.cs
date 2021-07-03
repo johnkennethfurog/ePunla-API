@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -9,7 +10,7 @@ using MediatR;
 
 namespace ePunla.Query.Business.AdminQueries
 {
-    public class GetCropsHandler : IRequestHandler<GetCropsQuery, MediatrResponse<IEnumerable<CropDto>>>
+    public class GetCropsHandler : IRequestHandler<GetCropsQuery, MediatrResponse<PageResponseDto<CropDto>>>
     {
         private readonly IMasterListContext _masterListContext;
         private readonly IMapper _mapper;
@@ -20,12 +21,24 @@ namespace ePunla.Query.Business.AdminQueries
             _mapper = mapper;
         }
 
-        public async Task<MediatrResponse<IEnumerable<CropDto>>> Handle(GetCropsQuery request, CancellationToken cancellationToken)
+        public async Task<MediatrResponse<PageResponseDto<CropDto>>> Handle(GetCropsQuery request, CancellationToken cancellationToken)
         {
-            var mediatorResponse = await _masterListContext.GetCrops();
-            var categoriesDto = _mapper.Map<IEnumerable<CropDto>>(mediatorResponse.Value);
+            var mediatorResponse = await _masterListContext.GetCrops(request.SearchRequest);
+            var cropsDto = _mapper.Map<IEnumerable<CropDto>>(mediatorResponse.Value);
+            var totalCount = mediatorResponse.Value.FirstOrDefault()?.total_count;
 
-            return new MediatrResponse<IEnumerable<CropDto>>(categoriesDto);
+            var page = new PageResponse
+            {
+                TotalCount = totalCount ?? 0
+            };
+
+            var pagedResponse = new PageResponseDto<CropDto>
+            {
+                Page = page,
+                Values = cropsDto
+            };
+
+            return new MediatrResponse<PageResponseDto<CropDto>>(pagedResponse);
         }
     }
 }

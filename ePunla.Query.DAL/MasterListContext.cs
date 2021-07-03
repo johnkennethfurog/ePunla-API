@@ -7,6 +7,7 @@ using ePunla.Common.Utilitites.DbConnect;
 using ePunla.Common.Utilitites.Response;
 using ePunla.Query.DAL.Interfaces;
 using ePunla.Query.DAL.Models;
+using ePunla.Query.Domain.Dtos;
 
 namespace ePunla.Query.DAL
 {
@@ -38,10 +39,21 @@ namespace ePunla.Query.DAL
             return new ContextResponse<IEnumerable<CategoryModel>>(response);
         }
 
-        public async Task<ContextResponse<IEnumerable<CropModel>>> GetCrops()
+        public async Task<ContextResponse<IEnumerable<CropModel>>> GetCrops(PageRequestDto<SearchAdminCropFieldsDto> searchRequest)
         {
             using var dbConn = await _dbConnection.CreateConnectionAsync();
-            var response = (await dbConn.QueryAsync<CropModel>(SP_GET_CROPS, commandType: CommandType.StoredProcedure));
+
+            var searchField = searchRequest.SearchField;
+            var page = searchRequest.Page;
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@searchText", searchField.SearchText);
+            dynamicParameters.Add("@categoryId", searchField.CategoryId);
+            dynamicParameters.Add("@showInactive", searchField.ShowInactive);
+            dynamicParameters.Add("@pageNUmber", page.PageNumber);
+            dynamicParameters.Add("@pageSize", page.PageSize);
+
+            var response = (await dbConn.QueryAsync<CropModel>(SP_GET_CROPS, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<CropModel>>(response);
         }
     }

@@ -3,6 +3,7 @@ CREATE TABLE [dbo].[Crops] (
     [CategoryId] INT            NULL,
     [Duration]   INT            NOT NULL,
     [Name]       NVARCHAR (200) NULL,
+    [IsActive] INT NULL DEFAULT 1
     CONSTRAINT [PK_Crops] PRIMARY KEY CLUSTERED ([CropId] ASC),
     CONSTRAINT [FK_Crops_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Categories] ([CategoryId])
 );

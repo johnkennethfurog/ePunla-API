@@ -7,5 +7,6 @@
         public int Duration { get; set; }
         public int CategoryId { get; set; }
         public string Category { get; set; }
+        public bool IsActive { get; set; }
     }
 }

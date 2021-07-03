@@ -6,5 +6,7 @@ using MediatR;
 
 namespace ePunla.Query.Business.AdminQueries
 {
-    public class GetCropsQuery : IRequest<MediatrResponse<IEnumerable<CropDto>>> { }
+    public class GetCropsQuery : IRequest<MediatrResponse<PageResponseDto<CropDto>>> {
+        public PageRequestDto<SearchAdminCropFieldsDto> SearchRequest { get; set; }
+    }
 }
