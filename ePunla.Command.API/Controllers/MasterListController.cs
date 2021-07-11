@@ -37,8 +37,8 @@ namespace ePunla.Command.API.Controllers
             return ProcessResponse(response);
         }
 
-        [HttpPost("barangays/${barangayId}/changeStatus")]
-        public async Task<IActionResult> ChangeBarangayStatus(int barangayId, ChangeBarangayStatDto changeBarangayStatDto)
+        [HttpPut("barangays/${barangayId}/changeStatus")]
+        public async Task<IActionResult> ChangeBarangayStatus(int barangayId, [FromBody]ChangeBarangayStatDto changeBarangayStatDto)
         {
             var response = await _mediator.Send(new ChangeBarangayStatCommand { BarangayId = barangayId, ChangeBarangayStatDto = changeBarangayStatDto });
             return ProcessResponse(response);
