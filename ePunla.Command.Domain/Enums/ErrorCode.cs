@@ -31,5 +31,9 @@
         ClaimNotFound = 7001,
         ClaimStatusIsNotPending = 7002,
         ClaimDuplicateDamageType = 7003,
+        ClaimAlreadyForVerification = 7004,
+        ClaimAlreadyClaimed = 7005,
+        ClaimAlreadyDenied = 7006,
+        ClaimStatusIsPending = 7007,
     }
 }

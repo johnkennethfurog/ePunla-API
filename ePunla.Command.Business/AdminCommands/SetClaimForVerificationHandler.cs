@@ -9,18 +9,18 @@ using MediatR;
 
 namespace ePunla.Command.Business.AdminCommands
 {
-    public class ValidateClaimHandler : IRequestHandler<ValidateClaimCommand, MediatrResponse>
+    public class SetClaimForVerificationHandler : IRequestHandler<SetClaimForVerificationCommand, MediatrResponse>
     {
         private readonly IAdminContext _adminContext;
 
-        public ValidateClaimHandler(IAdminContext adminContext)
+        public SetClaimForVerificationHandler(IAdminContext adminContext)
         {
             _adminContext = adminContext;
         }
 
-        public async Task<MediatrResponse> Handle(ValidateClaimCommand request, CancellationToken cancellationToken)
+        public async Task<MediatrResponse> Handle(SetClaimForVerificationCommand request, CancellationToken cancellationToken)
         {
-            var contextResponse = await _adminContext.ValidateClaim(request.ClaimId, request.ValidateClaimDto);
+            var contextResponse = await _adminContext.SetClaimForVerification(request.ClaimId);
 
             if (!contextResponse.IsValid)
             {
@@ -33,8 +33,8 @@ namespace ePunla.Command.Business.AdminCommands
                         return new MediatrResponse(new ErrorMessage("Cannot validate claim, claim is already claimed"));
                     case ErrorCode.ClaimAlreadyDenied:
                         return new MediatrResponse(new ErrorMessage("Cannot validate claim, claim is already denied"));
-                    case ErrorCode.ClaimStatusIsPending:
-                        return new MediatrResponse(new ErrorMessage("Cannot validate claim, claim is still pending"));
+                    case ErrorCode.ClaimAlreadyForVerification:
+                        return new MediatrResponse(new ErrorMessage("Cannot validate claim, claim is already for verification"));
                 }
             }
 

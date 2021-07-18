@@ -8,5 +8,8 @@
         // Farmer
         MobileNumberAlreadyExist = 3001,
         FarmerNotFound = 3002,
+
+        // CLAIM ERROR
+        ClaimNotFound = 7001
     }
 }

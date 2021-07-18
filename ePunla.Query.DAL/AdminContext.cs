@@ -4,6 +4,7 @@ using System.Data;
 using System.Threading.Tasks;
 using Dapper;
 using ePunla.Common.Utilitites.DbConnect;
+using ePunla.Common.Utilitites.Extensions;
 using ePunla.Common.Utilitites.Response;
 using ePunla.Query.DAL.Interfaces;
 using ePunla.Query.DAL.Models;
@@ -15,6 +16,7 @@ namespace ePunla.Query.DAL
     {
         const string SP_GET_FARMS = "sp_getListOfFarms";
         const string SP_GET_CLAIMS = "sp_getListOfClaims";
+        const string SP_GET_CLAIM_DETAIL = "sp_getClaimDetail";
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -59,6 +61,20 @@ namespace ePunla.Query.DAL
 
             var response = (await dbConn.QueryAsync<ClaimModel>(SP_GET_CLAIMS, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<ClaimModel>>(response);
+        }
+
+        public async Task<ContextResponse<ClaimDetailModel>> GetClaimDetail(int claimId)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@claimId", claimId);
+            dynamicParameters.AddValidationParam();
+
+            var response = (await dbConn.QueryFirstOrDefaultAsync<ClaimDetailModel>(SP_GET_CLAIM_DETAIL, dynamicParameters, commandType: CommandType.StoredProcedure));
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse<ClaimDetailModel>.ValidateContextResponse(validation, response);
         }
     }
 }

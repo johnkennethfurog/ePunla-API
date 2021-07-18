@@ -15,12 +15,27 @@ namespace ePunla.Command.DAL
     {
         const string SP_VALIDATE_FARM = "sp_validateFarm";
         const string SP_VALIDATE_CLAIM = "sp_validateClaim";
+        const string SP_SET_CLAIM_FOR_VERIFICATION = "sp_setClaimForVerification";
 
         private readonly IDatabaseConnection _dbConnection;
 
         public AdminContext(IDatabaseConnection dbConnection)
         {
             _dbConnection = dbConnection;
+        }
+
+        public async Task<ContextResponse> SetClaimForVerification(int ClaimId)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@claimId", ClaimId);
+            dynamicParameters.AddValidationParam();
+
+            await dbConn.QueryAsync(SP_SET_CLAIM_FOR_VERIFICATION, dynamicParameters, commandType: CommandType.StoredProcedure);
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse.ValidateContextResponse(validation);
         }
 
         public async Task<ContextResponse> ValidateClaim(int ClaimId, ValidateClaimDto validateClaimDto)
