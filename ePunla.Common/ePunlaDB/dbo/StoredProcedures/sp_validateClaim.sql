@@ -32,8 +32,8 @@ BEGIN
     END
 
   -- CHECK IF CLAIM STATUS IS STILL PENDING
-  ELSE IF @claimStatus = @PendingLiteral
-    BEGIN
+  ELSE IF @claimStatus = @PendingLiteral AND @isApproved = 1
+    BEGIN 
       SET @Validation = 7007;
     END
   ELSE

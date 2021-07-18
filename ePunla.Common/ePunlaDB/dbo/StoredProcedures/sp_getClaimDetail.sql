@@ -40,7 +40,7 @@ BEGIN
           FA.MiddleName,
           FA.Avatar,
           FA.MobileNumber,
-          [FamerBarangay] = FAB.Name,
+          [FarmerBarangay] = FAB.Name,
           [FarmerArea] = FABA.Name,
           [FarmerAddress] = FA.StreetAddress
       FROM Claims C
