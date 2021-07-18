@@ -35,8 +35,9 @@ namespace ePunla.Query.Domain.Dtos
         public string MiddleName { get; set; }
         public string Avatar { get; set; }
         public string MobileNumber { get; set; }
-        public string FamerBarangay { get; set; }
+        public string FarmerBarangay { get; set; }
         public string FarmerArea { get; set; }
         public string FarmerAddress { get; set; }
     }
+
 }
