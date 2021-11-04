@@ -14,6 +14,7 @@ BEGIN
           [BarangayAreaId] = BA.BarangayAreaId,
           [ImageUrl] = F.[ImageUrl],
           [ImageUrlId] = F.[ImageUrlId],
+          [ValidationDate]= F.[ValidationDate],
           [Lng] = F.Lng,
           [Lat] = F.Lat
   FROM Farms F

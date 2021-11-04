@@ -10,5 +10,7 @@
         public int BarangayAreaId { get; set; }
         public decimal Lng { get; set; }
         public decimal Lat { get; set; }
+        public string ImageUrl { get; set; }
+        public string ImageUrlId { get; set; }
     }
 }

@@ -17,6 +17,6 @@ namespace ePunla.Query.DAL.Models
         public decimal Lat { get; set; }
         public string ImageUrl { get; set; }
         public string ImageUrlId { get; set; }
-        public DateTime ValidationDate { get; set; }
+        public DateTime? ValidationDate { get; set; }
     }
 }
