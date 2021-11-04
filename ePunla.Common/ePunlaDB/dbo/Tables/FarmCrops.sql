@@ -8,6 +8,7 @@ CREATE TABLE [dbo].[FarmCrops] (
     [AreaSize]             DECIMAL        NOT NULL,
     [Status]               NVARCHAR (20) NULL,
     [HarvestDate]          DATETIME2 (7)  NULL,
+    [ClaimFilingDate]      DATETIME2 (7)  NULL,
     CONSTRAINT [PK_FarmCrops] PRIMARY KEY CLUSTERED ([FarmCropId] ASC),
     CONSTRAINT [FK_FarmCrops_Categories_CategoryId] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[Categories] ([CategoryId]),
     CONSTRAINT [FK_FarmCrops_Crops_CropId] FOREIGN KEY ([CropId]) REFERENCES [dbo].[Crops] ([CropId]),

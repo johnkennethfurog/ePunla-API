@@ -46,7 +46,7 @@ BEGIN
     BEGIN
 
       -- UPDATE FARM CROP STATUS TO DAMAGED
-      UPDATE FarmCrops SET [Status]='Damaged' WHERE FarmCropId = @FarmCropId
+      UPDATE FarmCrops SET [Status]='Damaged', [ClaimFilingDate]=GETDATE() WHERE FarmCropId = @FarmCropId
 
       -- SAVE CLAIM
       INSERT INTO Claims ([FarmCropId],[FarmId],[FilingDate],[DamagedArea],[Description],[PhotoUrl], [PhotoId],[Status]) 

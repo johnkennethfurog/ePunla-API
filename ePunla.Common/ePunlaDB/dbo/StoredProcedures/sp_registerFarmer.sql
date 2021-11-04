@@ -10,6 +10,8 @@ CREATE PROCEDURE [dbo].[sp_registerFarmer]
     @Avatar           NVARCHAR (MAX),
     @AvatarId         NVARCHAR (100),
     @BarangayAreaId   INT,
+    @IdentityDocumentUrl  NVARCHAR (MAX) NULL,
+    @IdentityDocumentId NVARCHAR(100)  NULL,
     @Validation       INT OUTPUT
 AS
   BEGIN
@@ -29,10 +31,12 @@ AS
       BEGIN
         INSERT INTO Farmers
           ([FirstName],[LastName],[StreetAddress],[BarangayId],[MobileNumber],[MiddleName],
-          [PasswordHash],[PasswordSalt],[Avatar],[AvatarId],[RegistrationDate],[Status],[BarangayAreaId])
+          [PasswordHash],[PasswordSalt],[Avatar],[AvatarId],[RegistrationDate],[Status],[BarangayAreaId],
+          [IdentityDocumentUrl],[IdentityDocumentId])
         VALUES
           (@FirstName,@LastName,@StreetAddress,@BarangayId,@MobileNumber,@MiddleName,
-          @PasswordHash, @PasswordSalt,@Avatar,@AvatarId,GETDATE(),'Pending',@BarangayAreaId)
+          @PasswordHash, @PasswordSalt,@Avatar,@AvatarId,GETDATE(),'Pending',@BarangayAreaId,
+          @IdentityDocumentUrl,@IdentityDocumentId)
       END
     
     SELECT ISNULL(SCOPE_IDENTITY(),0);

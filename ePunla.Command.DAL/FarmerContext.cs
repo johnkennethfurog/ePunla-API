@@ -49,6 +49,8 @@ namespace ePunla.Command.DAL
             dynamicParameters.Add("@Avatar", registerFarmerDto.Avatar);
             dynamicParameters.Add("@AvatarId", registerFarmerDto.AvatarId);
             dynamicParameters.Add("@MobileNumber", registerFarmerDto.MobileNumber);
+            dynamicParameters.Add("@IdentityDocumentId", registerFarmerDto.IdentityDocumentId);
+            dynamicParameters.Add("@IdentityDocumentUrl", registerFarmerDto.IdentityDocumentUrl);
             dynamicParameters.AddValidationParam();
 
             var result = (await dbConn.QueryAsync<int>(SP_REGISTER_FARMER, dynamicParameters, commandType: CommandType.StoredProcedure)).FirstOrDefault();

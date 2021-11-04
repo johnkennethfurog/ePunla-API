@@ -13,5 +13,7 @@ namespace ePunla.Command.Domain.Dtos
         public string Avatar { get; set; }
         public string AvatarId { get; set; }
         public int BarangayAreaId { get; set; }
+        public string IdentityDocumentUrl { get; set; }
+        public string IdentityDocumentId { get; set; }
     }
 }

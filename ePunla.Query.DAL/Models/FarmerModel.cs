@@ -12,5 +12,7 @@
         public int BarangayId { get; set; }
         public string MobileNumber { get; set; }
         public string AvatarId { get; set; }
+        public string IdentityDocumentUrl { get; set; }
+        public string IdentityDocumentId { get; set; }
     }
 }

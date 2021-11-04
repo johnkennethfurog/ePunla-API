@@ -9,6 +9,8 @@ CREATE TABLE [dbo].[Farms] (
     [Status]         NVARCHAR (20) NULL,
     [ValidationDate] DATETIME2 (7)  NULL,
     [Remarks]        NVARCHAR (MAX) NULL,
+    [ImageUrl]      NVARCHAR (MAX) NULL,
+    [ImageUrlId]    NVARCHAR (20) NULL,
     [Lng]           DECIMAL(19,16),
     [Lat]           DECIMAL(19,16),
     CONSTRAINT [PK_Farms] PRIMARY KEY CLUSTERED ([FarmId] ASC),

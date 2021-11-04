@@ -6,6 +6,8 @@ CREATE PROCEDURE [dbo].[sp_saveFarm]
   @BarangayId INT,
   @BarangayAreaId INT,
   @FarmerId INT,
+  @ImageUrl NVARCHAR(MAX),
+  @ImageUrlID NVARCHAR(200),
   @Lng DECIMAL(19,16),
   @Lat DECIMAL(19,16),
   @Validation INT OUTPUT
@@ -39,9 +41,9 @@ BEGIN
   ELSE IF @FarmId IS NULL
     BEGIN
       INSERT INTO Farms
-        ([FarmerId],[Address],[BarangayId],[BarangayAreaId],[AreaSize],[Name],[Status],[Lng],[Lat])
+        ([FarmerId],[Address],[BarangayId],[BarangayAreaId],[AreaSize],[Name],[Status],[Lng],[Lat],[ImageUrl],[ImageUrlId])
       VALUES
-        (@FarmerId, @StreetAddress, @BarangayId, @BarangayAreaId, @AreaSize, @Name, 'Pending',@Lng, @Lat)
+        (@FarmerId, @StreetAddress, @BarangayId, @BarangayAreaId, @AreaSize, @Name, 'Pending',@Lng, @Lat, @ImageUrl, @ImageUrlID)
 
         SET @FarmId = SCOPE_IDENTITY()
     END
@@ -57,7 +59,9 @@ BEGIN
         [AreaSize] = @AreaSize,
         [Name] = @Name,
         [Lng] = @Lng,
-        [Lat] = @Lat
+        [Lat] = @Lat,
+        [ImageUrl] = @ImageUrl,
+        [ImageUrlId] = @ImageUrlID
       WHERE FarmId = @FarmId
     END
 

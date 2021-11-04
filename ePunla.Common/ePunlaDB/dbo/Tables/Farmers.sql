@@ -14,6 +14,8 @@ CREATE TABLE [dbo].[Farmers] (
     [Status]           NVARCHAR (20)  NOT NULL,
     [ValidationDate]   DATETIME2 (7)  NULL,
     [BarangayAreaId]   INT            NOT NULL,
+    [IdentityDocumentUrl]  NVARCHAR (MAX) NULL,
+    [IdentityDocumentId] NVARCHAR(100)  NULL,
     CONSTRAINT [PK_Farmers] PRIMARY KEY CLUSTERED ([FarmerId] ASC),
     CONSTRAINT [FK_Farmers_BarangayAreas_BarangayAreaId] FOREIGN KEY ([BarangayAreaId]) REFERENCES [dbo].[BarangayAreas] ([BarangayAreaId]),
     CONSTRAINT [FK_Farmers_Barangays_BarangayId] FOREIGN KEY ([BarangayId]) REFERENCES [dbo].[Barangays] ([BarangayId])

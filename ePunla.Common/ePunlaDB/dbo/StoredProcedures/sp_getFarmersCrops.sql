@@ -17,7 +17,7 @@ BEGIN
           [PlantedDate] = FC.PlantedDate,
           [AreaSize] = FC.AreaSize,
           [Status] = FC.[Status],
-          [HarvestDate] = FC.HarvestDate
+          [ActionDate] = IIF(FC.[Status] = 'Damaged', FC.ClaimFilingDate,FC.HarvestDate)
   FROM FarmCrops FC
   LEFT JOIN Farms F ON F.FarmId = FC.FarmId
   LEFT JOIN Crops C on C.CropId = FC.CropId

@@ -12,6 +12,8 @@ BEGIN
           [Farmer] = F.LastName + ', ' + F.FirstName + ' ' + ISNULL(F.MiddleName,''),
           F.MobileNumber,
           F.Avatar,
+          F.IdentityDocumentUrl,
+          F.IdentityDocumentId,
           [FarmerStatus] = F.[Status],
           [FarmerBarangay] = B.Name,
           [FarmerArea] = BA.Name,
@@ -30,6 +32,8 @@ BEGIN
       FA.Address,
       FA.[Status],
       FA.AreaSize,
+      [ImageUrl] = FA.[ImageUrl],
+      [ImageUrlId] = FA.[ImageUrlId],
       F.*
   FROM Farms FA
   LEFT JOIN farmers_cte F ON F.FarmerId = FA.FarmerId

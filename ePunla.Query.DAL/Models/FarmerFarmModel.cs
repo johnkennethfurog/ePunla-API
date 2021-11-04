@@ -1,4 +1,6 @@
-﻿namespace ePunla.Query.DAL.Models
+﻿using System;
+
+namespace ePunla.Query.DAL.Models
 {
     public class FarmerFarmModel
     {
@@ -13,5 +15,8 @@
         public string StreetAddress { get; set; }
         public decimal Lng { get; set; }
         public decimal Lat { get; set; }
+        public string ImageUrl { get; set; }
+        public string ImageUrlId { get; set; }
+        public DateTime ValidationDate { get; set; }
     }
 }
