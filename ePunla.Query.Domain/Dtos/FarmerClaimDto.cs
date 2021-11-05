@@ -17,7 +17,7 @@ namespace ePunla.Query.Domain.Dtos
         public int FarmCropId { get; set; }
         public int FarmId { get; set; }
         public string PhotoId { get; set; }
-        public DateTime ValidationDate { get; set; }
+        public DateTime? ValidationDate { get; set; }
 
         public IEnumerable<ClaimDamageCauseDto> DamageCause { get; set; }
     }
