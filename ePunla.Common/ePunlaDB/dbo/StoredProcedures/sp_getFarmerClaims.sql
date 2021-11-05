@@ -14,7 +14,8 @@ BEGIN
       CL.[Status],
       CL.[Description],
       CL.PhotoUrl,
-      CL.PhotoId
+      CL.PhotoId,
+      CL.ValidationDate
   FROM Claims CL
     LEFT JOIN FarmCrops FC on FC.FarmCropId = CL.FarmCropId
     LEFT JOIN Crops CR ON CR.CropId = FC.CropId

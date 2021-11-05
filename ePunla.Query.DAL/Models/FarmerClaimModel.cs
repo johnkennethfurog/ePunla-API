@@ -15,5 +15,6 @@ namespace ePunla.Query.DAL.Models
         public int FarmCropId { get; set; }
         public int FarmId { get; set; }
         public string PhotoId { get; set; }
+        public DateTime ValidationDate { get; set; }
     }
 }
