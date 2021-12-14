@@ -113,11 +113,15 @@
     <Build Include="dbo\StoredProcedures\sp_updateBarangayStatus.sql" />
     <Build Include="dbo\StoredProcedures\sp_getClaimDetail.sql" />
     <Build Include="dbo\StoredProcedures\sp_setClaimForVerification.sql" />
+    <Build Include="dbo\StoredProcedures\sp_getAdminDashboardData.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="dbo\Data\barangay.sql" />
+    <None Include="dbo\Data\barangay_area.sql" />
+    <None Include="dbo\Data\crops.sql" />
     <None Include="dbo\Data\categories_data.sql" />
     <None Include="dbo\Data\damage_type_data.sql" />
     <None Include="dbo\Data\test_data.sql" />

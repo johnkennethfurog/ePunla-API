@@ -27,6 +27,8 @@ namespace ePunla.Query.Business.Configurations
             CreateMap<CategoryModel, CategoryDto>();
             CreateMap<CropModel, CropDto>();
             CreateMap<ClaimDetailModel, ClaimDetailDto>();
+
+            CreateMap<StatFarmerPerBarangayModel, StatFarmerPerBarangayDto>();
         }
     }
 }

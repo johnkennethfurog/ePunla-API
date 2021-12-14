@@ -17,6 +17,7 @@ namespace ePunla.Query.DAL
         const string SP_GET_FARMS = "sp_getListOfFarms";
         const string SP_GET_CLAIMS = "sp_getListOfClaims";
         const string SP_GET_CLAIM_DETAIL = "sp_getClaimDetail";
+        const string SP_GET_ADMIN_DASHBOARD_DATA = "sp_getAdminDashboardData";
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -75,6 +76,27 @@ namespace ePunla.Query.DAL
 
             var validation = dynamicParameters.GetValidationParamValue();
             return ContextResponse<ClaimDetailModel>.ValidateContextResponse(validation, response);
+        }
+
+        public async Task<ContextResponse<StatDashboardModel>> GetStatistic()
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+
+            var response = (await dbConn.QueryMultipleAsync(SP_GET_ADMIN_DASHBOARD_DATA, commandType: CommandType.StoredProcedure));
+
+            var cropPerBarangay = response.Read<StatCropPerBarangayModel>();
+            var cropStatusPerBarangay = response.Read<StatCropStatusPerBarangayModel>();
+            var farmerPerBarangay = response.Read<StatFarmerPerBarangayModel>();
+
+            var statDashboard = new StatDashboardModel
+            {
+                StatCropPerBarangayModel = cropPerBarangay,
+                StatFarmerPerBarangayModel = farmerPerBarangay,
+                StatCropStatusPerBarangayModel = cropStatusPerBarangay
+            };
+
+            return new ContextResponse<StatDashboardModel>(statDashboard);
         }
     }
 }

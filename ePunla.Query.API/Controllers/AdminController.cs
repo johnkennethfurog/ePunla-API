@@ -39,5 +39,12 @@ namespace ePunla.Query.API.Controllers
             var response = await _mediator.Send(new GetClaimDetailQuery { ClaimId = claimId });
             return ProcessResponse(response);
         }
+
+        [HttpGet("dashboard")]
+        public async Task<IActionResult> GetDashboard()
+        {
+            var response = await _mediator.Send(new GetDashboardItemQuery());
+            return ProcessResponse(response);
+        }
     }
 }

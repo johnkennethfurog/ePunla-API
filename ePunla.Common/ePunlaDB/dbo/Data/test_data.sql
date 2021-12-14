@@ -1,56 +1,56 @@
 -- TEST DATA FOR BARAMGAY
-DECLARE @barangays TABLE
-(
-    [BarangayId] INT,
-    [Name]       NVARCHAR (MAX),
-    [IsActive]   BIT 
-);
+-- DECLARE @barangays TABLE
+-- (
+--     [BarangayId] INT,
+--     [Name]       NVARCHAR (MAX),
+--     [IsActive]   BIT 
+-- );
 
-INSERT INTO @barangays
-SELECT 1, 'Barangay Uno',1
-UNION SELECT 2, 'Barangay Dos',1
-UNION SELECT 3, 'Barangay Tres',1
+-- INSERT INTO @barangays
+-- SELECT 1, 'Barangay Uno',1
+-- UNION SELECT 2, 'Barangay Dos',1
+-- UNION SELECT 3, 'Barangay Tres',1
 
-SET IDENTITY_INSERT [dbo].Barangays ON
+-- SET IDENTITY_INSERT [dbo].Barangays ON
 
-MERGE Barangays as [TARGET]
-USING @barangays as [SOURCE]
-ON ([SOURCE].BarangayId = [TARGET].BarangayId)
-WHEN NOT MATCHED 
-    THEN INSERT (BarangayId,Name,IsActive) 
-    VALUES ([SOURCE].BarangayId,[SOURCE].Name,[SOURCE].IsActive);
+-- MERGE Barangays as [TARGET]
+-- USING @barangays as [SOURCE]
+-- ON ([SOURCE].BarangayId = [TARGET].BarangayId)
+-- WHEN NOT MATCHED 
+--     THEN INSERT (BarangayId,Name,IsActive) 
+--     VALUES ([SOURCE].BarangayId,[SOURCE].Name,[SOURCE].IsActive);
 
-SET IDENTITY_INSERT [dbo].Barangays OFF
+-- SET IDENTITY_INSERT [dbo].Barangays OFF
 
 -- TEST DATA FOR BARANGAY AREA
 
-DECLARE @barangayAreas TABLE
-(
-    [BarangayAreaId] INT,
-    [BarangayId]     INT,
-    [Name]           NVARCHAR (MAX),
-    [IsActive]       BIT
-);
+-- DECLARE @barangayAreas TABLE
+-- (
+--     [BarangayAreaId] INT,
+--     [BarangayId]     INT,
+--     [Name]           NVARCHAR (MAX),
+--     [IsActive]       BIT
+-- );
 
-INSERT INTO @barangayAreas
-SELECT 1, 1 , 'Purok Uno',1
-UNION SELECT 2,1, 'Purok Dos',1
-UNION SELECT 3,1, 'Purok Tres',1
-UNION SELECT 4,2, 'Purok Uno',1
-UNION SELECT 5,2, 'Purok Dos',1
-UNION SELECT 6,3, 'Purok Uno',1
-UNION SELECT 7,3, 'Purok Dos',1
+-- INSERT INTO @barangayAreas
+-- SELECT 1, 1 , 'Purok Uno',1
+-- UNION SELECT 2,1, 'Purok Dos',1
+-- UNION SELECT 3,1, 'Purok Tres',1
+-- UNION SELECT 4,2, 'Purok Uno',1
+-- UNION SELECT 5,2, 'Purok Dos',1
+-- UNION SELECT 6,3, 'Purok Uno',1
+-- UNION SELECT 7,3, 'Purok Dos',1
 
-SET IDENTITY_INSERT [dbo].BarangayAreas ON
+-- SET IDENTITY_INSERT [dbo].BarangayAreas ON
 
-MERGE BarangayAreas as [TARGET]
-USING @barangayAreas as [SOURCE]
-ON ([SOURCE].BarangayAreaId = [TARGET].BarangayAreaId)
-WHEN NOT MATCHED 
-    THEN INSERT (BarangayAreaId,BarangayId,Name,IsActive) 
-    VALUES ([SOURCE].BarangayAreaId,[SOURCE].BarangayId,[SOURCE].Name,[SOURCE].IsActive);
+-- MERGE BarangayAreas as [TARGET]
+-- USING @barangayAreas as [SOURCE]
+-- ON ([SOURCE].BarangayAreaId = [TARGET].BarangayAreaId)
+-- WHEN NOT MATCHED 
+--     THEN INSERT (BarangayAreaId,BarangayId,Name,IsActive) 
+--     VALUES ([SOURCE].BarangayAreaId,[SOURCE].BarangayId,[SOURCE].Name,[SOURCE].IsActive);
 
-SET IDENTITY_INSERT [dbo].BarangayAreas OFF
+-- SET IDENTITY_INSERT [dbo].BarangayAreas OFF
 
 -- TEST DATA FOR FARMERS
 DECLARE @Farmers TABLE 
@@ -97,46 +97,46 @@ WHEN NOT MATCHED
 SET IDENTITY_INSERT [dbo].Farmers OFF
 
 -- TEST DATA FOR CROPS
-DECLARE @crops TABLE
-(
-    [CropId]     INT,
-    [CategoryId] INT,
-    [Duration]   INT,
-    [Name]       NVARCHAR (200)
-);
+-- DECLARE @crops TABLE
+-- (
+--     [CropId]     INT,
+--     [CategoryId] INT,
+--     [Duration]   INT,
+--     [Name]       NVARCHAR (200)
+-- );
 
-INSERT INTO @crops
-SELECT 1, 1, 50, 'Kalabasa'
-UNION SELECT 2, 1, 25, 'Upo'
-UNION SELECT 3, 1, 30, 'Ampalaya'
-UNION SELECT 4, 1, 40, 'Patola'
-UNION SELECT 5, 1, 15, 'Okra'
-UNION SELECT 6, 1, 60, 'Labanos'
-UNION SELECT 7, 1, 60, 'Patatas'
-UNION SELECT 8, 1, 60, 'Sigarilyas'
-UNION SELECT 9, 1, 60, 'Kangkong'
-UNION SELECT 10, 1, 60, 'Sitaw'
+-- INSERT INTO @crops
+-- SELECT 1, 1, 50, 'Kalabasa'
+-- UNION SELECT 2, 1, 25, 'Upo'
+-- UNION SELECT 3, 1, 30, 'Ampalaya'
+-- UNION SELECT 4, 1, 40, 'Patola'
+-- UNION SELECT 5, 1, 15, 'Okra'
+-- UNION SELECT 6, 1, 60, 'Labanos'
+-- UNION SELECT 7, 1, 60, 'Patatas'
+-- UNION SELECT 8, 1, 60, 'Sigarilyas'
+-- UNION SELECT 9, 1, 60, 'Kangkong'
+-- UNION SELECT 10, 1, 60, 'Sitaw'
 
-UNION SELECT 11, 2, 25, 'Mansanas'
-UNION SELECT 12, 2, 30, 'Buko'
-UNION SELECT 13, 2, 40, 'Peras'
-UNION SELECT 14, 2, 15, 'Orange'
-UNION SELECT 15, 2, 60, 'Ubas'
-UNION SELECT 16, 2, 60, 'Papaya'
-UNION SELECT 17, 2, 60, 'Ponkan'
-UNION SELECT 18, 2, 60, 'Dalandan'
-UNION SELECT 19, 2, 60, 'Mangga'
+-- UNION SELECT 11, 2, 25, 'Mansanas'
+-- UNION SELECT 12, 2, 30, 'Buko'
+-- UNION SELECT 13, 2, 40, 'Peras'
+-- UNION SELECT 14, 2, 15, 'Orange'
+-- UNION SELECT 15, 2, 60, 'Ubas'
+-- UNION SELECT 16, 2, 60, 'Papaya'
+-- UNION SELECT 17, 2, 60, 'Ponkan'
+-- UNION SELECT 18, 2, 60, 'Dalandan'
+-- UNION SELECT 19, 2, 60, 'Mangga'
 
-SET IDENTITY_INSERT [dbo].Crops ON
+-- SET IDENTITY_INSERT [dbo].Crops ON
 
-MERGE Crops as [TARGET]
-USING @crops as [SOURCE]
-ON ([SOURCE].CropId = [TARGET].CropId)
-WHEN NOT MATCHED 
-    THEN INSERT (CropId,CategoryId,Duration,Name) 
-    VALUES ([SOURCE].CropId,[SOURCE].CategoryId,[SOURCE].Duration,[SOURCE].Name);
+-- MERGE Crops as [TARGET]
+-- USING @crops as [SOURCE]
+-- ON ([SOURCE].CropId = [TARGET].CropId)
+-- WHEN NOT MATCHED 
+--     THEN INSERT (CropId,CategoryId,Duration,Name) 
+--     VALUES ([SOURCE].CropId,[SOURCE].CategoryId,[SOURCE].Duration,[SOURCE].Name);
 
-SET IDENTITY_INSERT [dbo].Crops OFF
+-- SET IDENTITY_INSERT [dbo].Crops OFF
 
 -- -- TEST DATA FOR FARMS
 DECLARE @farms TABLE
