@@ -8,5 +8,6 @@ namespace ePunla.Query.Domain.Dtos
         public IEnumerable<StatCropPerBarangayDto> StatCropPerBarangayDto { get; set; }
         public IEnumerable<StatCropStatusPerBarangayDto> StatCropStatusPerBarangayDto { get; set; }
         public IEnumerable<StatFarmerPerBarangayDto> StatFarmerPerBarangayDto { get; set; }
+        public StatCountDto StatCountDto { get; set; }
     }
 }

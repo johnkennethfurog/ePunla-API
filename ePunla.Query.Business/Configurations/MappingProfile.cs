@@ -29,6 +29,7 @@ namespace ePunla.Query.Business.Configurations
             CreateMap<ClaimDetailModel, ClaimDetailDto>();
 
             CreateMap<StatFarmerPerBarangayModel, StatFarmerPerBarangayDto>();
+            CreateMap<StatCountModel, StatCountDto>();
         }
     }
 }

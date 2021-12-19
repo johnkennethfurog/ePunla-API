@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using ePunla.Common.Utilitites.DbConnect;
@@ -88,12 +89,14 @@ namespace ePunla.Query.DAL
             var cropPerBarangay = response.Read<StatCropPerBarangayModel>();
             var cropStatusPerBarangay = response.Read<StatCropStatusPerBarangayModel>();
             var farmerPerBarangay = response.Read<StatFarmerPerBarangayModel>();
+            var statCountModel = response.Read<StatCountModel>().FirstOrDefault();
 
             var statDashboard = new StatDashboardModel
             {
                 StatCropPerBarangayModel = cropPerBarangay,
                 StatFarmerPerBarangayModel = farmerPerBarangay,
-                StatCropStatusPerBarangayModel = cropStatusPerBarangay
+                StatCropStatusPerBarangayModel = cropStatusPerBarangay,
+                StatCountModel = statCountModel
             };
 
             return new ContextResponse<StatDashboardModel>(statDashboard);

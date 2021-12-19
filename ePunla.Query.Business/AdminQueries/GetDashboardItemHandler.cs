@@ -34,7 +34,7 @@ namespace ePunla.Query.Business.AdminQueries
 
 
             var farmerPerBarangayDto = _mapper.Map<IEnumerable<StatFarmerPerBarangayDto>>(statDashboardModel.StatFarmerPerBarangayModel);
-
+            var statCountDto = _mapper.Map<StatCountDto>(statDashboardModel.StatCountModel);
 
 
            
@@ -111,7 +111,8 @@ namespace ePunla.Query.Business.AdminQueries
             {
                 StatCropStatusPerBarangayDto = cropPerStatusPerBarangayDto,
                 StatFarmerPerBarangayDto = farmerPerBarangayDto,
-                StatCropPerBarangayDto = cropPerBarangayDto
+                StatCropPerBarangayDto = cropPerBarangayDto,
+                StatCountDto = statCountDto
             };
 
             return new MediatrResponse<StatDashboardDto>(statDashboardDto);
