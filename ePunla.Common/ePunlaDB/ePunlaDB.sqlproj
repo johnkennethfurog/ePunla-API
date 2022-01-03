@@ -66,6 +66,7 @@
     <Folder Include="dbo\Data" />
     <Folder Include="dbo\PostDeployment" />
     <Folder Include="dbo\Types" />
+    <Folder Include="StoredProcedures\" />
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Delete Files="$(BaseIntermediateOutputPath)\project.assets.json" />
@@ -114,6 +115,7 @@
     <Build Include="dbo\StoredProcedures\sp_getClaimDetail.sql" />
     <Build Include="dbo\StoredProcedures\sp_setClaimForVerification.sql" />
     <Build Include="dbo\StoredProcedures\sp_getAdminDashboardData.sql" />
+    <Build Include="StoredProcedures\sp_getFarmerDashboard.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

@@ -47,5 +47,12 @@ namespace ePunla.Query.API.Controllers
             var response = await _mediator.Send(new GetFarmersCropQuery { FarmerId = GetUserId(), SearchField = SearchField });
             return ProcessResponse(response);
         }
+
+        [HttpGet("dashboard")]
+        public async Task<IActionResult> GetDashboard()
+        {
+            var response = await _mediator.Send(new GetFarmerDashboardQuery());
+            return ProcessResponse(response);
+        }
     }
 }

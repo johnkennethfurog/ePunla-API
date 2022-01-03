@@ -22,6 +22,7 @@ namespace ePunla.Query.DAL
         const string SP_GET_CLAIM_CAUSES = "sp_getClaimCauses";
         const string SP_GET_FARMER_CLAIMS = "sp_getFarmerClaims";
 
+        const string SP_GET_FARMER_DASHBOARD = "sp_getFarmerDashboard";
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -95,6 +96,15 @@ namespace ePunla.Query.DAL
 
             var validation = dynamicParameters.GetValidationParamValue();
             return ContextResponse<FarmerModel>.ValidateContextResponse(validation, response);
+        }
+
+        public async Task<ContextResponse<IEnumerable<FarmerDashboardModel>>> GetDashboard()
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var response = await dbConn.QueryAsync<FarmerDashboardModel>(SP_GET_FARMER_DASHBOARD, commandType: CommandType.StoredProcedure);
+
+            return new ContextResponse<IEnumerable<FarmerDashboardModel>>(response);
         }
     }
 }
