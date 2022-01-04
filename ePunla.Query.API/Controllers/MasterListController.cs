@@ -20,7 +20,6 @@ namespace ePunla.Query.API.Controllers
             _mediator = mediator;
         }
 
-        [AllowAnonymous]
         [HttpGet("barangays")]
         public async Task<IActionResult> GetFarms()
         {
@@ -28,7 +27,6 @@ namespace ePunla.Query.API.Controllers
             return ProcessResponse(response);
         }
 
-        [AllowAnonymous]
         [HttpGet("categories")]
         public async Task<IActionResult> GetCategories()
         {
@@ -36,7 +34,6 @@ namespace ePunla.Query.API.Controllers
             return ProcessResponse(response);
         }
 
-        [AllowAnonymous]
         [HttpPost("crops")]
         public async Task<IActionResult> GetCrops([FromBody] PageRequestDto<SearchAdminCropFieldsDto> searchRequest)
         {

@@ -3,12 +3,14 @@ using ePunla.Common.Utilitites.BaseClass;
 using ePunla.Query.Business.AdminQueries;
 using ePunla.Query.Domain.Dtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ePunla.Query.API.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class AdminController : BaseController
     {

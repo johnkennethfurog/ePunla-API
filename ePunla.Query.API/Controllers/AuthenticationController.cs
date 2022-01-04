@@ -26,6 +26,13 @@ namespace ePunla.Query.API.Controllers
             return ProcessResponse(response);
         }
 
+        [HttpPost("admin")]
+        public async Task<IActionResult> AdminSignin([FromBody] SigninAdminDto signinAdminDto)
+        {
+            var response = await _mediator.Send(new SigninAdminQuery { SigninAdminDto = signinAdminDto });
+            return ProcessResponse(response);
+        }
+
         [HttpGet("ValidateMobileNumber/{mobileNumber}")]
         public async Task<IActionResult> ValidateMobileNumber(string mobileNumber)
         {
