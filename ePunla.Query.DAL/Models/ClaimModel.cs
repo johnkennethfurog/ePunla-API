@@ -13,6 +13,7 @@ namespace ePunla.Query.DAL.Models
         public string PhotoUrl { get; set; }
         public string Remarks { get; set; }
         public DateTime? ValidationDate { get; set; }
+        public string ReferenceNumber { get; set; }
 
         public string Farm { get; set; }
         public string Address { get; set; }

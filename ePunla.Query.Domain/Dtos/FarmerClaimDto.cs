@@ -13,6 +13,7 @@ namespace ePunla.Query.Domain.Dtos
         public string Status { get; set; }
         public string Description { get; set; }
         public string PhotoUrl { get; set; }
+        public string ReferenceNumber { get; set; }
 
         public int FarmCropId { get; set; }
         public int FarmId { get; set; }

@@ -17,6 +17,7 @@ BEGIN
       C.PhotoUrl,
       C.Remarks,
       C.ValidationDate,
+      C.ReferenceNumber,
 
 
       [Farm] = F.Name,

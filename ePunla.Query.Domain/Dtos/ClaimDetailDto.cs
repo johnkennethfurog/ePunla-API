@@ -21,6 +21,7 @@ namespace ePunla.Query.Domain.Dtos
         public string Crop { get; set; }
         public DateTime DatePlanted { get; set; }
         public int CropAreaSize { get; set; }
+        public string ReferenceNumber { get; set; }
 
         // FARM DETAIL
         public string Farm { get; set; }

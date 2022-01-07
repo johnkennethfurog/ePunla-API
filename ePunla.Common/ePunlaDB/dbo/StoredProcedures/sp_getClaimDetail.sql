@@ -21,6 +21,7 @@ BEGIN
           C.PhotoUrl,
           C.Remarks,
           C.ValidationDate,
+          C.ReferenceNumber,
 
           -- CROP DETAIL
           [Crop] = CR.Name,
