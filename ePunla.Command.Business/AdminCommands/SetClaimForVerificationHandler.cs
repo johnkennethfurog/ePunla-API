@@ -35,6 +35,8 @@ namespace ePunla.Command.Business.AdminCommands
                         return new MediatrResponse(new ErrorMessage("Cannot validate claim, claim is already denied"));
                     case ErrorCode.ClaimAlreadyForVerification:
                         return new MediatrResponse(new ErrorMessage("Cannot validate claim, claim is already for verification"));
+                    case ErrorCode.ClaimStatusIsApproved:
+                        return new MediatrResponse(new ErrorMessage("Cannot validate claim, claim is already approved"));
                 }
             }
 

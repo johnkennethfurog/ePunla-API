@@ -117,6 +117,7 @@
     <Build Include="dbo\StoredProcedures\sp_getAdminDashboardData.sql" />
     <Build Include="StoredProcedures\sp_getFarmerDashboard.sql" />
     <Build Include="StoredProcedures\sp_authenticateAdmin.sql" />
+    <Build Include="StoredProcedures\sp_setClaimAsClaimed.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

@@ -7,7 +7,8 @@ namespace ePunla.Command.DAL.interfaces
     public interface IAdminContext
     {
         Task<ContextResponse> ValidateFarm(int FarmId, ValidateFarmDto validateFarmDto);
-        Task<ContextResponse> ValidateClaim(int ClaimId, ValidateClaimDto validateClaimDto);
+        Task<ContextResponse> ValidateClaim(int ClaimId, string ReferenceNumber, ValidateClaimDto validateClaimDto);
         Task<ContextResponse> SetClaimForVerification(int ClaimId);
+        Task<ContextResponse> SetClaimAsClaimed(int ClaimId);
     }
 }

@@ -5,6 +5,7 @@
         Pending,
         Claimed,
         Denied,
-        ForVerification
+        ForVerification,
+        Approved
     }
 }

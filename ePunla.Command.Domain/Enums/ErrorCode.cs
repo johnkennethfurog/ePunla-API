@@ -35,5 +35,6 @@
         ClaimAlreadyClaimed = 7005,
         ClaimAlreadyDenied = 7006,
         ClaimStatusIsPending = 7007,
+        ClaimStatusIsApproved = 7008,
     }
 }

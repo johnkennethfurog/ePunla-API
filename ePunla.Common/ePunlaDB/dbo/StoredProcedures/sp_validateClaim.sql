@@ -2,6 +2,7 @@ CREATE PROCEDURE [dbo].[sp_validateClaim]
   @claimId INT,
   @isApproved BIT,
   @remarks NVARCHAR(500),
+  @referenceNumber NVARCHAR(23),
   @Validation INT OUTPUT
 AS
 BEGIN
@@ -9,11 +10,12 @@ BEGIN
   DECLARE @ClaimedLiteral NVARCHAR(30) = 'Claimed';
   DECLARE @DeniedLiteral NVARCHAR(30) = 'Denied';
   DECLARE @PendingLiteral NVARCHAR(30) = 'Pending';
+  DECLARE @ApprovedLiteral NVARCHAR(30) = 'Approved';
 
   DECLARE @claimStatus NVARCHAR(30);
   SELECT @claimStatus = [Status] FROM Claims WHERE ClaimId = @claimId
 
--- CHECK IF UPDATING AND CLAIM EXIST
+-- CHECK IF CLAIM EXIST
   IF NOT EXISTS (SELECT TOP 1 * FROM Claims WHERE ClaimId = @claimId)
     BEGIN 
       SET @Validation = 7001;
@@ -26,7 +28,7 @@ BEGIN
     END
 
   -- CHECK IF CLAIM STATUS IS ALREADY DENIED
-   ELSE IF @claimStatus = @DeniedLiteral
+  ELSE IF @claimStatus = @DeniedLiteral
     BEGIN
       SET @Validation = 7006;
     END
@@ -36,13 +38,21 @@ BEGIN
     BEGIN 
       SET @Validation = 7007;
     END
+
+  -- CHECK IF CLAIM STATUS IS ALREADY APPROVED
+  ELSE IF @claimStatus = @ApprovedLiteral
+    BEGIN
+      SET @Validation = 7008;
+    END
+
   ELSE
     BEGIN
       UPDATE Claims SET 
         [Remarks] = @remarks,
         [ValidationDate] = GETDATE(),
+        [ReferenceNumber] = @referenceNumber,
         [Status] =  CASE @isApproved 
-                      WHEN 1 THEN @ClaimedLiteral
+                      WHEN 1 THEN @ApprovedLiteral
                       WHEN 0 THEN @DeniedLiteral
                     END
       WHERE ClaimId = @claimId

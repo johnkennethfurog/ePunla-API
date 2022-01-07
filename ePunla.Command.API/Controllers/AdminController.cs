@@ -37,9 +37,16 @@ namespace ePunla.Command.API.Controllers
         }
 
         [HttpPut("claims/{claimId}/setforverification")]
-        public async Task<IActionResult> ValidateClaim(int claimId)
+        public async Task<IActionResult> SetForVerification(int claimId)
         {
             var response = await _mediator.Send(new SetClaimForVerificationCommand { ClaimId = claimId });
+            return ProcessResponse(response);
+        }
+
+        [HttpPut("claims/{claimId}/setasclaimed")]
+        public async Task<IActionResult> SetAsClaimed(int claimId)
+        {
+            var response = await _mediator.Send(new SetClaimAsClaimedCommand { ClaimId = claimId });
             return ProcessResponse(response);
         }
     }
