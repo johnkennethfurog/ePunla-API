@@ -27,6 +27,7 @@ BEGIN
           [Crop] = CR.Name,
           [DatePlanted] = FC.PlantedDate,
           [CropAreaSize] = FC.AreaSize,
+          FC.EstimatedHarvestDate,
 
           -- FARM DETAIL
           [Farm] = F.Name,

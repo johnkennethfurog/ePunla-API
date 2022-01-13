@@ -30,6 +30,7 @@ namespace ePunla.Query.Business.AdminQueries
 
             var cropPerBarangayModel = statDashboardModel.StatCropPerBarangayModel;
             var cropStatusPerBarangayModel = statDashboardModel.StatCropStatusPerBarangayModel;
+            var farmersPerBarangayModel = statDashboardModel.FarmerPerBarangayModel;
 
 
 
@@ -106,13 +107,37 @@ namespace ePunla.Query.Business.AdminQueries
                 });
             });
 
+            // get farmers per barangay
+            var groupedFarmersPerBarangay = farmersPerBarangayModel
+                .GroupBy(b => b.BarangayId)
+                .Select(b =>
+                            new
+                            {
+                                b.First().Barangay,
+                                b.First().BarangayId,
+                                Farmers = b.Select(c => new { c.FirstName, c.LastName, c.MobileNumber, c.StreetAddress, c.FarmerId })
+                            });
+            var groupedFarmersPerBarangayDto = new List<FarmerPerBarangayDto>();
+            groupedFarmersPerBarangay.ToList().ForEach(x =>
+            {
+                var farmerPerBarangayDto = new FarmerPerBarangayDto
+                {
+                    Barangay = x.Barangay,
+                    BarangayId = x.BarangayId,
+                    Farmers = x.Farmers as IEnumerable<FarmerPerBarangay>
+                };
+
+                groupedFarmersPerBarangayDto.Add(farmerPerBarangayDto);
+            });
+
 
             var statDashboardDto = new StatDashboardDto
             {
                 StatCropStatusPerBarangayDto = cropPerStatusPerBarangayDto,
                 StatFarmerPerBarangayDto = farmerPerBarangayDto,
                 StatCropPerBarangayDto = cropPerBarangayDto,
-                StatCountDto = statCountDto
+                StatCountDto = statCountDto,
+                FarmerPerBarangayDto = groupedFarmersPerBarangayDto
             };
 
             return new MediatrResponse<StatDashboardDto>(statDashboardDto);

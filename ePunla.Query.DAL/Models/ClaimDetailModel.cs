@@ -18,6 +18,7 @@ namespace ePunla.Query.DAL.Models
         public DateTime DatePlanted { get; set; }
         public int CropAreaSize { get; set; }
         public string ReferenceNumber { get; set; }
+        public DateTime EstimatedHarvestDate { get; set; }
 
         // FARM DETAIL
         public string Farm { get; set; }

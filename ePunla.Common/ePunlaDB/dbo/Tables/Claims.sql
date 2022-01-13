@@ -8,7 +8,7 @@ CREATE TABLE [dbo].[Claims] (
     [PhotoUrl]       NVARCHAR (100) NULL,
     [PhotoId]        NVARCHAR(100)  NULL,
     [Status]         NVARCHAR (20)  NOT NULL,
-    [ReferenceNumber]         NVARCHAR (20)  NULL,
+    [ReferenceNumber]         NVARCHAR (30)  NULL,
     [Remarks]        NVARCHAR (500) NULL,
     [ValidationDate] DATETIME2 (7)  NULL,
     CONSTRAINT [PK_Claims] PRIMARY KEY CLUSTERED ([ClaimId] ASC),

@@ -8,6 +8,7 @@ namespace ePunla.Query.DAL.Models
         public IEnumerable<StatCropPerBarangayModel> StatCropPerBarangayModel { get; set; }
         public IEnumerable<StatCropStatusPerBarangayModel> StatCropStatusPerBarangayModel { get; set; }
         public IEnumerable<StatFarmerPerBarangayModel> StatFarmerPerBarangayModel { get; set; }
+        public IEnumerable<FarmerPerBarangayModel> FarmerPerBarangayModel { get; set; }
         public StatCountModel StatCountModel { get; set; }
     }
 }

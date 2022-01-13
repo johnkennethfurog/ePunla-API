@@ -86,17 +86,19 @@ namespace ePunla.Query.DAL
 
             var response = (await dbConn.QueryMultipleAsync(SP_GET_ADMIN_DASHBOARD_DATA, commandType: CommandType.StoredProcedure));
 
-            var cropPerBarangay = response.Read<StatCropPerBarangayModel>();
-            var cropStatusPerBarangay = response.Read<StatCropStatusPerBarangayModel>();
-            var farmerPerBarangay = response.Read<StatFarmerPerBarangayModel>();
+            var cropPerBarangayStat = response.Read<StatCropPerBarangayModel>();
+            var cropStatusPerBarangayStat = response.Read<StatCropStatusPerBarangayModel>();
+            var farmerPerBarangayStat = response.Read<StatFarmerPerBarangayModel>();
+            var farmersPerBarangay = response.Read<FarmerPerBarangayModel>();
             var statCountModel = response.Read<StatCountModel>().FirstOrDefault();
 
             var statDashboard = new StatDashboardModel
             {
-                StatCropPerBarangayModel = cropPerBarangay,
-                StatFarmerPerBarangayModel = farmerPerBarangay,
-                StatCropStatusPerBarangayModel = cropStatusPerBarangay,
-                StatCountModel = statCountModel
+                StatCropPerBarangayModel = cropPerBarangayStat,
+                StatFarmerPerBarangayModel = farmerPerBarangayStat,
+                StatCropStatusPerBarangayModel = cropStatusPerBarangayStat,
+                StatCountModel = statCountModel,
+                FarmerPerBarangayModel = farmersPerBarangay
             };
 
             return new ContextResponse<StatDashboardModel>(statDashboard);

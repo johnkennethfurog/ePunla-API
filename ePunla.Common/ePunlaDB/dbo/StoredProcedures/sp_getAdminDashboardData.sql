@@ -21,6 +21,17 @@ SELECT B.Name as 'Barangay',B.BarangayId, COUNT(F.FarmerId) AS 'FarmerCount'  FR
 LEFT JOIN Barangays B ON B.BarangayId = F.BarangayId
 GROUP BY B.BarangayId, B.Name
 
+-- FOR NUMBER OF FARMER PER BARANGAY
+SELECT 
+    F.FirstName, 
+    F.LastName, 
+    F.StreetAddress, 
+    [Barangay] = B.Name, 
+    MobileNumber = '+63' + F.MobileNumber,
+    B.BarangayId, 
+    F.FarmerId
+FROM Farmers F
+LEFT JOIN Barangays B ON B.BarangayId = F.BarangayId
 
 DECLARE @ActiveFarmerCount INT;
 DECLARE @FarmCount INT;

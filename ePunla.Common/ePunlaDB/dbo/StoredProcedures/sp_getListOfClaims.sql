@@ -46,6 +46,7 @@ BEGIN
       F.Name LIKE @searchText + '%' OR 
       F.Address LIKE @searchText + '%' OR 
       FA.FirstName LIKE  @searchText + '%' OR 
+      C.ReferenceNumber LIKE  @searchText + '%' OR 
       FA.LastName LIKE  @searchText + '%'
   ) AND
   (

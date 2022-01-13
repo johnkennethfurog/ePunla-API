@@ -21,7 +21,7 @@ namespace ePunla.Command.Business.AdminCommands
         public async Task<MediatrResponse> Handle(ValidateClaimCommand request, CancellationToken cancellationToken)
         {
 
-            var referenceNumber = new DateTime().ToString("yyyyMMddhhmmss") + "-" + request.ClaimId.ToString("00000000");
+            var referenceNumber = DateTime.Now.ToString("yyyyMMddhhmmss") + "-" + request.ClaimId.ToString("00000000");
             var contextResponse = await _adminContext.ValidateClaim(request.ClaimId, referenceNumber, request.ValidateClaimDto);
 
             if (!contextResponse.IsValid)
