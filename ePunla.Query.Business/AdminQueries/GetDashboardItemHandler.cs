@@ -120,11 +120,23 @@ namespace ePunla.Query.Business.AdminQueries
             var groupedFarmersPerBarangayDto = new List<FarmerPerBarangayDto>();
             groupedFarmersPerBarangay.ToList().ForEach(x =>
             {
+                var farmersPerBarangay = new List<FarmerPerBarangay>();
+                x.Farmers.ToList().ForEach(x =>
+                {
+                    farmersPerBarangay.Add(new FarmerPerBarangay
+                    {
+                        FarmerId = x.FarmerId,
+                        FirstName = x.FirstName,
+                        LastName = x.LastName,
+                        MobileNumber = x.MobileNumber
+                    });
+                });
+
                 var farmerPerBarangayDto = new FarmerPerBarangayDto
                 {
                     Barangay = x.Barangay,
                     BarangayId = x.BarangayId,
-                    Farmers = x.Farmers as IEnumerable<FarmerPerBarangay>
+                    Farmers = farmersPerBarangay
                 };
 
                 groupedFarmersPerBarangayDto.Add(farmerPerBarangayDto);

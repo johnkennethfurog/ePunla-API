@@ -26,8 +26,8 @@ SELECT
     F.FirstName, 
     F.LastName, 
     F.StreetAddress, 
-    [Barangay] = B.Name, 
-    MobileNumber = '+63' + F.MobileNumber,
+    B.Name as 'Barangay', 
+    MobileNumber = F.MobileNumber,
     B.BarangayId, 
     F.FarmerId
 FROM Farmers F
