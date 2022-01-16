@@ -32,6 +32,7 @@ namespace ePunla.Query.Business.Configurations
             CreateMap<StatCountModel, StatCountDto>();
 
             CreateMap<FarmerDashboardModel, FarmerDashboardCropStatDto>();
+            CreateMap<CropsOccuranceModel, CropsOccuranceDto>();
         }
     }
 }

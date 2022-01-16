@@ -48,5 +48,12 @@ namespace ePunla.Query.API.Controllers
             var response = await _mediator.Send(new GetDashboardItemQuery());
             return ProcessResponse(response);
         }
+
+        [HttpPost("cropsoccurance")]
+        public async Task<IActionResult> GetCropsOccurance([FromBody] SearchCropsOccuranceDto request)
+        {
+            var response = await _mediator.Send(new GetCropsOccuranceQuery { CropsOccuranceLookupFields = request });
+            return ProcessResponse(response);
+        }
     }
 }

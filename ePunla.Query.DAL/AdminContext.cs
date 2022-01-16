@@ -19,6 +19,7 @@ namespace ePunla.Query.DAL
         const string SP_GET_CLAIMS = "sp_getListOfClaims";
         const string SP_GET_CLAIM_DETAIL = "sp_getClaimDetail";
         const string SP_GET_ADMIN_DASHBOARD_DATA = "sp_getAdminDashboardData";
+        const string SP_GET_CROPS_OCCURANCE = "sp_getCropsOccurance";
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -102,6 +103,19 @@ namespace ePunla.Query.DAL
             };
 
             return new ContextResponse<StatDashboardModel>(statDashboard);
+        }
+
+        public async Task<ContextResponse<IEnumerable<CropsOccuranceModel>>> GetCropsOccurance(SearchCropsOccuranceDto CropsOccuranceLookupFields)
+        {
+
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@PlantedFrom", CropsOccuranceLookupFields?.PlantedFrom);
+            dynamicParameters.Add("@PlantedTo", CropsOccuranceLookupFields?.PlantedTo);
+
+            var response = (await dbConn.QueryAsync<CropsOccuranceModel>(SP_GET_CROPS_OCCURANCE, dynamicParameters, commandType: CommandType.StoredProcedure));
+            return new ContextResponse<IEnumerable<CropsOccuranceModel>>(response);
         }
     }
 }
