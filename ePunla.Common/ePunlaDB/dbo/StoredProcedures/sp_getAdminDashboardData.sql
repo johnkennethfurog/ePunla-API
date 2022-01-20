@@ -29,7 +29,8 @@ SELECT
     B.Name as 'Barangay', 
     MobileNumber = F.MobileNumber,
     B.BarangayId, 
-    F.FarmerId
+    F.FarmerId,
+    F.RegistrationDate
 FROM Farmers F
 LEFT JOIN Barangays B ON B.BarangayId = F.BarangayId
 

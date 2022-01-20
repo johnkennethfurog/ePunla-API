@@ -32,6 +32,7 @@ BEGIN
       FA.Address,
       FA.[Status],
       FA.AreaSize,
+      FA.ValidationDate,
       [ImageUrl] = FA.[ImageUrl],
       [ImageUrlId] = FA.[ImageUrlId],
       F.*

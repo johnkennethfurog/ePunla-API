@@ -1,4 +1,6 @@
-﻿namespace ePunla.Query.Domain.Dtos
+﻿using System;
+
+namespace ePunla.Query.Domain.Dtos
 {
     public class FarmDto
     {
@@ -11,6 +13,7 @@
         public decimal AreaSize { get; set; }
         public string ImageUrl { get; set; }
         public string ImageUrlId { get; set; }
+        public DateTime ValidationDate { get; set; }
 
         public int FarmerId { get; set; }
         public string Farmer { get; set; }
@@ -20,6 +23,7 @@
         public string FarmerBarangay { get; set; }
         public string FarmerArea { get; set; }
         public string FarmerAddress { get; set; }
+       
 
 
         public string IdentityDocumentUrl { get; set; }

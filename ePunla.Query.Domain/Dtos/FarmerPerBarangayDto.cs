@@ -17,5 +17,6 @@ namespace ePunla.Query.Domain.Dtos
         public string StreetAddress { get; set; }
         public string MobileNumber { get; set; }
         public int FarmerId { get; set; }
+        public DateTime RegistrationDate { get; set; }
     }
 }
