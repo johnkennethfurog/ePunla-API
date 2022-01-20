@@ -10,5 +10,6 @@ namespace ePunla.Query.DAL.Models
         public string MobileNumber { get; set; }
         public int BarangayId { get; set; }
         public int FarmerId { get; set; }
+        public DateTime? RegistrationDate { get; set; }
     }
 }

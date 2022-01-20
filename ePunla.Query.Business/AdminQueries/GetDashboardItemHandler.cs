@@ -115,7 +115,7 @@ namespace ePunla.Query.Business.AdminQueries
                             {
                                 b.First().Barangay,
                                 b.First().BarangayId,
-                                Farmers = b.Select(c => new { c.FirstName, c.LastName, c.MobileNumber, c.StreetAddress, c.FarmerId })
+                                Farmers = b.Select(c => new { c.FirstName, c.LastName, c.MobileNumber, c.StreetAddress, c.FarmerId , c.RegistrationDate})
                             });
             var groupedFarmersPerBarangayDto = new List<FarmerPerBarangayDto>();
             groupedFarmersPerBarangay.ToList().ForEach(x =>
@@ -128,7 +128,8 @@ namespace ePunla.Query.Business.AdminQueries
                         FarmerId = x.FarmerId,
                         FirstName = x.FirstName,
                         LastName = x.LastName,
-                        MobileNumber = x.MobileNumber
+                        MobileNumber = x.MobileNumber,
+                        RegistrationDate = x.RegistrationDate
                     });
                 });
 
