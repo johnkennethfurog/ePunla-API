@@ -13,7 +13,7 @@ namespace ePunla.Query.Domain.Dtos
         public decimal AreaSize { get; set; }
         public string ImageUrl { get; set; }
         public string ImageUrlId { get; set; }
-        public DateTime ValidationDate { get; set; }
+        public DateTime? ValidationDate { get; set; }
 
         public int FarmerId { get; set; }
         public string Farmer { get; set; }

@@ -13,7 +13,7 @@ namespace ePunla.Query.DAL.Models
         public decimal AreaSize { get; set; }
         public string IdentityDocumentUrl { get; set; }
         public string IdentityDocumentId { get; set; }
-        public DateTime ValidationDate { get; set; }
+        public DateTime? ValidationDate { get; set; }
 
         public int FarmerId { get; set; }
         public string Farmer { get; set; }
