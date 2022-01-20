@@ -14,7 +14,7 @@ namespace ePunla.Query.Domain.Dtos
         public DateTime PlantedDate { get; set; }
         public decimal AreaSize { get; set; }
         public string Status { get; set; }
-        public DateTime HarvestDate { get; set; }
-        public DateTime ActionDate { get; set; }
+        public DateTime? HarvestDate { get; set; }
+        public DateTime? ActionDate { get; set; }
     }
 }
