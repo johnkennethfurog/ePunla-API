@@ -129,7 +129,8 @@ namespace ePunla.Query.Business.AdminQueries
                         FirstName = x.FirstName,
                         LastName = x.LastName,
                         MobileNumber = x.MobileNumber,
-                        RegistrationDate = x.RegistrationDate
+                        RegistrationDate = x.RegistrationDate,
+                        StreetAddress = x.StreetAddress
                     });
                 });
 
