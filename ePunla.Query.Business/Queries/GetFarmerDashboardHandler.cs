@@ -44,7 +44,7 @@ namespace ePunla.Query.Business.Queries
             {
                 Damaged = topDamagedDto,
                 Planted = topPlantedDto,
-                Harvested = topDamagedDto
+                Harvested = topHarvestedDto
 
             });
         }
