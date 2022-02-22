@@ -119,6 +119,7 @@
     <Build Include="StoredProcedures\sp_authenticateAdmin.sql" />
     <Build Include="StoredProcedures\sp_setClaimAsClaimed.sql" />
     <Build Include="dbo\StoredProcedures\sp_getCropsOccurance.sql" />
+    <Build Include="dbo\StoredProcedures\sp_getAdminProfile.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PostDeployment\Script.PostDeployment.sql" />

@@ -20,6 +20,7 @@ namespace ePunla.Query.DAL
         const string SP_GET_CLAIM_DETAIL = "sp_getClaimDetail";
         const string SP_GET_ADMIN_DASHBOARD_DATA = "sp_getAdminDashboardData";
         const string SP_GET_CROPS_OCCURANCE = "sp_getCropsOccurance";
+        const string SP_GET_ADMIN_PROFILE = "sp_getAdminProfile";
 
         private readonly IDatabaseConnection _dbConnection;
 
@@ -116,6 +117,20 @@ namespace ePunla.Query.DAL
 
             var response = (await dbConn.QueryAsync<CropsOccuranceModel>(SP_GET_CROPS_OCCURANCE, dynamicParameters, commandType: CommandType.StoredProcedure));
             return new ContextResponse<IEnumerable<CropsOccuranceModel>>(response);
+        }
+
+        public async Task<ContextResponse<AdminProfileModel>> GetAdminProfile(int userId)
+        {
+            using var dbConn = await _dbConnection.CreateConnectionAsync();
+
+            var dynamicParameters = new DynamicParameters();
+            dynamicParameters.Add("@userId", userId);
+            dynamicParameters.AddValidationParam();
+
+            var response = await dbConn.QueryFirstOrDefaultAsync<AdminProfileModel>(SP_GET_ADMIN_PROFILE, dynamicParameters, commandType: CommandType.StoredProcedure);
+
+            var validation = dynamicParameters.GetValidationParamValue();
+            return ContextResponse<AdminProfileModel>.ValidateContextResponse(validation, response);
         }
     }
 }

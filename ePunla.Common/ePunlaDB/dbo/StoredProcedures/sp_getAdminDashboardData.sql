@@ -7,6 +7,7 @@ BEGIN
   LEFT JOIN Farms F ON F.FarmId = FC.FarmId
   LEFT JOIN Barangays B ON B.BarangayId = F.BarangayId
   LEFT JOIN Crops C ON C.CropId = FC.CropId
+  WHERE FC.Status = 'Planted'
   GROUP BY B.BarangayId,FC.CropId, C.Name,B.Name,B.Lat,B.Lng,B.BarangayId
 
 -- FOR NUMBER OF PLANTED, HARVESTED OR DAMAGED CROP PER BARANGAY

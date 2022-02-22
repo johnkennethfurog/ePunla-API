@@ -55,5 +55,12 @@ namespace ePunla.Query.API.Controllers
             var response = await _mediator.Send(new GetCropsOccuranceQuery { CropsOccuranceLookupFields = request });
             return ProcessResponse(response);
         }
+
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            var response = await _mediator.Send(new GetAdminProfileQuery { UserId = GetUserId() });
+            return ProcessResponse(response);
+        }
     }
 }

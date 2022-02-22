@@ -14,5 +14,6 @@ namespace ePunla.Query.DAL.Interfaces
         Task<ContextResponse<ClaimDetailModel>> GetClaimDetail(int claimId);
         Task<ContextResponse<StatDashboardModel>> GetStatistic();
         Task<ContextResponse<IEnumerable<CropsOccuranceModel>>> GetCropsOccurance(SearchCropsOccuranceDto CropsOccuranceLookupFields);
+        Task<ContextResponse<AdminProfileModel>> GetAdminProfile(int userId);
     }
 }
