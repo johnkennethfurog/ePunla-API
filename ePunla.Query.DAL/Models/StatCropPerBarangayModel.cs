@@ -10,5 +10,6 @@ namespace ePunla.Query.DAL.Models
         public string Barangay { get; set; }
         public decimal Lat { get; set; }
         public decimal Lng { get; set; }
+        public string Color { get; set; }
     }
 }

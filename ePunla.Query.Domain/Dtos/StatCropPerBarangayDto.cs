@@ -17,5 +17,6 @@ namespace ePunla.Query.Domain.Dtos
         public string Crop { get; set; }
         public decimal Percentage { get; set; }
         public int Count { get; set; }
+        public string Color { get; set; }
     }
 }

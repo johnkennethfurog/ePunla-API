@@ -49,7 +49,7 @@ namespace ePunla.Query.Business.AdminQueries
                                 b.First().Lat,
                                 b.First().Lng,
                                 b.First().BarangayId,
-                                Crops = b.Select(c => new { c.Crop, c.CropsCount })
+                                Crops = b.Select(c => new { c.Crop, c.CropsCount, c.Color })
                             });
 
             // get percentage of crop for each barangay
@@ -63,7 +63,7 @@ namespace ePunla.Query.Business.AdminQueries
                 g.Crops.ToList().ForEach(c =>
                 {
                     decimal percentage = ((decimal)c.CropsCount / totalCropsCount) * 100;
-                    cropsListDto.Add(new StatCrop { Crop = c.Crop, Percentage = percentage, Count = c.CropsCount });
+                    cropsListDto.Add(new StatCrop { Crop = c.Crop, Percentage = percentage, Count = c.CropsCount, Color = c.Color });
                 });
 
                 cropPerBarangayDto.Add(new StatCropPerBarangayDto

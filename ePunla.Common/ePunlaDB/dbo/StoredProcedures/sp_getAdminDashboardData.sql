@@ -3,7 +3,7 @@ AS
 BEGIN
 
 --  FOR NUMBER OF CROPS PER BARANNGAY
-  SELECT FC.CropId, B.BarangayId, COUNT(FC.CropId) as 'CropsCount',C.Name as 'Crop', B.Name as 'Barangay',B.Lat,B.Lng FROM FarmCrops FC
+  SELECT FC.CropId, B.BarangayId, COUNT(FC.CropId) as 'CropsCount',C.Name as 'Crop',C.Color, B.Name as 'Barangay',B.Lat,B.Lng FROM FarmCrops FC
   LEFT JOIN Farms F ON F.FarmId = FC.FarmId
   LEFT JOIN Barangays B ON B.BarangayId = F.BarangayId
   LEFT JOIN Crops C ON C.CropId = FC.CropId
